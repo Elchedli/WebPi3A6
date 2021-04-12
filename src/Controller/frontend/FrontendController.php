@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/frontend")
  */
-class MainController extends AbstractController
+class FrontendController extends AbstractController
 {
     /**
      * @Route("/", name="acceuil", methods={"GET"})
