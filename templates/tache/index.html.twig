@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tache index{% endblock %}
+
+{% block body %}
+    <h1>Tache index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdTache</th>
+                <th>Username</th>
+                <th>EtatTache</th>
+                <th>DifficulteTache</th>
+                <th>DescriptionTache</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tache in taches %}
+            <tr>
+                <td>{{ tache.idTache }}</td>
+                <td>{{ tache.username }}</td>
+                <td>{{ tache.etatTache ? 'Yes' : 'No' }}</td>
+                <td>{{ tache.difficulteTache }}</td>
+                <td>{{ tache.descriptionTache }}</td>
+                <td>
+                    <a href="{{asset("{{ path('tache_show', {'idTache': tache.idTache}) }}")}}">show</a>
+                    <a href="{{asset("{{ path('tache_edit', {'idTache': tache.idTache}) }}")}}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{asset("{{ path('tache_new') }}")}}">Create new</a>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suivi{% endblock %}
+
+{% block body %}
+    <h1>Suivi</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdS</th>
+                <td>{{ suivi.idS }}</td>
+            </tr>
+            <tr>
+                <th>TitreS</th>
+                <td>{{ suivi.titreS }}</td>
+            </tr>
+            <tr>
+                <th>DateDs</th>
+                <td>{{ suivi.dateDs ? suivi.dateDs|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFs</th>
+                <td>{{ suivi.dateFs ? suivi.dateFs|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TempsDs</th>
+                <td>{{ suivi.tempsDs ? suivi.tempsDs|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TempsFs</th>
+                <td>{{ suivi.tempsFs ? suivi.tempsFs|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{asset("{{ path('suivi_index') }}")}}">back to list</a>
+
+    <a href="{{asset("{{ path('suivi_edit', {'idS': suivi.idS}) }}")}}">edit</a>
+
+    {{ include('suivi/_delete_form.html.twig') }}
+{% endblock %}
