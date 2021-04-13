@@ -1,0 +1,29 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<div class="container text-center">
+{{ form_widget(form) }}
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+        <div class="form-group col-md-10 ">
+                <label for="objRec"> Object </label>
+                {{ form_widget(form.objRec, { 'attr' : { 'class' : 'form-control' } }) }}
+            </div>
+            </div>
+                <label for="sujRec"> Details
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.sujRec) }}
+
+            </div>
+                </label>
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.etatRec) }}
+            </div>
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.dateRec) }}
+            </div>
+            <div class="col" id="some-custom-id">
+                {{ form_row(form.idCat) }}
+            </div>
+        </div>
+<button class="btn custom-btn">{{ button_label|default('Add') }}</button>
+{{ form_end(form) }}

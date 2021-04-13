@@ -1,0 +1,74 @@
+{#{% extends 'base.html.twig' %}#}
+{% extends 'basefront.html.twig' %}
+
+{% block title %}
+    <title>Reclamation</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+{% endblock %}
+{% block contact %}
+<div class="contact">
+    <div class="container">
+        <div class="section-header text-center">
+            <h1 class="bg-light py-4 text-info"> Report a Problem </h1>
+        </div>
+    </div>
+    <div class="row align-items-center contact-information">
+        <div class="col-md-6 col-lg-3">
+            <div class="contact-info">
+                <div class="contact-icon">
+                    <i class="fa fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Address</h3>
+                    <p>ESPRIT, Ariana, Tunisia</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="contact-info">
+                <div class="contact-icon">
+                    <i class="fa fa-phone-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Call Us</h3>
+                    <p>+216 22 953 766</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="contact-info">
+                <div class="contact-icon">
+                    <i class="fa fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Email Us</h3>
+                    <p>spirity@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="contact-info">
+                <div class="contact-icon">
+                    <i class="fa fa-share"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Follow Us</h3>
+                    <div class="contact-social">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <h5>
+            {{ include('Front/reclamation/_form.html.twig') }}
+    </h5>
+    <a class="btn custom-btn" href="{{ path('reclamation_index') }}">Reclamations' List</a>
+{% endblock %}

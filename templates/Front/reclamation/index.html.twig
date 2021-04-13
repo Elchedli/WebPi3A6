@@ -1,0 +1,51 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}
+    <title>Reclamation</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+{% endblock %}
+{% block contact %}
+    <table class="table">
+        <thead>
+            <tr>
+                {#<th>IdRec</th>#}
+                <th>Username</th>
+                <th>Object</th>
+                <th>Details</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamation %}
+            <tr>
+                {# <td>{{ reclamation.idRec }}</td> #}
+                <td>{{ reclamation.username }}</td>
+                <td>{{ reclamation.objRec }}</td>
+                <td>{{ reclamation.sujRec }}</td>
+                <td>{{ reclamation.etatRec }}</td>
+                <td>{{ reclamation.dateRec ? reclamation.dateRec|date('d-m-Y H:i:s') : '' }}</td>
+                <td>
+                    <div class="carousel-btn">
+                        <a class="btn custom-btn" href="{{ path('reclamation_show', {'idRec': reclamation.idRec}) }}">Show</a>
+                        <a class="btn custom-btn" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}">Edit</a>
+                    </div>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="carousel-btn">
+        <div class="align-content-center">
+    <a class="btn custom-btn" href="{{ path('reclamation_new') }}">Report a Problem</a>
+        </div>
+    </div>
+{% endblock %}
