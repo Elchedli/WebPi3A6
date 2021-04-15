@@ -1,0 +1,56 @@
+{% extends 'baseback.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Articles</title>
+{% endblock  %}
+
+
+{% block b %}
+    <div class="box-header">
+
+        <center>  <h2 class="box-title" style="font-size: 40px;color:#1d5987;">Liste des Articles</h2></center>
+    </div>
+
+<br>
+    <br>
+    <table class="table" >
+        <thead>
+            <tr>
+                {# <th>IdArt</th>  #}
+                <th>Titre Article</th>
+                <th>Auteur</th>
+                <th>Description</th>
+                <th>Date de publication</th>
+                <th>Likes</th>
+                <th>Photo</th>
+                <th>Catégories</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+               {#  <td>{{ article.idArt }}</td> #}
+                <td>{{ article.titreArt }}</td>
+                <td>{{ article.auteurArt }}</td>
+                <td>{{ article.descriptionArt }}</td>
+                <td>{{ article.dateArt ? article.dateArt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.likes }}</td>
+                <td><img style="margin-bottom: -50px" src="{{ asset('uploads/' ~  article.photo) }}" width="300" height="130"></td>
+                <td>{{ article.idCat }}</td>
+                <td>
+                    <a href="{{ path('articles_showw', {'idArt': article.idArt}) }}" class="btn btn-success">Show</a>
+                    <br>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

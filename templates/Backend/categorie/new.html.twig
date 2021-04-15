@@ -1,0 +1,31 @@
+{% extends 'baseback.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+{% endblock %}
+
+{% block b %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+    <div>
+        <div class="pt-editor">
+            <div class="form-group col-md-12">
+                <div class="box-header">
+
+                   <center> <h3 class="box-title">Ajouter Catégories</h3></center>
+                </div>
+                <label for="inputContenu" class="tt-note pt-4">Catégorie : </label>
+                {{ form_errors(form.titreCat) }}
+                {{ form_widget(form.titreCat, { 'attr' : { 'class' : 'form-control', "rows":"5" } }) }}
+            </div>
+        </div>
+
+
+        <button class="btn custom-btn">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+
+
+        <a class="btn custom-btn" href="{{ path('categorie_indexx') }}">Back to list</a>
+
+    </div>
+{% endblock %}

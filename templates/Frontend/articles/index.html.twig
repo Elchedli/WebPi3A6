@@ -1,0 +1,69 @@
+{% extends 'baseNewFront.html.twig' %}
+{% block car %}
+<div class="carousel">
+    <div class="container-fluid">
+        <div class="owl-carousel">
+            <div class="carousel-item-art">
+                <div class="carousel-img">
+                    <img src="{{ asset("img/blog-for-business.jpg")}}" alt="Image">
+                </div>
+                <div class="carousel-text">
+                    <h1>Liste des <span> Articles </span> </h1>
+                </div>
+            </div>
+
+        </div>
+        {% endblock %}
+
+{% block blog %}
+    <br>
+    <br>
+    <center>
+        <a href="{{ path('articles_new') }}" class="btn custom-btn">Add Article +</a>
+    </center>
+<br>
+    <br>
+    <table class="table" >
+        <thead>
+            <tr>
+                {# <th>IdArt</th>  #}
+                <th>Titre Article</th>
+                <th>Auteur</th>
+                <th>Description</th>
+                <th>Date de publication</th>
+                <th>Likes</th>
+                <th>Photo</th>
+                <th>Catégories</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+               {#  <td>{{ article.idArt }}</td> #}
+                <td>{{ article.titreArt }}</td>
+                <td>{{ article.auteurArt }}</td>
+                <td>{{ article.descriptionArt }}</td>
+                <td>{{ article.dateArt ? article.dateArt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.likes }}</td>
+                <td><img style="margin-bottom: -50px" src="{{ asset('uploads/' ~  article.photo) }}" width="300" height="130"></td>
+                <td>{{ article.idCat }}</td>
+                <td>
+                    <a href="{{ path('articles_show', {'idArt': article.idArt}) }}" class="btn btn-outline-warning">Show</a>
+                    <br>
+                    <br>
+                    <a href="{{ path('articles_edit', {'idArt': article.idArt}) }}" class="btn btn-outline-success">Edit</a>
+                    <br>
+                    <br>
+                    <button class="btn btn-outline-danger">Like</button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
