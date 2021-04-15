@@ -1,0 +1,52 @@
+{% extends 'Front.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block Evenement %}
+    <h1>Evenement index</h1>
+
+    <table class="table" style="width: 75%;">
+        <thead>
+            <tr>
+              {#   <th>IdEv</th>  #}
+                <th>TitreEv</th>
+                <th>TypeEv</th>
+                <th>EmplacementEv</th>
+                <th>DateDev</th>
+                <th>DateFev</th>
+                <th>TempsDev</th>
+                <th>TempsFev</th>
+                <th>AgeMin</th>
+                <th>AgeMax</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+               {#  <td>{{ evenement.idEv }}</td> #}
+                <td>{{ evenement.titreEv }}</td>
+                <td>{{ evenement.typeEv }}</td>
+                <td>{{ evenement.emplacementEv }}</td>
+                <td>{{ evenement.dateDev ? evenement.dateDev|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.dateFev ? evenement.dateFev|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.tempsDev ? evenement.tempsDev|date('H:i:s') : '' }}</td>
+                <td>{{ evenement.tempsFev ? evenement.tempsFev|date('H:i:s') : '' }}</td>
+                <td>{{ evenement.ageMin }}</td>
+                <td>{{ evenement.ageMax }}</td>
+                <td>
+                    <a href="{{ path('evenement_show', {'idEv': evenement.idEv}) }}">show</a>
+                    <a href="{{ path('evenement_edit', {'idEv': evenement.idEv}) }}">edit</a>
+                    {{ include('evenement/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('evenement_new') }}">Create new</a>
+{% endblock %}

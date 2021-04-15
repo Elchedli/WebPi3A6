@@ -1,0 +1,31 @@
+{% extends 'Front.html.twig' %}
+
+{% block title %}Act{% endblock %}
+
+{% block Evenement %}
+    <h1>Act</h1>
+
+    <table class="table">
+        <tbody>
+          {#   <tr>
+                <th>IdAct</th>
+                <td>{{ act.idAct }}</td>
+            </tr>
+          #}
+            <tr>
+                <th>NomAct</th>
+                <td>{{ act.nomAct }}</td>
+            </tr>
+            <tr>
+                <th>TypeAct</th>
+                <td>{{ act.typeAct }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('act_index') }}">back to list</a>
+
+    <a href="{{ path('act_edit', {'idAct': act.idAct}) }}">edit</a>
+
+    {{ include('act/_delete_form.html.twig') }}
+{% endblock %}
