@@ -1,3 +1,21 @@
 #reclamation{
-    display: flex;
+    width: 400px;
+    display: table;
+    margin: 0 auto;
+}
+
+#reclamation div{
+    display: block;
+    margin-top: 20px;
+}
+#reclamation div input,#reclamation div select{
+    display: inline-block;
+    float: right;
+}
+#reclamation div select{
+    width: 250px;
+}
+form{
+    text-align: center;
+    /*align-text: center;*/
 }

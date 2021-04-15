@@ -91,7 +91,7 @@ class ReclamationController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('$reclamation_index');
+        return $this->redirectToRoute('reclamation_index');
 
     }
 }

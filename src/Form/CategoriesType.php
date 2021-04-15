@@ -12,8 +12,8 @@ class CategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomCat')
-        ;
+            ->add('nomCat', null,['required' => false]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

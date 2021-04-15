@@ -1,42 +1,49 @@
-{# {% extends 'base.html.twig' %} #}
-
-{% block title %}Reclamation{% endblock %}
-
-{% block body %}
-    <h1>Reclamation</h1>
-
+{% extends 'basefront.html.twig' %}
+{% block title %}
+    <title>Reclamation</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+{% endblock %}
+{% block contact %}
+<div class="section-header text-center">
+    <h2 class="bg-light py-4 text-info"> Your Selected Reclamation</h2>
+</div>
     <table class="table">
         <tbody>
-            <tr>
-                <th>IdRec</th>
+        {#   <tr>
+               <th>IdRec</th>
                 <td>{{ reclamation.idRec }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>Username</th>
                 <td>{{ reclamation.username }}</td>
             </tr>
             <tr>
-                <th>ObjRec</th>
+                <th>Object</th>
                 <td>{{ reclamation.objRec }}</td>
             </tr>
             <tr>
-                <th>SujRec</th>
+                <th>Details</th>
                 <td>{{ reclamation.sujRec }}</td>
             </tr>
             <tr>
-                <th>EtatRec</th>
+                <th>Status</th>
                 <td>{{ reclamation.etatRec }}</td>
             </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{ reclamation.idCat }}</td>
+        </tr>
             <tr>
-                <th>DateRec</th>
+                <th>Date</th>
                 <td>{{ reclamation.dateRec ? reclamation.dateRec|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('reclamation_index') }}">back to list</a>
-
-    <a href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}">edit</a>
-
+    <a class="btn custom-btn" href="{{ path('reclamation_index') }}">Back To List</a>
     {{ include('Front/reclamation/_delete_form.html.twig') }}
+    <a class="btn custom-btn" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}">Edit</a>
+
 {% endblock %}

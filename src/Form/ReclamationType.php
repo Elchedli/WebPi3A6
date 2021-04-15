@@ -14,13 +14,12 @@ class ReclamationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            #->add('username')#
-            ->add('objRec')
-            ->add('sujRec')
-            ->add('etatRec')
-            ->add('dateRec')
-            #->add('idUser')#
-            ->add('idCat')
+            ->add('username', null, ['label' => 'Username'])
+            ->add('objRec', null, ['label' => 'Object'])
+            ->add('sujRec',null, ['label' => 'Details'])
+            ->add('etatRec', null, ['label' => 'Status'])
+ //           ->add('dateRec')
+            ->add('idCat', null, ['label' => 'Name Category'])
         ;
     }
 

@@ -69,23 +69,15 @@ class Reclamation
      */
     private $dateRec ;
 
-    /**
-     * @var \App\Entity\UserSimple
-     *
-     * @ORM\ManyToOne(targetEntity=UserSimple::class, inversedBy="reclamations")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id_user")
-     * })
-     */
-    private $idUser;
 
     /**
      * @var \App\Entity\Categories
      *
      * @ORM\ManyToOne(targetEntity=Categories::class, inversedBy="reclamations")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_cat", referencedColumnName="id_cat")
+     * @ORM\JoinColumn(name="id_cat", referencedColumnName="id_cat")
      * })
+     * @Assert\NotNull(message="This field is obligatory.")
      */
     private $idCat;
 
@@ -183,22 +175,6 @@ class Reclamation
     public function setDateRec(?DateTimeInterface $dateRec): void
     {
         $this->dateRec = $dateRec;
-    }
-
-    /**
-     * @return \App\Entity\UserSimple
-     */
-    public function getIdUser(): ?\App\Entity\UserSimple
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * @param \App\Entity\UserSimple $idUser
-     */
-    public function setIdUser(\App\Entity\UserSimple $idUser): void
-    {
-        $this->idUser = $idUser;
     }
 
     /**

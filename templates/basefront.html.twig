@@ -40,7 +40,7 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto">
-                    <a href="{{ asset("index.html")}}" class="nav-item nav-link active">Home</a>
+                    <a href="{{ path('reclamation_index')}}" class="nav-item nav-link active">Home</a>
                     <a href="{{ asset("about.html")}}" class="nav-item nav-link">About</a>
                     <a href="{{ asset("feature.html")}}" class="nav-item nav-link">Events</a>
                     <a href="{{ asset("team.html")}}" class="nav-item nav-link">Team</a>
@@ -85,7 +85,7 @@
                             Let us know if you have ideas that can help make our products better.
                         </p>
                         <div class="carousel-btn">
-                            <a class="btn custom-btn" href="">Show My Reclamations</a>
+                            <a class="btn custom-btn" href="{{ path('reclamation_new') }}">Report here</a>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                             If you need help solving a specific problem, please include as much info as possible.
                         </p>
                         <div class="carousel-btn">
-                            <a class="btn custom-btn" href="">Show My Reclamations</a>
+                            <a class="btn custom-btn" href="{{ path('reclamation_new') }}">Report here</a>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                             Feel free to contact us.
                         </p>
                         <div class="carousel-btn">
-                            <a class="btn custom-btn" href="">Show My Reclamations</a>
+                            <a class="btn custom-btn" href="{{ path('reclamation_new') }}">Report here</a>
                         </div>
                     </div>
                 </div>
@@ -841,23 +841,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="footer-link">
-                                <h2>Quick Links</h2>
-                                <a href="">Terms of use</a>
-                                <a href="">Privacy policy</a>
-                                <a href="">Cookies</a>
-                                <a href="">Help</a>
-                                <a href="">FQAs</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="footer-newsletter">
-                        <h2>Newsletter</h2>
+                        <h2>Your Only Mindscape</h2>
                         <p>
-
+                            In the upcoming months, you can expect big changes in your life.
                         </p>
                         <div class="form">
                             <label>
@@ -871,8 +861,8 @@
         </div>
         <div class="copyright">
             <div class="container">
-                <p>Copyright &copy; <a href="#">Your Site Name</a>, All Right Reserved.</p>
-                <p>Designed By <a href="https://htmlcodex.com">HTML Codex</a></p>
+                <p>Copyright &copy; <a href="#">Spirity</a>, All Right Reserved.</p>
+                <p>Designed By <a href="#">Innov'Dev</a></p>
             </div>
         </div>
     </div>

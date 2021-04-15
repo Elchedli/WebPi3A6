@@ -1,0 +1,23 @@
+{%  extends 'baseback.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Reclamations</title>
+{% endblock %}
+{% block b %}
+<div class="box box-info" style="align-items: center; padding-left: 400px ">
+    <div class="box-header">
+        {# <i class="fa fa-envelope"></i> #}
+        <h3 class="box-title">Edit Status</h3>
+    </div>
+    <div class="box-body">
+        <form action="#" method="post">
+            <div class="form-group">
+    {{ include('Back/reclamation/_form.html.twig', {'button_label': 'Update'}) }}
+                <br>
+    {{ include('Back/reclamation/_delete_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

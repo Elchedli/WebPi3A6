@@ -1,13 +1,12 @@
-{# {% extends 'base.html.twig' %} #}
-
-{% block title %}Edit Reclamation{% endblock %}
-
-{% block body %}
+{%  extends 'basefront.html.twig' %}
+{% block title %}
+    <title>Edit Reclamation</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+{% endblock %}
+{% block contact %}
     <h1>Edit Reclamation</h1>
-
     {{ include('Front/reclamation/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('reclamation_index') }}">back to list</a>
-
-    {{ include('Front/reclamation/_delete_form.html.twig') }}
+    {{ include('Front/reclamation/_delete_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

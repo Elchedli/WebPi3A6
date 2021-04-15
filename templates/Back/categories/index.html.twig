@@ -1,0 +1,49 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+{% endblock %}
+
+{% block b %}
+    <div class="box box-info" style="align-items: center; padding-left: 400px ">
+    <div class="box-header">
+        {# <i class="fa fa-envelope"></i> #}
+        <h3 class="bg-light py-4 text-info">Our Categories</h3>
+    </div>
+    <div class="box-body">
+    <form action="#" method="post">
+    <div class="form-group">
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>Category</th> #}
+                <th>Name Of Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                {# <td>{{ category.idCat }}</td> #}
+                <td>{{ category.nomCat }}</td>
+                <td>
+                    <a class="btn btn-adn" href="{{ path('categories_show', {'idCat': category.idCat}) }}">Show</a>
+                    <a class="btn btn-adn" href="{{ path('categories_edit', {'idCat': category.idCat}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No Records Found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-adn" href="{{ path('categories_new') }}">Add</a>
+    </div>
+    </form>
+    </div>
+    </div>
+{% endblock %}

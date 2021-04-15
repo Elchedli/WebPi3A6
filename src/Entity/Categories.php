@@ -26,8 +26,7 @@ class Categories
      * @var string|null
      *
      * @ORM\Column(name="nom_cat", type="string", length=500, nullable=true)
-     *
-     * @Assert\NotBlank(message="This field is obligatory.")
+     * @Assert\NotBlank(message="This field is obligatory")
      * @Assert\Type(
      *     type="alpha",
      *     message="Please fill it with letters only."

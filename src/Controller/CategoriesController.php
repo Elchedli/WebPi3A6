@@ -20,7 +20,7 @@ class CategoriesController extends AbstractController
      */
     public function index(CategoriesRepository $categoriesRepository): Response
     {
-        return $this->render('Front/categories/index.html.twig', [
+        return $this->render('Back/categories/index.html.twig', [
             'categories' => $categoriesRepository->findAll(),
         ]);
     }
@@ -41,7 +41,7 @@ class CategoriesController extends AbstractController
             return $this->redirectToRoute('categories_index');
         }
 
-        return $this->render('Front/categories/add.html.twig', [
+        return $this->render('Back/categories/add.html.twig', [
             'categories' => $categories,
             'form' => $form->createView(),
         ]);
@@ -52,7 +52,7 @@ class CategoriesController extends AbstractController
      */
     public function show(Categories $categories): Response
     {
-        return $this->render('Front/categories/show.html.twig', [
+        return $this->render('Back/categories/show.html.twig', [
             'categories' => $categories,
         ]);
     }
@@ -60,9 +60,9 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/{idCat}/edit", name="categories_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Categories $category): Response
+    public function edit(Request $request, Categories $categories): Response
     {
-        $form = $this->createForm(CategoriesType::class, $category);
+        $form = $this->createForm(CategoriesType::class, $categories);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,8 +71,8 @@ class CategoriesController extends AbstractController
             return $this->redirectToRoute('categories_index');
         }
 
-        return $this->render('Front/categories/edit.html.twig', [
-            'category' => $category,
+        return $this->render('Back/categories/edit.html.twig', [
+            'categories' => $categories,
             'form' => $form->createView(),
         ]);
     }
@@ -80,11 +80,11 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/{idCat}", name="categories_delete", methods={"POST"})
      */
-    public function delete(Request $request, Categories $category): Response
+    public function delete(Request $request, Categories $categories): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getIdCat(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$categories->getIdCat(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($category);
+            $entityManager->remove($categories);
             $entityManager->flush();
         }
 

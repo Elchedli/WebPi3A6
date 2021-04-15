@@ -1,0 +1,6 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+{{ form_widget(form) }}
+<br><br>
+    <button class="btn btn-success">{{ button_label|default('Add') }}</button>
+<a class="btn btn-adn" href="{{ path('categories_index') }}">Back To List</a>
+{{ form_end(form) }}

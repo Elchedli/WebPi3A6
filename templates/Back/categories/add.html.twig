@@ -1,0 +1,25 @@
+{% extends 'baseback.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+    {% endblock %}
+
+{% block b %}
+    <div class="box box-info" style="align-items: center; padding-left: 400px">
+        <div class="section-header text-center">
+        <div class="box-header">
+            {# <i class="fa fa-envelope"></i> #}
+            <h1 class="bg-light py-4 text-info"> Create Categories </h1>
+        </div>
+        <div class="box-body">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <br>
+                    <h5> {{ include('Back/categories/_form.html.twig') }} </h5>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}
