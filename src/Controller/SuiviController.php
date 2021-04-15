@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Suivi;
 use App\Form\SuiviType;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,7 +76,6 @@ class SuiviController extends AbstractController
     {
         $form = $this->createForm(SuiviType::class, $suivi);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 

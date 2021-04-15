@@ -20,18 +20,61 @@ class SuiviType extends AbstractType
     {
         $builder
             ->add('username',TextType::class,[
-                'label'=>'Nom du psy',
+                'label'=>'Nom du psy : ',
                 'attr'=>[
                     'placeholder'=>'Nom du psy',
+                    'class' => 'form-control',
+                    'readonly' => true,
+                    'value' => 'mgkpsy'
+                ]
+            ])
+            ->add('client',TextType::class,[
+                'label'=>'Nom du client : ',
+                'attr'=>[
+                    'placeholder'=>'Nom du client',
                     'class' => 'form-control'
                 ]
             ])
-            ->add('client')
-            ->add('titreS')
-            ->add('dateDs',DateType::class,['widget' => 'single_text'])
-            ->add('dateFs',DateType::class,['widget' => 'single_text'])
-            ->add('tempsDs',TimeType::class,['widget' => 'single_text'])
-            ->add('tempsFs',TimeType::class,['widget' => 'single_text'])
+            ->add('titreS',TextType::class,[
+                'label'=>'Titre : ',
+                'attr'=>[
+                    'placeholder'=>'Titre du suivi',
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('dateDs',DateType::class,[
+                'widget' => 'single_text',
+                'label'=> 'Date debut : ',
+                'attr'=>[
+                    'placeholder'=>'Nom du client',
+                    'class' => 'form-control'
+                ]
+
+            ])
+            ->add('dateFs',DateType::class,[
+                'widget' => 'single_text',
+                'label'=> 'Date fin : ',
+                'attr'=>[
+                    'placeholder'=>'Nom du client',
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('tempsDs',TimeType::class,[
+                'widget' => 'single_text',
+                'label'=> 'Temps debut : ',
+                'attr'=>[
+                    'placeholder'=>'Nom du client',
+                    'class' => 'form-control'
+                ]
+            ])
+            ->add('tempsFs',TimeType::class,[
+                'widget' => 'single_text',
+                'label'=> 'Temps fin : ',
+                'attr'=>[
+                    'placeholder'=>'Nom du client',
+                    'class' => 'form-control'
+                ]
+            ])
 
         ;
     }
