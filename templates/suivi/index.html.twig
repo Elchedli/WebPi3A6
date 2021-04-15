@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suivi index{% endblock %}
+
+{% block body %}
+
+    <table class="table" style="margin-top: 40px">
+        <thead>
+            <tr>
+                <th>IdS</th>
+                <th>Client</th>
+                <th>Titre</th>
+                <th>Date Debut</th>
+                <th>Date Fin</th>
+                <th>Temps Debut</th>
+                <th>Temps Fin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for suivi in suivis %}
+            <tr>
+                <td>{{ suivi.idS }}</td>
+                <td>{{ suivi.client }}</td>
+                <td>{{ suivi.titreS }}</td>
+                <td>{{ suivi.dateDs ? suivi.dateDs|date('Y-m-d') : '' }}</td>
+                <td>{{ suivi.dateFs ? suivi.dateFs|date('Y-m-d') : '' }}</td>
+                <td>{{ suivi.tempsDs ? suivi.tempsDs|date('H:i:s') : '' }}</td>
+                <td>{{ suivi.tempsFs ? suivi.tempsFs|date('H:i:s') : '' }}</td>
+                <td>
+                    <a class="bozilla" href="{{ path('suivi_show', {'idS': suivi.idS}) }}" type="1">Afficher</a>
+                    <a class="bozilla" href="{{ path('suivi_edit', {'idS': suivi.idS}) }}" type="2">Modifier</a>
+                    <a class="bozilla" href="{{ path('suivi_delete', {'idS': suivi.idS}) }}" type="3">Supprimer</a>
+{#                    <a href="{{ path('suivi_supp', {'idS': suivi.idS}) }}">Supprimer</a>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="bozilla" href="{{ path('suivi_new') }}" style="display: table;margin: 0 auto;margin-top: 30px">Ajouter un nouveau</a>
+{#    <script>#}
+{#        $(".bozilla").click(function(e){#}
+{#            e.preventDefault();#}
+{#            let link = e.target.href;#}
+{#            $("#dynamicbull").load(link);#}
+{#        });#}
+
+{#    </script>#}
+{% endblock %}

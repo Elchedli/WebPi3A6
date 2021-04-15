@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block title %}New Suivi{% endblock %}
+{% block body %}
+
+    {{ include('suivi/_form.html.twig') }}
+    <a href="{{ path('suivi_index') }}">Revenir a la liste</a>
+{% endblock %}
+

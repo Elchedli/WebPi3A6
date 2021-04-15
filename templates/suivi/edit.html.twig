@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Suivi{% endblock %}
+
+{% block body %}
+    {{ include('suivi/_form.html.twig', {'button_label': 'Mise a jour'}) }}
+    <a href="{{ path('suivi_index') }}">Revenir</a>
+{% endblock %}

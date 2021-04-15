@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Coach index{% endblock %}
+
+{% block body %}
+    <h1>Coach index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdUser</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Mail</th>
+                <th>DateN</th>
+                <th>Code</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coach in coaches %}
+            <tr>
+                <td>{{ coach.idUser }}</td>
+                <td>{{ coach.username }}</td>
+                <td>{{ coach.password }}</td>
+                <td>{{ coach.mail }}</td>
+                <td>{{ coach.dateN ? coach.dateN|date('Y-m-d') : '' }}</td>
+                <td>{{ coach.code }}</td>
+                <td>
+                    <a href="{{ path('coach_show', {'idUser': coach.idUser}) }}">show</a>
+                    <a href="{{ path('coach_edit', {'idUser': coach.idUser}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('coach_new') }}">Create new</a>
+{% endblock %}
