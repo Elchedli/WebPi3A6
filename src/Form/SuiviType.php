@@ -5,9 +5,11 @@ namespace App\Form;
 use App\Entity\Psycho;
 use App\Entity\Simple;
 use App\Entity\Suivi;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -28,11 +30,18 @@ class SuiviType extends AbstractType
                     'value' => 'mgkpsy'
                 ]
             ])
-            ->add('client',TextType::class,[
-                'label'=>'Nom du client : ',
+//            ->add('client', TextType::class,[
+//                'label'=>'Nom client : ',
+//                'attr'=>[
+//                    'placeholder'=>'Nom du client',
+//                    'class' => 'form-control',
+//                ]
+//            ])
+            ->add('client', TextType::class,[
+                'label'=>'Nom client : ',
                 'attr'=>[
                     'placeholder'=>'Nom du client',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ])
             ->add('titreS',TextType::class,[
@@ -75,6 +84,7 @@ class SuiviType extends AbstractType
                     'class' => 'form-control'
                 ]
             ])
+            ->add('save', SubmitType::class)
 
         ;
     }

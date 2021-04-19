@@ -1,4 +1,20 @@
-{{ form_start(form) }}
+{{ form_start(form,{attr: {novalidate: 'novalidate'}}) }}
     {{ form_widget(form) }}
-    <button class="btn btn-primary mt-4 pr-4 pl-4">{{ button_label|default('Enregistrer') }}</button>
+    <button class="btn btn-primary mt-4 pr-4 pl-4" id="axiosverif" >{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+
+
+{% block javascripts %}
+{#    <script>#}
+{#        $("#axiosverif").click(function(e) {#}
+{#            e.preventDefault();#}
+{#        });#}
+{#    </script>#}
+{% endblock %}
+<script>
+{#    $(".btn-primary").click(function(e){#}
+{#        e.preventDefault();#}
+{#        let link = e.target.href;#}
+{#        $("#dynamicbull").load(link);#}
+{#    });#}
+{#</script>#}

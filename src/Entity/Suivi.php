@@ -4,6 +4,7 @@ namespace App\Entity;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Suivi
@@ -24,36 +25,36 @@ class Suivi
 
     /**
      * @var string|null
-     *
      * @ORM\Column(name="titre_s", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message=" Adresse devrait etre non vide")
      */
     private $titreS;
 
     /**
      * @var DateTime
-     *
      * @ORM\Column(name="date_ds", type="date", nullable=false)
+     * @Assert\DateTime(message="Faut que ca soit une date valide")
      */
     private $dateDs;
 
     /**
      * @var DateTime
-     *
      * @ORM\Column(name="date_fs", type="date", nullable=false)
+     * @Assert\DateTime(message="Faut que ca soit une date valide")
      */
     private $dateFs;
 
     /**
      * @var DateTime
-     *
      * @ORM\Column(name="temps_ds", type="time", nullable=false)
+     * @Assert\DateTime(message="Faut que ca soit du temps")
      */
     private $tempsDs;
 
     /**
      * @var DateTime
-     *
      * @ORM\Column(name="temps_fs", type="time", nullable=false)
+     * @Assert\DateTime(message="Faut que ca soit du temps")
      */
     private $tempsFs;
 
@@ -65,8 +66,9 @@ class Suivi
     private $username;
 
     /**
-     * @var string|null
+     * @var String|null
      * @ORM\Column(name="client", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="Client doit étre existant")
      * @ORM\ManyToOne(targetEntity=Simple::class,inversedBy="username")
      */
     private $client;
@@ -183,5 +185,7 @@ class Suivi
         $this->client = $client;
     }
 
-
+    public function __toString() {
+        return $this->getUsername();
+    }
 }
