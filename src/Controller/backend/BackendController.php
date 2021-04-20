@@ -2,6 +2,7 @@
 
 namespace App\Controller\backend;
 use App\Entity\Suivi;
+use App\Entity\Tache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,6 +38,11 @@ class BackendController extends AbstractController
      */
     public function backtaches(): Response
     {
-        return $this->render('backend/taches.html.twig');
+        $taches = $this->getDoctrine()
+            ->getRepository(Tache::class)
+            ->findAll();
+        return $this->render('tache/index.html.twig', [
+            'taches' => $taches,
+        ]);
     }
 }

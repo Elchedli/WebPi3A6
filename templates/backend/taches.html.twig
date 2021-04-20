@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>srtdash - SEO Dashboard</title>
+    <title>Taches</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="{{asset("backend/general/assets/images/icon/favicon.ico")}}">
     <link rel="stylesheet" href="{{asset("backend/general/assets/css/bootstrap.min.css")}}">
@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="{{asset("backend/general/assets/css/default-css.css")}}">
     <link rel="stylesheet" href="{{asset("backend/general/assets/css/styles.css")}}">
     <link rel="stylesheet" href="{{asset("backend/general/assets/css/responsive.css")}}">
+    <link rel="stylesheet" href="{{asset("backend/chedli/acceuil.css")}}">
+    <link rel="stylesheet" href="{{asset("backend/chedli/crud.css")}}">
+
     <!-- modernizr css -->
     <script src="{{asset("backend/general/assets/js/vendor/modernizr-2.8.3.min.js")}}"></script>
 </head>
@@ -39,7 +42,7 @@
     <div class="sidebar-menu">
         <div class="sidebar-header">
             <div class="logo">
-                <a href="{{asset("index.html")}}"><img src="{{asset("backend/general/assets/images/icon/logo.png")}}" alt="logo"></a>
+                <a href="{{asset("backend/acceuil.html.twig")}}"><img src="{{asset("backend/general/assets/images/icon/logo.png")}}" alt="logo"></a>
             </div>
         </div>
         <div class="main-menu">
@@ -281,6 +284,8 @@
                 </div>
             </div>
         </div>
+        {% block param %}
+        {% endblock %}
         <!-- page title area end -->
     </div>
 </div>

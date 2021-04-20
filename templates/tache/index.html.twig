@@ -1,0 +1,33 @@
+{% extends 'backend/taches.html.twig' %}
+{% block param %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Etat Tache</th>
+                <th>Difficulte Tache</th>
+                <th>Description Tache</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tache in taches %}
+            <tr>
+                <td>{{ tache.username }}</td>
+                <td>{{ tache.etatTache ? 'Fait' : 'Pas fait' }}</td>
+                <td>{{ tache.difficulteTache }}</td>
+                <td>{{ tache.descriptionTache }}</td>
+                <td>
+                    <a href="{{ path('tache_edit', {'idTache': tache.idTache}) }}">Modifier</a>
+                    <a href="{{ path('tache_delete', {'idTache': tache.idTache}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Pas encore des utilisateurs</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('tache_new') }} " style="display: table;margin: 0 auto;margin-top: 30px">Créer un nouveau</a>
+{% endblock %}
