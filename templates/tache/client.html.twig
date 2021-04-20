@@ -1,0 +1,43 @@
+{% extends 'backend/taches.html.twig' %}
+{% block param %}
+    {% if clients is defined %}
+        {% for client in clients %}
+            <div class="client_div">
+                <a href="{{ path('suivi_liste', {'NomClient': client.client}) }}">{{ client.client }}</a>
+            </div>
+        {% endfor %}
+     {% else %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Titre</th>
+                        <th>Date Debut</th>
+                        <th>Date Fin</th>
+                        <th>Temps Debut</th>
+                        <th>Temps Fin</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for suivi in suivis %}
+                        <tr>
+                            <td>{{ suivi.client }}</td>
+                            <td>{{ suivi.titreS }}</td>
+                            <td>{{ suivi.dateDs ? suivi.dateDs|date('Y-m-d') : '' }}</td>
+                            <td>{{ suivi.dateFs ? suivi.dateFs|date('Y-m-d') : '' }}</td>
+                            <td>{{ suivi.tempsDs ? suivi.tempsDs|date('H:i:s') : '' }}</td>
+                            <td>{{ suivi.tempsFs ? suivi.tempsFs|date('H:i:s') : '' }}</td>
+                            <td>
+                                <a class="bozilla" href="{{ path('tache_index', {'idS': suivi.idS}) }}">Consulter</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">Pas encore d'articles </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+    {% endif %}
+{% endblock %}

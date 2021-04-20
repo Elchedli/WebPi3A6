@@ -18,8 +18,8 @@
                 <td>{{ tache.difficulteTache }}</td>
                 <td>{{ tache.descriptionTache }}</td>
                 <td>
-                    <a href="{{ path('tache_edit', {'idTache': tache.idTache}) }}">Modifier</a>
-                    <a href="{{ path('tache_delete', {'idTache': tache.idTache}) }}">Supprimer</a>
+                    <a href="{{ path('tache_edit', {'idTache': tache.idTache,'idS': idS}) }}">Modifier</a>
+                    <a href="{{ path('tache_delete', {'idTache': tache.idTache,'idS': idS}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
@@ -29,5 +29,5 @@
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('tache_new') }} " style="display: table;margin: 0 auto;margin-top: 30px">Créer un nouveau</a>
+    <a href="{{ path('tache_new',{'idS': idS}) }} " style="display: table;margin: 0 auto;margin-top: 30px">Créer un nouveau</a>
 {% endblock %}

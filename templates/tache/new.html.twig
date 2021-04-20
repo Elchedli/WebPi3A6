@@ -2,6 +2,6 @@
 {% block param %}
     <div id="dynamicbull">
         {{ include('tache/_form.html.twig') }}
-        <a href="{{ path('tache_index') }}">Revenir a la liste</a>
+        <a href="{{ path('tache_index',{'idS' : idS}) }}">Revenir a la liste</a>
     </div>
 {% endblock %}

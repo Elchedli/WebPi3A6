@@ -3,13 +3,14 @@
 namespace App\Entity;
 use DateTime;
 use DateTimeInterface;
+use App\Repository\SuiviRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Suivi
  *
  * @ORM\Table(name="suivi", indexes={@ORM\Index(name="fk_simple_client", columns={"client"}), @ORM\Index(name="fk_psycho_username", columns={"username"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=SuiviRepository::class)
  */
 class Suivi
 {

@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Entity;
-
+use App\Repository\TacheRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Tache
  *
  * @ORM\Table(name="tache")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=tacheRepository::class)
  */
 class Tache
 {
