@@ -1,0 +1,45 @@
+{% block blog %}
+
+     <style>
+
+         tr:nth-child(even) {
+             background-color: #f2f2f2;
+         }
+     </style>
+     <h1 align="center" style="font-size: 40px;color:#1d5987;">Article converti en PDF</h1>
+
+            <table class="table" id="mytable" border="1" >
+               
+                <tbody>
+
+                <tr>
+                <th style="background-color: #f2f2f2">Titre Article</th>
+                <td>{{ article.titreArt }}</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #f2f2f2">Auteur</th>
+                    <td>{{ article.auteurArt }}</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #f2f2f2">Description</th>
+                    <td>{{ article.descriptionArt }}</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #f2f2f2">Date de publication</th>
+                    <td>{{ article.dateArt ? article.dateArt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th style="background-color: #f2f2f2">Likes</th>
+                    <td>{{ article.likes }}</td>
+                </tr>
+
+
+                <tr>
+                    <th style="background-color: #f2f2f2">Catégorie</th>
+                    <td>{{ article.idCat }}</td>
+                </tr>
+
+                </tbody>
+                    </table>
+
+        {% endblock %}

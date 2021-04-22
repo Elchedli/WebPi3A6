@@ -1,0 +1,109 @@
+{% extends 'baseNewFront.html.twig' %}
+
+{% block car %}
+<div class="carousel">
+    <div class="container-fluid">
+        <div class="owl-carousel">
+            <div class="carousel-item-art">
+                <div class="carousel-img">
+                    <img src="{{ asset("img/blog-for-business.jpg")}}" alt="Image">
+                </div>
+                <div class="carousel-text">
+                    <h1>Liste des <span> Articles </span> </h1>
+                </div>
+            </div>
+
+        </div>
+        {% endblock %}
+
+{% block blog %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+        <form method="post" >
+            <input type="text"  class="form-control" name="AfficherClasse" onkeyup="myFunction()" placeholder="Chercher par catégorie..."  id="myInput" >
+        </form>
+
+
+    <br>
+    <br>
+    <center>
+        <a href="{{ path('articles_new') }}" class="btn btn-outline-danger fas fa-plus">Add Article +</a>
+    </center>
+<br>
+    <br>
+    <table class="table" id="mytable" >
+        <thead>
+            <tr>
+                {# <th>IdArt</th>  #}
+                <th>Titre Article</th>
+                <th>Auteur</th>
+                <th>Description</th>
+                <th>Date de publication</th>
+                <th>Likes</th>
+                <th>Photo</th>
+                <th>Catégories</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+               {#  <td>{{ article.idArt }}</td> #}
+                <td>{{ article.titreArt }}</td>
+                <td>{{ article.auteurArt }}</td>
+                <td>{{ article.descriptionArt }}</td>
+                <td>{{ article.dateArt ? article.dateArt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.likes }}</td>
+                <td><img style="margin-bottom: -50px" src="{{ asset('uploads/' ~  article.photo) }}" width="300" height="130"></td>
+                <td>{{ article.idCat }}</td>
+                <td>
+                    <a href="{{ path('articles_show', {'idArt': article.idArt}) }}" class="btn btn-outline-warning fas fa-star">Show</a>
+                    <br>
+                    <br>
+                    <a href="{{ path('articles_edit', {'idArt': article.idArt}) }}" class="btn btn-outline-success fas fa-edit">Edit</a>
+                    <br>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i,j, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("mytable");
+                tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+                for (i = 0; i < tr.length; i++) {
+                    td= tr[i].getElementsByTagName("td")[6];
+                    td1= tr[i].getElementsByTagName("td")[2];
+
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        }
+                        else if  (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";  }
+                        else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+
+        </script>
+
+        </tbody>
+    </table>
+
+{% endblock %}

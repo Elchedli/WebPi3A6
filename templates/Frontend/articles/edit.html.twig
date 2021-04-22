@@ -1,0 +1,79 @@
+{#{% extends 'base.html.twig' %}#}
+{% extends 'baseNewFront.html.twig' %}
+{% block car %}
+<div class="carousel">
+    <div class="container-fluid">
+        <div class="owl-carousel">
+            <div class="carousel-item-art">
+                <div class="carousel-img">
+                    <img src="{{ asset("img/blog-for-business.jpg")}}" alt="Image">
+                </div>
+                <div class="carousel-text">
+                    <h1>Editer <span> Article </span> </h1>
+                </div>
+            </div>
+
+        </div>
+
+        {% endblock %}
+{% block blog %}
+
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+        <div>
+            <div class="pt-editor">
+                <div class="form-group col-md-12">
+                    <label for="inputContenu" class="tt-note pt-4">Titre</label>
+                    {{ form_errors(form.titreArt) }}
+                    {{ form_widget(form.titreArt, { 'attr' : { 'class' : 'form-control', "rows":"5" } }) }}
+                </div>
+            </div>
+
+            <div class="pt-editor">
+                <div class="form-group col-md-12">
+                    <label for="inputContenu" class="tt-note pt-4">Auteur</label>
+                    {{ form_errors(form.auteurArt) }}
+                    {{ form_widget(form.auteurArt, { 'attr' : { 'class' : 'form-control', "rows":"5" } }) }}
+                </div>
+            </div>
+            <div class="pt-editor">
+                <div class="form-group col-md-12">
+                    <label for="inputContenu" class="tt-note pt-4">Description</label>
+                    {{ form_errors(form.descriptionArt) }}
+
+                    {{ form_widget(form.descriptionArt, { 'attr' : { 'class' : 'form-control', "rows":"5" } }) }}
+                </div>
+            </div>
+            {#
+            <div class="pt-editor">
+                <div class="form-group col-md-12">
+                    <label for="inputContenu" class="tt-note pt-4">likes</label>
+                    {{ form_widget(form.likes) }}
+                </div>
+            </div>
+            #}
+            <div class="pt-editor">
+                <div class="form-group col-md-6">
+                    <label for="inputContenu" class="tt-note pt-4">Photo</label>
+                    {{ form_errors(form.photo) }}
+
+                    {{ form_widget(form.photo, { 'attr' : { 'class' : 'form-control', "rows":"5" } }) }}
+                </div>
+
+            </div>
+            <div class="pt-editor">
+                <div class="form-group col-md-12">
+                    <label for="inputContenu" class="tt-note pt-4">Catégories</label>
+                    {{ form_errors(form.idCat) }}
+                    {{ form_widget(form.idCat) }}
+                </div>
+
+            </div>
+            <button  class="btn btn-outline-warning fas fa-plus">{{ button_label|default('Update') }}</button>
+            {{ form_end(form) }}
+
+
+
+    <a href="{{ path('articles_index') }}"  class="btn btn-outline-info fas fa-backward"> Back to list</a>
+
+    {{ include('Frontend/articles/_delete_form.html.twig') }}
+{% endblock %}

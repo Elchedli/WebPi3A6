@@ -1,0 +1,49 @@
+{% extends 'baseback.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+{% endblock  %}
+{% block b %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="box-header">
+
+        <center>  <h2 class="box-title" style="font-size: 40px;color:#1d5987;">Liste des Catégories</h2></center>
+    </div>
+<br>
+<br>
+<center>
+    <a href="{{ path('categorie_neww') }}" class="btn btn-success">Add Category +</a>
+</center>
+<br>
+<br>
+<table class="table">
+    <thead>
+    <tr>
+        {#  <th>IdCat</th> #}
+        <th>Catégorie</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for categorie in categories %}
+        <tr>
+            {#  <td>{{ categorie.idCat }}</td> #}
+            <td>{{ categorie.titreCat }}</td>
+            <td>
+                <a href="{{ path('categorie_showw', {'idCat': categorie.idCat}) }}" class="btn btn-info">Show</a>
+                <a href="{{ path('categorie_editt', {'idCat': categorie.idCat}) }}" class="btn btn-danger">Edit</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

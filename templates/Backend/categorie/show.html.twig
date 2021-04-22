@@ -1,0 +1,29 @@
+{% extends 'baseback.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+{% endblock %}
+{% block b %}
+
+    <table class="table">
+        <tbody>
+{#<tr>
+                <th>IdCat</th>
+                <td>{{ categorie.idCat }}</td>
+            </tr>#}
+
+            <tr>
+                <th width="8%">Catégorie :</th>
+                <td >{{ categorie.titreCat }}</td>
+            </tr>
+        </tbody>
+    </table>
+<center>
+    <a href="{{ path('categorie_indexx') }}" class="btn btn-success">Back to list</a>
+
+    <a href="{{ path('categorie_editt', {'idCat': categorie.idCat}) }}" class="btn btn-info">Edit</a>
+</center>
+    <br>
+    {{ include('Backend/categorie/_delete_form.html.twig') }}
+{% endblock %}
