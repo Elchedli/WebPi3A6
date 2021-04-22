@@ -1,0 +1,50 @@
+
+
+{% block Evenement %}
+    <h1>Liste des evenements</h1>
+    <style>
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <table class="table"  border=" 1px solid" align="center" border-collapse="collapse"
+           border-spacing="0"
+           width="100%" >
+        <thead>
+        <tr>
+            {#   <th>IdEv</th>  #}
+            <th style="background-color: #f2f2f2" >Nom</th>
+            <th style="background-color: #f2f2f2" >Type</th>
+            <th style="background-color: #f2f2f2" >Emplacement</th>
+            <th style="background-color: #f2f2f2" >Date Debut</th>
+            <th style="background-color: #f2f2f2" >Date Fin</th>
+            <th style="background-color: #f2f2f2" >Temps Debut</th>
+            <th style="background-color: #f2f2f2" >Temps Fin</th>
+            <th style="background-color: #f2f2f2" >Age Min</th>
+            <th style="background-color: #f2f2f2" >Age Max</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                {#  <td>{{ evenement.idEv }}</td> #}
+                <td>{{ evenement.titreEv }}</td>
+                <td>{{ evenement.typeEv }}</td>
+                <td>{{ evenement.emplacementEv }}</td>
+                <td>{{ evenement.dateDev ? evenement.dateDev|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.dateFev ? evenement.dateFev|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.tempsDev ? evenement.tempsDev|date('H:i:s') : '' }}</td>
+                <td>{{ evenement.tempsFev ? evenement.tempsFev|date('H:i:s') : '' }}</td>
+                <td>{{ evenement.ageMin }}</td>
+                <td>{{ evenement.ageMax }}</td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

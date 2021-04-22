@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Invitation</title>
+
+{% block body %}
+    <h1>Edit Invitation</h1>
+
+    {{ include('invitation/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('invitation_index') }}">back to list</a>
+
+    {{ include('invitation/_delete_form.html.twig') }}
+{% endblock %}

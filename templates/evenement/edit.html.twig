@@ -1,0 +1,17 @@
+{% extends 'Front.html.twig' %}
+
+{% block title %}Edit Evenement{% endblock %}
+
+{% block Evenement %}
+    <center>
+    <h1>Edit Evenement</h1>
+
+    {{ include('evenement/_form.html.twig', {'button_label': 'Update'}) }}
+    <br>
+    <br>
+    <a class="btn btn-outline-primary fas fa-reply"  href="{{ path('evenement_index') }}">back to list</a>
+    <br>
+    <br>
+    {{ include('evenement/_delete_form.html.twig') }}
+    </center>
+{% endblock %}

@@ -1,0 +1,38 @@
+{#
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+ {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+#}
+
+{{ form_start(form, {'attr':{'novalidate':'novalidate'}}) }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+<div class="row">
+
+    <div class="banner_text_iner">
+        <center>
+        <table class="table  table-striped" border=" 1px solid"  align="center" >
+
+            <tr><td> Nom : </td>  <td>{{ form_widget(form.titreEv) }} {{ form_errors(form.titreEv) }}</td></tr>
+            <tr><td>  Type : </td>  <td>{{ form_widget(form.typeEv) }} {{ form_errors(form.typeEv) }}</td></tr>
+            <tr><td> Emplacement :</td>  <td>{{ form_widget(form.emplacementEv) }} {{ form_errors(form.emplacementEv )}}</td></tr>
+            <tr><td> Date debut :</td>  <td>{{ form_widget(form.dateDev) }} {{ form_errors(form.dateDev) }}</td></tr>
+            <tr><td> Date fin :</td>  <td > {{ form_widget(form.dateFev) }} {{ form_errors(form.dateFev) }}</td></tr>
+            <tr><td> Temps debut :</td>  <td>{{ form_widget(form.tempsDev)}} {{ form_errors(form.tempsDev) }}</td></tr>
+            <tr><td> Temps fin :</td>  <td>{{ form_widget(form.tempsFev)}} {{ form_errors(form.tempsFev) }}</td></tr>
+            <tr><td> Age min :</td>  <td>{{ form_widget(form.ageMin)}} {{ form_errors(form.ageMin) }}</td></tr>
+            <tr><td> Age max :</td>  <td>{{ form_widget(form.ageMax)}} {{ form_errors(form.ageMax) }}</td></tr>
+
+        </table>
+        </center>
+    </div>
+
+</div>
+
+<button class="btn btn-outline-success" ><i class="fa fa-download"></i> {{ button_label|default('Update') }}</button>
+
+{{ form_end(form) }}
