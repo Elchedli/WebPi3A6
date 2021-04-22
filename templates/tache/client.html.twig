@@ -2,9 +2,10 @@
 {% block param %}
     {% if clients is defined %}
         {% for client in clients %}
-            <div class="client_div">
-                <a href="{{ path('suivi_liste', {'NomClient': client.client}) }}">{{ client.client }}</a>
-            </div>
+            <a class="client_link" href="{{ path('suivi_liste', {'NomClient': client.client}) }}">
+                <img class="avatar user-thumb" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt="avatar">
+                <p>{{ client.client }}</p>
+            </a>
         {% endfor %}
      {% else %}
                 <table class="table">

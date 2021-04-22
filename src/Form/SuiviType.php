@@ -47,7 +47,8 @@ class SuiviType extends AbstractType
                 'label'=> 'Date debut : ',
                 'attr'=>[
                     'placeholder'=>'Nom du client',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'value' => '2011-09-29'
                 ]
 
             ])
@@ -56,7 +57,8 @@ class SuiviType extends AbstractType
                 'label'=> 'Date fin : ',
                 'attr'=>[
                     'placeholder'=>'Nom du client',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'value' => '2011-09-29'
                 ]
             ])
             ->add('tempsDs',TimeType::class,[
@@ -64,7 +66,8 @@ class SuiviType extends AbstractType
                 'label'=> 'Temps debut : ',
                 'attr'=>[
                     'placeholder'=>'Nom du client',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'value' => '01:00:00'
                 ]
             ])
             ->add('tempsFs',TimeType::class,[
@@ -72,7 +75,8 @@ class SuiviType extends AbstractType
                 'label'=> 'Temps fin : ',
                 'attr'=>[
                     'placeholder'=>'Nom du client',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'value' =>'02:00:00'
                 ]
             ])
 

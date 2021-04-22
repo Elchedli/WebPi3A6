@@ -39,12 +39,12 @@ class SuiviController extends AbstractController
         $suivi = new Suivi();
         $form = $this->createForm(SuiviType::class, $suivi);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($suivi);
             $entityManager->flush();
-
+            $session = $request->getSession();
+            $session->set('notif', 'fait');
             return $this->redirectToRoute('suivi_index');
         }
 
@@ -78,7 +78,6 @@ class SuiviController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('suivi_index');
         }
 
@@ -90,14 +89,14 @@ class SuiviController extends AbstractController
 
     /**
      * @Route("/effacer/{idS}", name="suivi_delete", methods={"GET","POST"})
-     * @return Response
      */
-    public function effacer($idS): Response
-    {
+    public function effacer(Request $request,$idS){
         $em = $this->getDoctrine()->getManager();
         $suivi=$em->getRepository(Suivi::class)->find($idS);
         $em->remove($suivi);
         $em->flush();
+        $session = $request->getSession();
+        $session->set('notif', 'echec');
         return $this->redirectToRoute('suivi_index');
     }
 }

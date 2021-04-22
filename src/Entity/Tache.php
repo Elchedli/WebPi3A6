@@ -3,7 +3,7 @@
 namespace App\Entity;
 use App\Repository\TacheRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Tache
  *
@@ -14,7 +14,6 @@ class Tache
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="id_tache", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -23,7 +22,7 @@ class Tache
 
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank(message="Client obligatoire")
      * @ORM\Column(name="username", type="string", length=30, nullable=true)
      */
     private $username;
@@ -37,14 +36,18 @@ class Tache
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Difficultée obligatoire")
+     * @Assert\Choice(
+     *     choices={1,11},
+     *     groups={"facile","moyenne","difficile"}
+     * )
      * @ORM\Column(name="difficulte_tache", type="string", length=30, nullable=false)
      */
     private $difficulteTache;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Description obligatoire")
      * @ORM\Column(name="description_tache", type="string", length=30, nullable=false)
      */
     private $descriptionTache;

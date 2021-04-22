@@ -5,6 +5,8 @@ use DateTime;
 use DateTimeInterface;
 use App\Repository\SuiviRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Suivi
@@ -22,44 +24,46 @@ class Suivi
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idS;
-
     /**
      * @var string|null
-     *
+     * @Assert\NotBlank(message="Titre obligatoire")
+     * @Assert\Length(
+     *      max = 40,
+     *      maxMessage = "Vous avez depasser les 40 caracteres"
+     * )
      * @ORM\Column(name="titre_s", type="string", length=50, nullable=false)
      */
     private $titreS;
-
     /**
      * @var DateTime
-     *
+     * @Assert\NotBlank(message="Date obligatoire")
      * @ORM\Column(name="date_ds", type="date", nullable=false)
      */
     private $dateDs;
-
     /**
      * @var DateTime
-     *
+     * @Assert\NotBlank(message="Date obligatoire")
      * @ORM\Column(name="date_fs", type="date", nullable=false)
      */
     private $dateFs;
 
     /**
      * @var DateTime
-     *
+     * @Assert\NotBlank(message="Date est obligatoire")
      * @ORM\Column(name="temps_ds", type="time", nullable=false)
      */
     private $tempsDs;
 
     /**
      * @var DateTime
-     *
+     * @Assert\NotBlank(message="Temps est obligatoire")
      * @ORM\Column(name="temps_fs", type="time", nullable=false)
      */
     private $tempsFs;
 
     /**
      * @var string|null
+     * @Assert\NotBlank(message="Temps est obligatoire")
      * @ORM\Column(name="username", type="string", length=50, nullable=false)
      * @ORM\ManyToOne(targetEntity=Psycho::class,inversedBy="username")
      */
@@ -67,6 +71,7 @@ class Suivi
 
     /**
      * @var string|null
+     * @Assert\NotBlank(message="Client obligatoire")
      * @ORM\Column(name="client", type="string", length=20, nullable=false)
      * @ORM\ManyToOne(targetEntity=Simple::class,inversedBy="username")
      */

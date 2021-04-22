@@ -63,6 +63,8 @@ class TacheController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tache);
             $entityManager->flush();
+            $session = $request->getSession();
+            $session->set('notif', 'fait');
             return $this->redirectToRoute('tache_index',array(
                 'idS' => $idS
             ));
@@ -107,6 +109,8 @@ class TacheController extends AbstractController
         $Tache=$em->getRepository(Tache::class)->find($idTache);
         $em->remove($Tache);
         $em->flush();
+        $session = $request->getSession();
+        $session->set('notif', 'echec');
         return $this->redirectToRoute('tache_index', [
             'idS' => $idS
         ]);
