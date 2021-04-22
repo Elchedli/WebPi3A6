@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PubLikeTracks{% endblock %}
+
+{% block body %}
+    <h1>PubLikeTracks</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pub_like_track.id }}</td>
+            </tr>
+            <tr>
+                <th>Id_user</th>
+                <td>{{ pub_like_track.idUser }}</td>
+            </tr>
+            <tr>
+                <th>Id_pub</th>
+                <td>{{ pub_like_track.idPub }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('pub_like_tracks_index') }}">back to list</a>
+
+    <a href="{{ path('pub_like_tracks_edit', {'id': pub_like_track.id}) }}">edit</a>
+
+    {{ include('pub_like_tracks/_delete_form.html.twig') }}
+{% endblock %}

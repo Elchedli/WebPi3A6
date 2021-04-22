@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New PubLikeTracks{% endblock %}
+
+{% block body %}
+    <h1>Create new PubLikeTracks</h1>
+
+    {{ include('pub_like_tracks/_form.html.twig') }}
+
+    <a href="{{ path('pub_like_tracks_index') }}">back to list</a>
+{% endblock %}
