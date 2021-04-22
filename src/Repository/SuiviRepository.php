@@ -17,6 +17,14 @@ class SuiviRepository extends ServiceEntityRepository
         parent::__construct($registry, Suivi::class);
     }
 
+    public function SuiviTaches($user)
+    {
+//        $sql = 'select distinct t.username,s.idS from App:Tache t join App:Suivi s where t.username = s.client';
+        $sql = 'select s from App:Suivi s where s.client = :user';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameter('user', $user);
+        return $result->getResult();
+    }
+
     public function SuiviClients()
     {
         $user = "mgkpsy";

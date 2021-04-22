@@ -11,12 +11,43 @@ use App\Repository\SuiviRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 /**
  * @Route("/tache")
  */
 class TacheController extends AbstractController
 {
+    /**
+     * TacheController constructor.
+     */
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+        $this->session->set('user','shidono');
+        $this->session->set('type','simple');
+    }
+
+    /**
+     * @Route("/Taches", name="suivi_taches", methods={"GET"})
+     */
+    public function listeTachesFront(){
+        $em=$this->getDoctrine()->getManager();
+        $data = $em->getRepository( Suivi::class)->SuiviTaches($this->session->get('user'));
+        return $this->render('frontend/suivi.html.twig',[
+            'suivis' => $data,
+        ]);
+    }
+
+    /**
+     * @Route("/todo/{idsuivi}", name="tache_task", methods={"GET"})
+     */
+    public function ToDo($idsuivi){
+        $em=$this->getDoctrine()->getManager();
+        $data = $em->getRepository( Tache::class)->TachesToDo($this->session->get('user'),$idsuivi);
+        return $this->render('frontend/todo.html.twig',[
+            'taches' => $data,
+        ]);
+    }
 
     /**
      * @Route("/", name="tache_clients", methods={"GET"})
@@ -29,6 +60,9 @@ class TacheController extends AbstractController
             'clients' => $data,
         ]);
     }
+
+
+
 
     /**
      * @Route("/liste/{NomClient}", name="suivi_liste", methods={"GET"})
@@ -105,7 +139,6 @@ class TacheController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $idTache = $request->get('idTache');
         $idS = $request->get('idS');
-        echo "black lives matter".$idTache;
         $Tache=$em->getRepository(Tache::class)->find($idTache);
         $em->remove($Tache);
         $em->flush();

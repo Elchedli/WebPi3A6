@@ -37,4 +37,12 @@ class TacheRepository extends ServiceEntityRepository
         return $result->getResult();
     }
 
+    public function TachesToDo($client,$idS){
+        $sql = 'select t from App:Tache t where t.username = :user';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameter('user', $client);
+        return $result->getResult();
+    }
+
+
+
 }
