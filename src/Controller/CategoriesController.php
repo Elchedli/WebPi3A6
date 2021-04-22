@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Categories;
+use App\Entity\Reclamation;
 use App\Form\CategoriesType;
 use App\Repository\CategoriesRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +30,7 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/add", name="categories_new", methods={"GET","POST"})
      */
+
     public function add(Request $request): Response
     {
         $categories= new Categories();
@@ -90,4 +93,6 @@ class CategoriesController extends AbstractController
 
         return $this->redirectToRoute('categories_index');
     }
+
+
 }

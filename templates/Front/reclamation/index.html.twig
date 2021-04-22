@@ -7,7 +7,17 @@
     <meta content="Free Website Template" name="description">
 {% endblock %}
 {% block contact %}
-    <table class="table">
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <br>
+    <center>
+    <p>
+    <button onclick="sortTable()" class="btn btn-outline-info fas fa-paper-plane"> Recent Claims</button></p>
+    </center>
+        <table class="table" id="myT">
         <thead>
             <tr>
                 {# <th>IdRec</th>#}
@@ -32,8 +42,8 @@
                 <td>{{ reclamation.dateRec ? reclamation.dateRec|date('d-m-Y H:i:s') : '' }}</td>
                 <td>
                     <div class="carousel-btn">
-                        <a class="btn custom-btn" href="{{ path('reclamation_show', {'idRec': reclamation.idRec}) }}">Show</a>
-                        <a class="btn custom-btn" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}">Edit</a>
+                        <a class="btn btn-outline-danger fas fa-star" href="{{ path('reclamation_show', {'idRec': reclamation.idRec}) }}"> Show</a>
+                        <a class="btn btn-outline-success fas fa-edit" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}"> Edit </a>
                     </div>
 
                 </td>
@@ -43,6 +53,44 @@
                 <td colspan="7">No Records Found</td>
             </tr>
         {% endfor %}
+        <script>
+            function sortTable() {
+                var table, rows, switching, i, x, y, shouldSwitch,dir;
+                table = document.getElementById("myT");
+                switching = true;
+                // Set the sorting direction to ascending:
+
+
+                while (switching) {
+
+                    switching = false;
+                    rows = table.rows;
+
+                    for (i = 1; i < (rows.length - 1); i++) {
+
+                        shouldSwitch = false;
+
+                        x = rows[i].getElementsByTagName("TD")[4];
+                        y = rows[i + 1].getElementsByTagName("TD")[4];
+
+
+
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+                            shouldSwitch = true;
+                            break;
+                        } }
+
+                    if (shouldSwitch) {
+
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+
+
+                }
+            }
+        </script>
         </tbody>
     </table>
 {% endblock %}

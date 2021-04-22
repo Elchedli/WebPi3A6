@@ -8,10 +8,14 @@ use App\Form\CategoriesType;
 use App\Form\ReclamationType;
 use App\Repository\CategoriesRepository;
 use App\Repository\ReclamationRepository;
+use Doctrine\Common\Collections\Collection;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class BackendController extends AbstractController
 {
@@ -42,6 +46,11 @@ class BackendController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($categories);
             $em->flush();
+
+            $this->addFlash(
+                'info',
+                'Added successfully'
+            );
             return $this->redirectToRoute('categories_indexx');
         }
 
@@ -144,9 +153,86 @@ class BackendController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($reclamation);
             $entityManager->flush();
+            $this->addFlash(
+                'info',
+                'Deleted successfully'
+            );
         }
 
         return $this->redirectToRoute('reclamation_indexx');
 
     }
+
+    /**
+     * @Route("/pdf/salma", name="imprimer", methods={"GET"})
+     */
+    public function pdf(ReclamationRepository $reclamationRepository): Response
+    {
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        $dompdf = new Dompdf($pdfOptions);
+
+        $html = $this->renderView('Back/reclamation/pdf.html.twig', [
+            'reclamations' => $reclamationRepository->findAll(),
+        ]);
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+    }
+
+    /**
+    # * @Route("/backend/rec/archive/{id}", name="recarchive")
+     */
+    #public function archive(Reclamation $reclamation)
+   # {
+       # if ($reclamation->getEtatRec() == 'To do') {
+           # $reclamation->setEtatRec('Done');
+            #$reclamation = $reclamation ->getIdRec();
+            #$this->em->persist($reclamation);
+            #$this->em->flush();
+            #$this->addFlash('success', "Archive effectué avec succès!");
+        #}else {
+        #    $this->addFlash('success', "Deja archivé !");
+        #}
+        #return $this->redirectToRoute('reclamation_indexx');
+    #}
+
+
+    /**
+     * @param ReclamationRepository $reclamationRepository
+     * @return Response
+     * @Route("/backend/stat", name="statistique")
+     */
+    public function statistique(ReclamationRepository $reclamationRepository)
+    {
+        $reclamation = $reclamationRepository->findAll();
+        $catType= ['Done', 'To do']; #, 'Suivi', 'Msg', 'Technical', 'Posts'];
+        $catColor = ['#49A9EA', '#36CAAB']; #, '#34495E', '#B370CF', '#AC5353', '#CFD4D8'];
+        $catDone= count($reclamationRepository->findBy(["etatRec" =>"Done"]) )  ;
+        $catToDo = count($reclamationRepository->findBy(["etatRec" =>"To do"]) ) ;
+        #$catSuivi = count($reclamationRepository->findBy(["idCat" => "Suivi"]) ) ;
+        #$catMsg= count($reclamationRepository->findBy(["idCat" =>"Msg"]) )  ;
+        #$catTechnical = count($reclamationRepository->findBy(["idCat" =>"Technical"]) ) ;
+        #$catPosts = count($reclamationRepository->findBy(["idCat" => "Posts"]) ) ;
+        $catCount = [ $catDone, $catToDo]; #,$categSuivi, $categMsg, $categTechnical, $categPosts];
+
+        return $this->render('Back/reclamation/stats.html.twig',
+            ['catType' => json_encode($catType),
+                'catColor' => json_encode($catColor),
+                'catCount' => json_encode($catCount),
+
+
+            ]);
+    }
+
 }

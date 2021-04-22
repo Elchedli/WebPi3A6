@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Spirity | Reclamation</title>
 {% endblock %}
+
 {% block b %}
 <div class="box box-info" style="align-items: center; padding-left: 400px ">
     <div class="box-header">
@@ -12,9 +13,15 @@
         <h3 class="bg-light py-4 text-info">Our Reclamations</h3>
     </div>
     <div class="box-body">
+        <form method="post" >
+
+            <input type="text" class="form-control" name="AfficherClasse" onkeyup="myFunction()" placeholder="Search" id="myInput" style="width:500px;display: inline-block;margin-left: 170px">
+            <label for="myInput" class="fa fa-search" style="display:inline-block">
+            </label>
+        </form >
         <form action="#" method="post">
             <div class="form-group">
-                <table class="table">
+                <table class="table" id="mytable">
                     <thead>
             <tr>
                 {# <th>IdRec</th>#}
@@ -38,8 +45,8 @@
                 <td>{{ reclamation.idCat }}</td>
                 <td>{{ reclamation.dateRec ? reclamation.dateRec|date('d-m-Y H:i:s') : '' }}</td>
                 <td>
-                        <a class="btn btn-adn" href="{{ path('reclamation_showw', {'idRec': reclamation.idRec}) }}">Show</a>
-                        <a class="btn btn-adn" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}">Edit</a>
+                        <a class="btn btn-warning" href="{{ path('reclamation_showw', {'idRec': reclamation.idRec}) }}"><i class="fa fa-star"></i> Show</a>
+                        <a class="btn btn-success" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}"><i class="fa fa-edit"></i> Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -47,8 +54,42 @@
                 <td colspan="7">No Records Found</td>
             </tr>
         {% endfor %}
+        <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i,j, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("mytable");
+                tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+                for (i = 0; i < tr.length; i++) {
+                    td= tr[i].getElementsByTagName("td")[1];
+                    td1= tr[i].getElementsByTagName("td")[2];
+                    td2= tr[i].getElementsByTagName("td")[4];
+
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        txtValue2 = td2.textContent || td2.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else if  (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";  }
+                        else if  (txtValue2.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+
+        </script>
         </tbody>
     </table>
+                <a class="btn btn-info"  href="{{path('imprimer') }}"> <i class="fa fa-print"></i> Print</a>
+                <a class="btn btn-pinterest"  href="{{path('statistique') }}"> <i class="fa fa-quote-right"></i> Stats</a>
             </div>
         </form>
     </div>

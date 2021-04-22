@@ -1,6 +1,10 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
 {{ form_widget(form) }}
 <br><br>
-<button class="btn custom-btn">{{ button_label|default('Add') }}</button>
-<a class="btn custom-btn" href="{{ path('reclamation_index') }}">Reclamations' List</a>
-{{ form_end(form) }}
+<center>
+<button class="btn btn-outline-warning fas fa-plus-circle"> {{ button_label|default('Add') }}</button>
+<br>
+<br>
+<a class="btn btn-outline-success fas fa-reply" href="{{ path('reclamation_index') }}"> Reclamations' List</a>
+</center>
+    {{ form_end(form) }}

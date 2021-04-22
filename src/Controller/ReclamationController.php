@@ -41,6 +41,11 @@ class ReclamationController extends AbstractController
             $entityManager->persist($reclamation);
             $entityManager->flush();
 
+            $this->addFlash(
+                'info',
+                'Added successfully'
+            );
+
             return $this->redirectToRoute('reclamation_index');
         }
 
@@ -71,6 +76,11 @@ class ReclamationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash(
+                'info',
+                'Updated successfully'
+            );
+
             return $this->redirectToRoute('reclamation_index');
         }
 
@@ -89,6 +99,10 @@ class ReclamationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($reclamation);
             $entityManager->flush();
+            $this->addFlash(
+                'info',
+                'Deleted successfully'
+            );
         }
 
         return $this->redirectToRoute('reclamation_index');

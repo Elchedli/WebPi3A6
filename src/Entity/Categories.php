@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categories
 {
+
     /**
      * @var int
      *
@@ -33,6 +36,13 @@ class Categories
      * )
      */
     private $nomCat;
+
+    private $reclamations;
+
+    public function __construct()
+    {
+        $this->reclamations = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -64,6 +74,14 @@ class Categories
     public function setNomCat(?string $nomCat): void
     {
         $this->nomCat = $nomCat;
+    }
+
+    /**
+     * @return Collection|Reclamation[]
+     */
+    public function getReclamations(): ?Collection
+    {
+        return $this-> reclamations;
     }
 
     public function __toString()

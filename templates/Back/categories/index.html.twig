@@ -7,6 +7,11 @@
 {% endblock %}
 
 {% block b %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="box box-info" style="align-items: center; padding-left: 400px ">
     <div class="box-header">
         {# <i class="fa fa-envelope"></i> #}
