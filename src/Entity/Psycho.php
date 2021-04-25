@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
- * Nutri
+ * Psycho
  *
- * @ORM\Table(name="nutri", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})})
+ * @ORM\Table(name="psycho", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"}), @ORM\UniqueConstraint(name="username_2", columns={"username"})})
  * @ORM\Entity
  */
-class Nutri
+class Psycho
 {
     /**
      * @var int
@@ -24,27 +24,26 @@ class Nutri
     /**
      * @var string
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @ORM\Column(name="username", type="string", length=50, nullable=false)
-     */
-    private $username;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message="Ce champs est obligatoire")<
      * @Assert\Length(
      *min=6,
      *max=50,
      *minMessage="Le mot de passe doit comporter au moins {{ limit }} caractères",
      *maxMessage ="Le mot de passe doit comporter au plus {{ limit }} caractères"
      *)
+     * @ORM\Column(name="username", type="string", length=50, nullable=false)
+     */
+    private $username;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="password", type="text", length=65535, nullable=false)
      */
     private $password;
 
     /**
      * @var string
-     * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @Assert\Email(message="Cette adresse mail n'est pas valide ")
+     *
      * @ORM\Column(name="mail", type="string", length=50, nullable=false)
      */
     private $mail;
@@ -59,7 +58,7 @@ class Nutri
     /**
      * @var string
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @ORM\Column(name="code", type="string", length=50, nullable=false)
+     * @ORM\Column(name="code", type="string", length=20, nullable=false)
      */
     private $code;
 
@@ -127,6 +126,5 @@ class Nutri
 
         return $this;
     }
-
 
 }

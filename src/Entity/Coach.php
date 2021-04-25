@@ -2,57 +2,57 @@
 
 namespace App\Entity;
 
-use App\Repository\CoachRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * @ORM\Entity(repositoryClass=CoachRepository::class)
+ * Coach
+ *
+ * @ORM\Table(name="coach", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})})
+ * @ORM\Entity
  */
 class Coach
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Ce champs est obligatoire")<
+     * @var string
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @ORM\Column(name="username", type="string", length=50, nullable=false)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Ce champs est obligatoire")<
-     * @Assert\Length(
-     *min=6,
-     *max=50,
-     *minMessage="Le mot de passe doit comporter au moins {{ limit }} caractères",
-     *maxMessage ="Le mot de passe doit comporter au plus {{ limit }} caractères"
-     *
-    )
+     * @var string
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @ORM\Column(name="password", type="text", length=65535, nullable=false)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Ce champs est obligatoire")<
-     * @Assert\Email(message="Cette adresse mail n'est pas valide ")
+     * @var string
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @ORM\Column(name="mail", type="string", length=50, nullable=false)
      */
     private $mail;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\NotBlank(message="Ce champs est obligatoire")<
+     * @var \DateTime
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @ORM\Column(name="date_n", type="date", nullable=false)
      */
     private $date_n;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Ce champs est obligatoire")<
+     * @var string
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @ORM\Column(name="code", type="string", length=20, nullable=false)
      */
     private $code;
 
@@ -120,4 +120,7 @@ class Coach
 
         return $this;
     }
+
+
+
 }

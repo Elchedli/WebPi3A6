@@ -50,6 +50,7 @@ class SimpleControllerFront extends AbstractController
 
     /**
      * @Route("/{id_user}", name="simplefront_show", methods={"GET"})
+     * @param Simple $simple
      */
     public function show(Simple $simple): Response
     {

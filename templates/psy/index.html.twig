@@ -1,9 +1,9 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Psy index{% endblock %}
+{% block title %}Psycho index{% endblock %}
 
 {% block body %}
-    <h1>Psy index</h1>
+    <h1>Psycho index</h1>
     <p><button class="btn btn-rounded btn-danger mb-3" onclick="sortTable()"> Sort by Date</button></p>
     <table class="table" id="myT" name="tableP">
 
@@ -17,13 +17,13 @@
             </tr>
         </thead>
         <tbody>
-        {% for psy in psies %}
+        {% for Psycho in psies %}
             <tr>
-                <td>{{ psy.username }}</td>
-                <td>{{ psy.mail }}</td>
-                <td>{{ psy.dateN ? psy.dateN|date('Y-m-d') : '' }}</td>
+                <td>{{ Psycho.username }}</td>
+                <td>{{ Psycho.mail }}</td>
+                <td>{{ Psycho.dateN ? Psycho.dateN|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('psy_show', {'id': psy.id}) }}">Details</a>
+                    <a href="{{ path('Psycho_show', {'id': Psycho.id}) }}">Details</a>
                 </td>
             </tr>
         {% else %}

@@ -1,29 +1,29 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Psy{% endblock %}
+{% block title %}Psycho{% endblock %}
 
 {% block body %}
-    <h1>Psy</h1>
+    <h1>Psycho</h1>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Username</th>
-                <td>{{ psy.username }}</td>
+                <td>{{ Psycho.username }}</td>
             </tr>
             <tr>
                 <th>Mail</th>
-                <td>{{ psy.mail }}</td>
+                <td>{{ Psycho.mail }}</td>
             </tr>
             <tr>
                 <th>Date_n</th>
-                <td>{{ psy.dateN ? psy.dateN|date('Y-m-d') : '' }}</td>
+                <td>{{ Psycho.dateN ? Psycho.dateN|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>
-    <button class="btn" onclick="location.href='{{ path('psy_index') }}'">  <i class="fa fa-reply"></i> </button>
+    <button class="btn" onclick="location.href='{{ path('Psycho_index') }}'">  <i class="fa fa-reply"></i> </button>
 <div class="col-offset-5">
-    <button class="btn" onclick="location.href='{{ path('psy_edit', {'id': psy.id}) }}'" > <i class="fa fa-edit"> </i></button>
+    <button class="btn" onclick="location.href='{{ path('Psycho_edit', {'id': Psycho.id}) }}'" > <i class="fa fa-edit"> </i></button>
 
     {{ include('psy/_delete_form.html.twig') }}
 {% endblock %}

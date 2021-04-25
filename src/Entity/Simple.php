@@ -2,52 +2,57 @@
 
 namespace App\Entity;
 
-use App\Repository\SimpleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * @ORM\Entity(repositoryClass=SimpleRepository::class)
+ * Simple
+ *
+ * @ORM\Table(name="simple", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"})})
+ * @ORM\Entity
  */
 class Simple
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id_user", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id_user;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Ce champs est obligatoire")<
+     * @var string
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @ORM\Column(name="username", type="string", length=20, nullable=false)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
      * @Assert\NotBlank(message="Ce champs est obligatoire")
      *@Assert\Length(
      *min=6,
      *max=50,
      *minMessage="Le mot de passe doit comporter au moins {{ limit }} caractères",
      *maxMessage ="Le mot de passe doit comporter au plus {{ limit }} caractères"
+     * )
+     * @ORM\Column(name="password", type="text", length=65535, nullable=false)
      *
-    )
      */
-
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
      * @Assert\NotBlank(message="Ce champs est obligatoire")
-     * @Assert\Email(message="Cette adresse mail n'est pas valide ")
+     * @ORM\Column(name="mail", type="string", length=50, nullable=false)
      */
     private $mail;
 
     /**
-     * @ORM\Column(type="date")
+     * @var \DateTime
      * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @ORM\Column(name="date_n", type="date", nullable=false)
      */
     private $date_n;
 
@@ -61,7 +66,7 @@ class Simple
         return $this->username;
     }
 
-    public function setUsername(?string $username): self
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
