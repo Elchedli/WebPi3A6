@@ -1,0 +1,11 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}New psy{% endblock %}
+
+{% block body %}
+    <h1>Create new psy</h1>
+        {{ include('psyfront/_form.html.twig') }}
+
+    <a href="{{ path('psyfront_index') }}">back to list</a>
+
+    {% endblock %}

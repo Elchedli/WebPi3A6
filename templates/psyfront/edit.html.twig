@@ -1,0 +1,13 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Edit psy{% endblock %}
+
+{% block body %}
+    <h1>Edit psy</h1>
+
+    {{ include('psyfront/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('psyfront_index') }}">back to list</a>
+
+    {{ include('psyfront/_delete_form.html.twig') }}
+{% endblock %}

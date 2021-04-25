@@ -1,0 +1,65 @@
+{% extends 'basefront.html.twig' %}
+
+
+
+{% block body %}
+
+    <input type="text" class="form-control" name="AfficherClasse" onkeyup="myFunction()" placeholder="Search" id="myInput">
+    <div class="row">
+        {% for psy in psys %}
+
+            <div class="col-lg-3 col-md-6">
+                <div class="team-item">
+                    <a class="team-img" href="{{ path('psyfront_show', {'id': psy.id}) }}">
+                        <img src="{{ asset('/front/img/psy.jpg') }}" alt="Image">
+                        <div class="team-social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </a>
+                    <div class="team-text">
+                        <h2>{{psy.username}} </h2>
+                        <p> {{ psy.mail }}</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i,j, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("mytable");
+                tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+                for (i = 0; i < tr.length; i++) {
+                    td= tr[i].getElementsByTagName("td")[0];
+
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+
+        </script>
+
+</div>
+
+
+
+{% endblock %}

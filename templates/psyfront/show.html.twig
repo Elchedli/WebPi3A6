@@ -1,0 +1,29 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}psy{% endblock %}
+
+{% block body %}
+    <h1>psy</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Username</th>
+                <td>{{ psy.username }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ psy.mail }}</td>
+            </tr>
+            <tr>
+                <th>Date of birth</th>
+                <td>{{ psy.dateN ? psy.dateN|date('Y-m-d') : '' }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('psyfront_index') }}">back to list</a>
+
+
+{% endblock %}

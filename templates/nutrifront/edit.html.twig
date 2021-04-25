@@ -1,0 +1,13 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Edit nutri{% endblock %}
+
+{% block body %}
+    <h1>Edit nutritionist</h1>
+
+    {{ include('nutrifront/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('nutrifront_index') }}">back to list</a>
+
+    {{ include('nutrifront/_delete_form.html.twig') }}
+{% endblock %}

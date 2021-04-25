@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Nutritionist{% endblock %}
+
+{% block body %}
+    <h1>Create new Nutritionist</h1>
+
+    {{ include('nutri/_form.html.twig') }}
+
+    <a href="{{ path('nutri_index') }}">back to list</a>
+{% endblock %}
