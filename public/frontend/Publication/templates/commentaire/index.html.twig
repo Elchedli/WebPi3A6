@@ -295,7 +295,7 @@
             {% for commentaire in commentaires %}
                 <tr>
                     <td>{{ commentaire.idPub }}</td>
-                    <td>{{ commentaire.idUser }}</td>
+                    <td>{{ commentaire.getUsername() }}</td>
                     <td>{{ commentaire.contenu }}</td>
                     <td>{{ commentaire.date ? commentaire.date|date('Y-m-d H:i:s') : '' }}</td>
                     <td>

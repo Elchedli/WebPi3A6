@@ -38,6 +38,21 @@ class Commentaire
      */
     private $date;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
+
+    public function setUsername($username)
+    {
+        return $this->username = $username;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

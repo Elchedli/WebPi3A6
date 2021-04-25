@@ -1,127 +1,114 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme formPub  'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <!-- Nav Bar Start -->
-    <div class="navbar navbar-expand-lg bg-light navbar-light">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">Spiri<span>ty</span></a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-light navbar-light">
+    <div class="container-fluid">
+        <a href="index.html" class="navbar-brand">Spiri<span>ty</span></a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav ml-auto">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="feature.html" class="nav-item nav-link">Feature</a>
-                    <a href="team.html" class="nav-item nav-link">Articles</a>
-                    <a href="menu.html" class="nav-item nav-link active">Publication</a>
-                    <a href="booking.html" class="nav-item nav-link">Evenements</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog Detail</a>
-                        </div>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="feature.html" class="nav-item nav-link">Feature</a>
+                <a href="team.html" class="nav-item nav-link">Articles</a>
+                <a href="menu.html" class="nav-item nav-link active">Publication</a>
+                <a href="booking.html" class="nav-item nav-link">Evenements</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu">
+                        <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                        <a href="single.html" class="dropdown-item">Blog Detail</a>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
         </div>
     </div>
-    <!-- Nav Bar End -->
+</div>
+<!-- Nav Bar End -->
 
 
-    <!-- Page Header Start -->
-    <div class="page-header mb-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2>Publications</h2>
-                </div>
-                <div class="col-12">
+<!-- Page Header Start -->
+<div class="page-header mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Publications</h2>
+            </div>
+            <div class="col-12">
 
-                </div>
             </div>
         </div>
     </div>
-    <!-- Page Header End -->
+</div>
+<!-- Page Header End -->
 
 
-    <!-- Food Start -->
+<!-- Food Start -->
 
-    <!-- Food End -->
+<!-- Food End -->
 
 
-    <!-- Menu Start -->
-    <div class="menu">
-        <div class="container">
-            <div class="section-header text-center">
+<!-- Menu Start -->
+<div class="menu">
+    <div class="container">
+        <div class="section-header text-center">
 
-            </div>
-            <div class="menu-tab">
-                <ul class="nav nav-pills justify-content-center">
-                    <li class="nav-item">
+        </div>
+        <div class="menu-tab">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
 
-                    </li>
-                </ul>
+                </li>
+            </ul>
 
-                <div class="tab-content">
-                    <div class="align-content-center">
-                    {% for publication in pubs %}
+            <div class="tab-content">
+                <div class="align-content-center">
+
                         <div class="menu-item">
                             <div class="menu-img">
-                                <img src="img/menu-burger.jpg" alt="Image">
                             </div>
                             <div>
 
-                                <h3>{{ publication.getUsername()}} Said :</h3>
+                                <h3>{{ publication.getId_user()}} Said :</h3>
                                 <h2>"{{ publication.getTexte() }}"</h2>
 
                                 <form action="{{ path('Pub_like',{'id_pub':publication.getId(),'id_user':1}) }}" method="post">
                                     <h5>Likes: {{ publication.getNb_reaction() }}</h5><button type="submit" class="btn-primary btn">Like/Dislike</button>
                                 </form>
                                 <p>{{ publication.getDate() | date('d/m/Y')}} at: {{ publication.getDate() | date('H:i')}}</p>
-                                <a href="{{ path('pub_view',{'id_pub':publication.getId()}) }}">Voir La Publication</a><br>
                                 <a href="{{ path('photos_publication',{'id_pub':publication.getId()}) }}">Voir Photo(s)</a><br>
                                 {% if publication.getId_user() == 1 %}
                                     <a href="{{ path('pub_delete',{'id':publication.getId()})}}"type="button">Supprimer</a><br>
                                     <a href="{{ path('publication_edit', {'id_pub': publication.getId()}) }}">Modifier</a>
                                     <hr>
 
-                                    {% for commentaire in publication.comment %}
-                                        <h6>{{ commentaire.getUsername()}} commented:</h6>
-                                        <p>{{ commentaire.contenu }}</p>
-                                        <p>{{ commentaire.getDate() | date('d/m/Y') }} at: {{ commentaire.getDate() | date('H:i')}}</p>
-                                        <hr>
-                                    {% else %}
-                                        <p>Pas de commentaires</p>
-                                    {% endfor %}
                                 {%  endif %}
                                 <form action="{{ path('commentaire_new_front',{'id_pub':publication.getId(),'id_user':1}) }}" method="post">
                                     <button type="submit" class="btn-primary btn">Ajouter un Commentaire</button>
                                     <hr>
                                 </form>
+                                {% if qr %}
+                                    <h6>Qr code de la page: </h6>
+                                    <img src="{{qr}}"><br><br><br>
+                                {% endif %}
+                                <a href="{{ path('publication') }}">Retour</a>
                             </div>
                         </div>
-                    {% endfor %}
+                </div>
+                <div id="burgers" class="container tab-pane active">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12">
 
-                    {{ form_start(formPub, {attr: {novalidate: 'novalidate'}}) }}
-                    {{ form_widget(formPub.texte,{ 'attr':{'class':'form-control','placeholder':'Text'}}) }}
-                    {{ form_errors(formPub.texte) }}
-                    {{ form_rest(formPub) }}
-                    {{ form_end(formPub) }}
-                    </div>
-                    <div id="burgers" class="container tab-pane active">
-                        <div class="row">
-                            <div class="col-lg-7 col-md-12">
+                            <div class="col-lg-5">
+                                <div class="booking-form">
 
-                                <div class="col-lg-5">
-                                    <div class="booking-form">
-
-                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -260,4 +247,4 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-{% endblock %}
+    {% endblock %}

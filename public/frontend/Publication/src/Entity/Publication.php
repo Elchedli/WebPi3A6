@@ -37,6 +37,22 @@ class Publication
     private $texte;
 
     /**
+     * @ORM\Column(type="string", length=1000)
+     * @Assert\Length(min= 1, max = 255)
+     */
+    private $username;
+
+    public function setUsername($username)
+    {
+        return $this->username = $username;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $date_pub;
@@ -63,6 +79,9 @@ class Publication
     {
         return $this->texte;
     }
+
+
+
     public function getId_user()
     {
         return $this->id_user;
@@ -98,6 +117,9 @@ class Publication
     {
         return $this->texte = $text;
     }
+
+
+
     public function setDate($date)
     {
         return $this->date_pub = $date;

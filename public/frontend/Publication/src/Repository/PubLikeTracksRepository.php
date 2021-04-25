@@ -25,7 +25,12 @@ class PubLikeTracksRepository extends ServiceEntityRepository
         $sql = 'select c from App:PubLikeTracks c where c.id_pub = :id_pub AND c.id_user = :id_user';
         $result = $this->getEntityManager()->createQuery($sql)->setParameters(array('id_pub'=>$id_pub,'id_user'=>$id_user));
 
-        return $result->getResult();
+        if(sizeof($result->getResult())==0)
+        {
+            return false;
+        }
+        else
+            return true;
     }
 
     public function t()

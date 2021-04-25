@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Repository\CommentaireRepository;
@@ -10,11 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/commentaire")
  */
 class CommentaireController extends AbstractController
 {
+    public $username = "jeff";
     /**
      * @Route("/", name="commentaire_index", methods={"GET"})
      */
@@ -71,6 +72,7 @@ class CommentaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $commentaire->setIdPub($id_pub);
             $commentaire->setIdUser($id_user);
+            $commentaire->setUsername($this->username);
             $commentaire->setDate(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($commentaire);
@@ -97,6 +99,7 @@ class CommentaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $commentaire->setIdPub($id_pub);
             $commentaire->setIdUser($id_user);
+            $commentaire->setUsername($this->username);
             $commentaire->setDate(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($commentaire);

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Commentaire;
 use App\Form\PhotoType;
 use App\Form\PublicationType;
+use App\Services\QrcodeService;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\EntityManagerInterface;
 use App\Controller\ObjectManagerAlias;
@@ -27,6 +28,8 @@ use App\Form\CommentaireType;
 class PublicationController extends AbstractController
 {
 
+    public $username = "jeff";
+
     /**
      * @Route("/publication", name="publication")
      * @param Request $request
@@ -34,6 +37,7 @@ class PublicationController extends AbstractController
      */
     public function index(Request $request): Response
     {
+
 
         $pform = new Publication();
 
@@ -54,6 +58,7 @@ class PublicationController extends AbstractController
             $pform->setDate(new \DateTime());
             $pform->setId_user(1);
             $pform->setLikes(0);
+            $pform->setUsername($this->username);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($pform);
             $entityManager->flush();
@@ -66,6 +71,7 @@ class PublicationController extends AbstractController
         $test =$em->getRepository( PubLikeTracks::class)->IsLiked(1,1);
         //$this->add(1,1);
         //$this->redirectToRoute('Add_tracker',['id_user'=>1,'id_pub'=>1]);
+        //this->removeTracker(1,1);
 
         foreach($pub as $key=>$value) {
             $data = $em->getRepository( Commentaire::class)->AffichageComment($value->getId());
@@ -110,6 +116,7 @@ class PublicationController extends AbstractController
             $pform->setDate(new \DateTime());
             $pform->setId_user(1);
             $pform->setLikes(0);
+            $pform->setUsername($this->username);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($pform);
             $entityManager->flush();
@@ -126,7 +133,26 @@ class PublicationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/pub_{id_pub}", name="pub_view")
+     * @param $id_pub
+     * @param QrcodeService $qrcodeService
+     * @param Request $request
+     * @return Response
+     */
+    public function SeePub($id_pub, QrcodeService $qrcodeService,Request $request)
+    {
 
+        $qr = $qrcodeService->qrcode('http://127.0.0.1:8000/pub_'.$id_pub);
+
+        $pub = $this->getDoctrine()->getManager()->getRepository(Publication::class)->find($id_pub);
+        return $this->render('publication/viewPub.html.twig', [
+            'controller_name' => 'PublicationController',
+            'publication'=>$pub,
+            "qr"=>$qr,
+        ]);
+
+    }
 
 
 
@@ -221,25 +247,45 @@ class PublicationController extends AbstractController
     }
             //$test2 = $em->getRepository(Publication::class)->Like(274);
     /**
-     * @Route("/LikeComm/{id_pub}", name="Pub_like" , methods={"GET","POST"})
+     * @Route("/LikeComm/{id_pub}_{id_user}", name="Pub_like" , methods={"GET","POST"})
      */
-    public function LC(Request $request,$id_pub): Response
+    public function LC(Request $request,$id_pub,$id_user): Response
     {
-        $em=$this->getDoctrine()->getManager();
-        $test2 = $em->getRepository(Publication::class)->Like($id_pub);
+        $entityManager = $this->getDoctrine()->getManager();
+        $liked = $entityManager->getRepository(PubLikeTracks::class)->isLiked($id_pub,$id_user);
+        if(!$liked)
+        {
+            $this->addTracker($id_user,$id_pub);
+            $repo = $entityManager->getRepository(Publication::class)->Like($id_pub);
+        }
+        else
+        {
+            $this->removeTracker($id_user,$id_pub);
+            $repo = $entityManager->getRepository(Publication::class)->Dislike($id_pub);
+        }
         return $this->redirectToRoute('publication');
     }
 
     /**
-     * @Route("/LikeCommBack/{id_pub}", name="Pub_likeBack" , methods={"GET","POST"})
+     * @Route("/LikeCommBack/{id_pub}_{id_user}", name="Pub_likeBack" , methods={"GET","POST"})
      */
-    public function LCB(Request $request,$id_pub): Response
+    public function LCB(Request $request,$id_pub,$id_user): Response
     {
-        $em=$this->getDoctrine()->getManager();
-        $test2 = $em->getRepository(Publication::class)->Like($id_pub);
+        $entityManager = $this->getDoctrine()->getManager();
+        $liked = $entityManager->getRepository(PubLikeTracks::class)->isLiked($id_pub,$id_user);
+        if(!$liked)
+        {
+            $this->addTracker($id_user,$id_pub);
+            $repo = $entityManager->getRepository(Publication::class)->Like($id_pub);
+        }
+        else
+        {
+            $this->removeTracker($id_user,$id_pub);
+            $repo = $entityManager->getRepository(Publication::class)->Dislike($id_pub);
+        }
         return $this->redirectToRoute('BackPublication');
     }
-    public function add($id_user,$id_pub):Response
+    public function addTracker($id_user,$id_pub):Response
     {
         $pubLikeTrack = new PubLikeTracks();
         $pubLikeTrack->setIdUser($id_user);
@@ -249,5 +295,32 @@ class PublicationController extends AbstractController
         $entityManager->flush();
         return new  Response('Inserted , ID = '.$pubLikeTrack->getId());
     }
+
+    public function removeTracker($id_user,$id_pub)
+    {
+        $tracker = new PubLikeTracks();
+        $repo = $this->getDoctrine()->getRepository(PubLikeTracks::class);
+        $tracker= $repo->findOneBy(['id_user'=>$id_user,'id_pub'=>$id_pub]);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($tracker);
+            $entityManager->flush();
+
+    }
+    public function like_dislike($id_user,$id_pub)
+{
+    $entityManager = $this->getDoctrine()->getManager();
+    $liked = $entityManager->getRepository(PubLikeTracks::class)->isLiked($id_pub,$id_user);
+    if(!$liked)
+    {
+        $this->addTracker($id_user,$id_pub);
+        $repo = $entityManager->getRepository(Publication::class)->Like($id_pub);
+    }
+    else
+    {
+        $this->removeTracker($id_user,$id_pub);
+        $repo = $entityManager->getRepository(Publication::class)->Dislike($id_pub);
+    }
+    return $this->redirectToRoute('publication');
+}
 
     }
