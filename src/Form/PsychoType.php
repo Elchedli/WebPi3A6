@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Psy;
+use App\Entity\Psycho;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -26,7 +26,7 @@ class PsychoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Psy::class,
+            'data_class' => Psycho::class,
         ]);
     }
 }

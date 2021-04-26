@@ -61,14 +61,11 @@ class NutriController extends AbstractController
     /**
      * @Route("/{id}/edit", name="nutri_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Nutri $nutri): Response
-    {
+    public function edit(Request $request, Nutri $nutri): Response{
         $form = $this->createForm(NutriType::class, $nutri);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('nutri_index');
         }
 
