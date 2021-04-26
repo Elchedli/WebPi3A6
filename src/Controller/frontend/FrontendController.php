@@ -59,4 +59,12 @@ class FrontendController extends AbstractController
         return $this->render('frontend/reclamation.html.twig');
     }
 
+    /**
+     * @Route("/suivi", name="fsuivi", methods={"GET"})
+     */
+    public function fsuivi(): Response
+    {
+        return $this->render('frontend/suivi.html.twig');
+    }
+
 }

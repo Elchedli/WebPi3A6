@@ -1,0 +1,12 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit Psycho{% endblock %}
+
+{% block param %}
+    <h1>Edit Psycho</h1>
+
+    {{ include('Psycho/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('Psycho_index') }}">back to list</a>
+
+{% endblock %}

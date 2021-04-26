@@ -1,41 +1,56 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Tache index{% endblock %}
-
-{% block body %}
-    <h1>Tache index</h1>
-
+{% extends 'backend/taches.html.twig' %}
+{% block param %}
     <table class="table">
         <thead>
             <tr>
-                <th>IdTache</th>
-                <th>Username</th>
-                <th>EtatTache</th>
-                <th>DifficulteTache</th>
-                <th>DescriptionTache</th>
-                <th>actions</th>
+                <th>Client</th>
+                <th>Etat Tache</th>
+                <th>Difficulte Tache</th>
+                <th>Description Tache</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for tache in taches %}
             <tr>
-                <td>{{ tache.idTache }}</td>
                 <td>{{ tache.username }}</td>
-                <td>{{ tache.etatTache ? 'Yes' : 'No' }}</td>
+                <td>{{ tache.etatTache ? 'Fait' : 'Pas fait' }}</td>
                 <td>{{ tache.difficulteTache }}</td>
                 <td>{{ tache.descriptionTache }}</td>
                 <td>
-                    <a href="{{asset("{{ path('tache_show', {'idTache': tache.idTache}) }}")}}">show</a>
-                    <a href="{{asset("{{ path('tache_edit', {'idTache': tache.idTache}) }}")}}">edit</a>
+                    <a href="{{ path('tache_edit', {'idTache': tache.idTache,'idS': idS}) }}">Modifier</a>
+                    <a href="{{ path('tache_delete', {'idTache': tache.idTache,'idS': idS}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Pas encore des utilisateurs</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <a href="{{ path('tache_new',{'idS': idS}) }} " style="display: table;margin: 0 auto;margin-top: 30px">Créer un nouveau</a>
+{% endblock %}
 
-    <a href="{{asset("{{ path('tache_new') }}")}}">Create new</a>
+{% block javascripts %}
+    <script src="{{ asset("//cdn.jsdelivr.net/npm/sweetalert2@10") }}"></script>
+    {% set notif = app.session.get('notif') %}
+    {% if notif == "fait" %}
+        <script>
+            Swal.fire(
+                'Tache ajouter!',
+                'Clicker pour sortir !',
+                'success'
+            )
+        </script>
+    {% elseif notif == "echec" %}
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Suppression',
+                text: 'Vous avez supprimer une tache'
+            })
+        </script>
+    {% endif %}
+    {{ app.session.set('notif', '') }}
 {% endblock %}

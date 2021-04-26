@@ -1,0 +1,85 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Nutri index{% endblock %}
+
+{% block param %}
+    <h1>Nutri index</h1>
+
+    <p><button class="btn btn-rounded btn-success mb-3" onclick="sortTable()"> Sort by Date</button></p>
+    <table class="table" id="myT">
+
+        <thead class="text-uppercase bg-success">
+
+            <tr>
+                <th>Username</th>
+                <th>Mail</th>
+                <th>Date of birth</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nutri in nutris %}
+            <tr>
+                <td>{{ nutri.username }}</td>
+                <td>{{ nutri.mail }}</td>
+                <td>{{ nutri.dateN ? nutri.dateN|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('nutri_show', {'id': nutri.id}) }}">Details</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        <script>
+            function sortTable() {
+                var table, rows, switching, i, x, y, shouldSwitch,dir;
+                table = document.getElementById("myT");
+                switching = true;
+                // Set the sorting direction to ascending:
+
+
+                while (switching) {
+
+                    switching = false;
+                    rows = table.rows;
+
+                    for (i = 1; i < (rows.length - 1); i++) {
+
+                        shouldSwitch = false;
+
+                        x = rows[i].getElementsByTagName("TD")[2];
+                        y = rows[i + 1].getElementsByTagName("TD")[2];
+
+
+
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+                            shouldSwitch = true;
+                            break;
+                        } }
+
+                    if (shouldSwitch) {
+
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+
+
+                }
+            }
+        </script>
+        </tbody>
+    </table>
+
+<script type="text/javascript">
+    function imprimer_page(){
+        window.print();
+    }
+</script>
+<div class="btn-toolbar" role="toolbar" aria-label="Programmatic control">
+    <div class="btn-group btn-group-sm" aria-label="Set Select2 option">
+        <form>
+            <input id="impression" class="btn btn-success mb-3" name="impression" type="button" onclick="imprimer_page()" value="Print this page" />
+        </form>{% endblock %}

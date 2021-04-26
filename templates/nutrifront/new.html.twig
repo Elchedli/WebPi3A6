@@ -1,0 +1,11 @@
+{% extends 'frontend/page.html.twig' %} {% block style %}  <link href="{{asset('frontend/general/css/mouradstyle.css')}}" rel="stylesheet"> {% endblock %}
+
+{% block title %}New nutritionist{% endblock %}
+
+{% block param %}
+    <h1>Create new nutri</h1>
+        {{ include('nutrifront/_form.html.twig') }}
+
+    <a href="{{ path('nutrifront_index') }}">back to list</a>
+
+    {% endblock %}

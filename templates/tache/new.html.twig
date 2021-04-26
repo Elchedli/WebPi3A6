@@ -1,11 +1,7 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New Tache{% endblock %}
-
-{% block body %}
-    <h1>Create new Tache</h1>
-
-    {{ include('tache/_form.html.twig') }}
-
-    <a href="{{asset("{{ path('tache_index') }}")}}">back to list</a>
+{% extends 'backend/taches.html.twig' %}
+{% block param %}
+    <div id="dynamicbull">
+        {{ include('tache/_form.html.twig') }}
+        <a href="{{ path('tache_index',{'idS' : idS}) }}">Revenir a la liste</a>
+    </div>
 {% endblock %}

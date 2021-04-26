@@ -2,17 +2,56 @@
 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
     <span class="navbar-toggler-icon"></span>
 </button>
-
 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
     <div class="navbar-nav ml-auto">
         <a  href="{{ path('acceuil') }}" class="nav-item nav-link active">Acceuil</a>
         <a  href="{{ path('event') }}" class="nav-item nav-link">Evenements</a>
         <a  href="{{ path('client') }}" class="nav-item nav-link">Clients</a>
         <a  href="{{ path('publication') }}" class="nav-item nav-link">Publication</a>
+        <a href="{{ path('suivi_taches') }}" class="nav-item nav-link">Taches</a>
         <a href="{{ path('discussion') }}" class="nav-item nav-link">Messagerie</a>
         <a href="{{ path('article') }}" class="nav-item nav-link">Articles</a>
         <a  href="{{ path('reclamation') }}" class="nav-item nav-link">Réclamation</a>
-        <a  href="{{ path('acceuil') }}" class="nav-item nav-link">S'inscrire</a>
-        <a  href="{{ path('acceuil') }}" class="nav-item nav-link">Connecter</a>
+
+        {% block javascripts %}
+            {% set user = app.session.get('user') %}
+            {% if user != "" %}
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ user }}</a>
+                    <div class="dropdown-menu">
+                        <a href="{{ path('deconnexion_login') }}" class="dropdown-item">Deconnexion</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profiles</a>
+                    <div class="dropdown-menu">
+                        <a href="{{ path('Psychofront_index') }}" class="dropdown-item">Psychochologist</a>
+                        <a href="{{ path('coachfront_index') }}" class="dropdown-item">Coach</a>
+                        <a href="{{ path('nutrifront_index') }}" class="dropdown-item">Nutritionist</a>
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">S'inscrire</a>
+                    <div class="dropdown-menu">
+                        <a href="{{ path('simplefront_new') }}" class="dropdown-item"> Simple</a>
+                        <a href="{{ path('Psychofront_new') }}" class="dropdown-item"> Psychologist</a>
+                        <a href="{{ path('coachfront_new') }}" class="dropdown-item"> Coach</a>
+                        <a href="{{ path('nutrifront_new') }}" class="dropdown-item"> Nutritionist</a>
+                    </div>
+                </div>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Connecter</a>
+                    <div class="dropdown-menu">
+                        <a href="{{ path('simple_login') }}" class="dropdown-item">Simple</a>
+                        <a href="{{ path('psy_login') }}" class="dropdown-item">Psychologist</a>
+                        <a href="{{ path('coach_login') }}" class="dropdown-item">Coach</a>
+                        <a href="{{ path('nutri_login') }}" class="dropdown-item">Nutritionist</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock %}
     </div>
 </div>
