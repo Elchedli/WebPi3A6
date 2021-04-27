@@ -1,0 +1,61 @@
+{% extends 'Back.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+{% block Evenement %}
+    <h1>Evenement</h1>
+
+    <table class="table">
+        <tbody>
+        {#  <tr>
+            <th>IdEv</th>
+            <td>{{ evenement.idEv }}</td>
+        </tr>
+        #}
+        <tr>
+            <th>Nom</th>
+            <td>{{ evenement.titreEv }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ evenement.typeEv }}</td>
+        </tr>
+        <tr>
+            <th>Emplacement</th>
+            <td>{{ evenement.emplacementEv }}</td>
+        </tr>
+        <tr>
+            <th>Date Debut</th>
+            <td>{{ evenement.dateDev ? evenement.dateDev|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Date Fin</th>
+            <td>{{ evenement.dateFev ? evenement.dateFev|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Temps Debut</th>
+            <td>{{ evenement.tempsDev ? evenement.tempsDev|date('H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Temps Finale</th>
+            <td>{{ evenement.tempsFev ? evenement.tempsFev|date('H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Age Min</th>
+            <td>{{ evenement.ageMin }}</td>
+        </tr>
+        <tr>
+            <th>Age Max</th>
+            <td>{{ evenement.ageMax }}</td>
+        </tr>
+      {#  <tr>
+            <th>idAct</th>
+            <td>{{ evenement.idAct }}</td>
+        </tr>
+      #}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin') }}">Revenir à la liste</a>
+
+{% endblock %}
+

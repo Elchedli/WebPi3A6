@@ -1,0 +1,43 @@
+{% extends 'Front.html.twig' %}
+
+{% block title %}Act index{% endblock %}
+
+{% block Evenement %}
+    <div class="team">
+        <div class="container">
+            <div class="section-header text-center">
+                <p></p>
+                <h2>Liste des Activités</h2>
+
+
+            </div>
+                <div class="row">
+                    {% for act in acts %}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="../upload/{{ act.image }}" alt="Image">
+
+                            </div>
+                            <div class="team-text">
+                                <h2>Nom: {{ act.nomAct }}</h2>
+                                <h2>Type: {{ act.typeAct }}</h2>
+                                <a href="{{ path('act_show', {'idAct': act.idAct}) }}"class="btn btn-outline-info fas fa-star">Afficher</a> <br>
+                                <a href="{{ path('act_edit', {'idAct': act.idAct}) }}"class="btn btn-outline-success fas fa-edit">Modifier</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <a class ="btn btn-outline-success" href="{{ path('act_new') }}"><i class="fas fa-plus-square "></i>Ajouter une activité</a>
+{% endblock %}

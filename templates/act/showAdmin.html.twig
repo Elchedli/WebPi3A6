@@ -1,0 +1,29 @@
+{% extends 'Back.html.twig' %}
+
+{% block title %}Act{% endblock %}
+
+{% block section %}
+    <h1>Act</h1>
+
+    <table class="table">
+        <tbody>
+        {#   <tr>
+                <th>IdAct</th>
+                <td>{{ act.idAct }}</td>
+            </tr>
+        #}
+        <tr>
+            <th>Nom</th>
+            <td>{{ act.nomAct }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ act.typeAct }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('act_indexAc') }}">back to list</a>
+
+
+{% endblock section %}
