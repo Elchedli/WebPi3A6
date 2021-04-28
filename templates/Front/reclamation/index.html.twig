@@ -15,17 +15,17 @@
     <br>
     <center>
     <p>
-    <button onclick="sortTable()" class="btn btn-outline-info fas fa-paper-plane"> Recent Claims</button></p>
+    <button onclick="sortTable()" class="btn btn-outline-info fas fa-paper-plane"> Réclamations Récentes</button></p>
     </center>
         <table class="table" id="myT">
         <thead>
             <tr>
                 {# <th>IdRec</th>#}
-                <th>Username</th>
-                <th>Object</th>
-                <th>Details</th>
-                <th>Status</th>
-                <th>Category</th>
+                <th>User</th>
+                <th>Objet</th>
+                <th>Description</th>
+                <th>Etat</th>
+                <th>Catégories</th>
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
@@ -42,15 +42,15 @@
                 <td>{{ reclamation.dateRec ? reclamation.dateRec|date('d-m-Y H:i:s') : '' }}</td>
                 <td>
                     <div class="carousel-btn">
-                        <a class="btn btn-outline-danger fas fa-star" href="{{ path('reclamation_show', {'idRec': reclamation.idRec}) }}"> Show</a>
-                        <a class="btn btn-outline-success fas fa-edit" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}"> Edit </a>
+                        <a class="btn btn-outline-danger fas fa-star" href="{{ path('reclamation_show', {'idRec': reclamation.idRec}) }}"> Afficher</a>
+                        <a class="btn btn-outline-success fas fa-edit" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}"> Modifier</a>
                     </div>
 
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">No Records Found</td>
+                <td colspan="7">Aucun Enregistrement Trouvé</td>
             </tr>
         {% endfor %}
         <script>
@@ -93,4 +93,7 @@
         </script>
         </tbody>
     </table>
+    <ul class="pages">
+        {{ knp_pagination_render(reclamation) }}
+    </ul>
 {% endblock %}

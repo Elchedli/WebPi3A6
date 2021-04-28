@@ -48,10 +48,7 @@ class Reclamation
      *
      * @ORM\Column(name="suj_rec", type="string", length=150, nullable=true)
      * @Assert\NotBlank(message="This field is obligatory.")
-     * @Assert\Type(
-     *     type="alpha",
-     *     message="Please fill it with letters only."
-     * )
+     *
      */
     private $sujRec;
 

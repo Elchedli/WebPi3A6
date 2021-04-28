@@ -16,6 +16,10 @@
     <div class="box-header">
         {# <i class="fa fa-envelope"></i> #}
         <h3 class="bg-light py-4 text-info">Our Categories</h3>
+        <br>
+        <center>
+            <a class="btn btn-success" href="{{ path('categories_new') }}"> <i class="fa fa-plus-circle"></i> Add</a>
+        </center>
     </div>
     <div class="box-body">
     <form action="#" method="post">
@@ -34,8 +38,8 @@
                 {# <td>{{ category.idCat }}</td> #}
                 <td>{{ category.nomCat }}</td>
                 <td>
-                    <a class="btn btn-adn" href="{{ path('categories_show', {'idCat': category.idCat}) }}">Show</a>
-                    <a class="btn btn-adn" href="{{ path('categories_edit', {'idCat': category.idCat}) }}">Edit</a>
+                    <a class="btn btn-warning" href="{{ path('categories_show', {'idCat': category.idCat}) }}"><i class="fa fa-star"></i> Show</a>
+                    <a class="btn btn-instagram" href="{{ path('categories_edit', {'idCat': category.idCat}) }}"><i class="fa fa-edit"></i> Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -45,8 +49,9 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-adn" href="{{ path('categories_new') }}">Add</a>
+        <ul class="pages">
+            {{ knp_pagination_render(categories) }}
+        </ul>
     </div>
     </form>
     </div>

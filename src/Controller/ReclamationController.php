@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -19,11 +20,20 @@ class ReclamationController extends AbstractController
 {
     /**
      * @Route("/", name="reclamation_index", methods={"GET"})
+     * @param ReclamationRepository $reclamationRepository
+     * @return Response
      */
-    public function index(ReclamationRepository $reclamationRepository): Response
+    public function index(ReclamationRepository $reclamationRepository, Request $request ,paginatorInterface $paginator): Response
     {
+        $reclamation = $this->getDoctrine()
+            ->getRepository(Reclamation::class)
+            ->findAll();
+        $reclamation = $paginator->paginate(
+            $reclamation,
+            $request->query->getInt('page', 1),
+            3);
         return $this->render('Front/reclamation/index.html.twig', [
-            'reclamation' => $reclamationRepository->findAll(),
+            'reclamation' => $reclamation,
         ]);
     }
 
@@ -108,4 +118,6 @@ class ReclamationController extends AbstractController
         return $this->redirectToRoute('reclamation_index');
 
     }
+
+
 }

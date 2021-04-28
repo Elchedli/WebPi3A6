@@ -1,6 +1,10 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
 {{ form_widget(form) }}
-<br><br>
-<button class="btn btn-success">{{ button_label|default('Add') }}</button>
-<a class="btn btn-adn" href="{{ path('reclamation_indexx') }}">Reclamations' List</a>
+<center>
+    <br><br>
+    <button class="btn btn-instagram"> <i class="fa fa-upload"></i> {{ button_label|default(' Add') }} </button>
+    <br>
+    <br>
+    <a class="btn btn-yahoo" href="{{ path('reclamation_indexx') }}"> <i class="fa fa-reply"></i> Reclamations' List</a>
+</center>
 {{ form_end(form) }}

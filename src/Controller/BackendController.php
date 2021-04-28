@@ -11,6 +11,7 @@ use App\Repository\ReclamationRepository;
 use Doctrine\Common\Collections\Collection;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,10 +27,17 @@ class BackendController extends AbstractController
     /**
      * @Route("/backend/cat", name="categories_indexx", methods={"GET"})
      */
-    public function index(CategoriesRepository $categoriesRepository): Response
+    public function index(CategoriesRepository $categoriesRepository, Request $request ,paginatorInterface $paginator): Response
     {
+        $categories = $this->getDoctrine()
+            ->getRepository(Categories::class)
+            ->findAll();
+        $categories = $paginator->paginate(
+            $categories,
+            $request->query->getInt('page', 1),
+            3);
         return $this->render('Back/categories/index.html.twig', [
-            'categories' => $categoriesRepository->findAll(),
+            'categories' => $categories,
         ]);
     }
 
@@ -107,10 +115,17 @@ class BackendController extends AbstractController
     /**
      * @Route("/backend/rec", name="reclamation_indexx", methods={"GET"})
      */
-    public function indexRec(ReclamationRepository $reclamationRepository): Response
+    public function indexRec(ReclamationRepository $reclamationRepository, Request $request ,paginatorInterface $paginator): Response
     {
+        $reclamation = $this->getDoctrine()
+            ->getRepository(Reclamation::class)
+            ->findAll();
+        $reclamation = $paginator->paginate(
+            $reclamation,
+            $request->query->getInt('page', 1),
+            3);
         return $this->render('Back/reclamation/index.html.twig', [
-            'reclamation' => $reclamationRepository->findAll(),
+            'reclamation' => $reclamation,
         ]);
     }
 
@@ -217,7 +232,7 @@ class BackendController extends AbstractController
     {
         $reclamation = $reclamationRepository->findAll();
         $catType= ['Done', 'To do']; #, 'Suivi', 'Msg', 'Technical', 'Posts'];
-        $catColor = ['#49A9EA', '#36CAAB']; #, '#34495E', '#B370CF', '#AC5353', '#CFD4D8'];
+        $catColor = ['#36CAAB', '#B370CF']; #, '#34495E', '#B370CF', '#AC5353', '#CFD4D8'];
         $catDone= count($reclamationRepository->findBy(["etatRec" =>"Done"]) )  ;
         $catToDo = count($reclamationRepository->findBy(["etatRec" =>"To do"]) ) ;
         #$catSuivi = count($reclamationRepository->findBy(["idCat" => "Suivi"]) ) ;

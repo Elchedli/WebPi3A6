@@ -28,11 +28,16 @@
             </tr>
         </tbody>
     </table>
-    <a class="btn btn-adn" href="{{ path('categories_index') }}">Back To List</a>
-
-    <a class="btn btn-adn" href="{{ path('categories_edit', {'idCat': categories.idCat}) }}">Edit</a>
-
+                <center>
+                    <br>
+    <a class="btn btn-success" href="{{ path('categories_index') }}"><i class="fa fa-reply"></i> Back To List</a>
+<br>
+                    <br>
+    <a class="btn btn-soundcloud" href="{{ path('categories_edit', {'idCat': categories.idCat}) }}"><i class="fa fa-edit"></i> Edit</a>
+<br>
+                    <br>
     {{ include('Back/categories/_delete_form.html.twig') }}
+                </center>
             </div>
         </form>
     </div>

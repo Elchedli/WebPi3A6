@@ -47,11 +47,16 @@
             </tr>
         </tbody>
     </table>
-
-    <a class="btn btn-adn" href="{{ path('reclamation_indexx') }}">Back To List</a>
-    {{ include('Back/reclamation/_delete_form.html.twig') }}
-    <a class="btn btn-adn" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}">Edit</a>
-        </div>
+            <center>
+                <br><br>
+                <a class="btn btn-yahoo" href="{{ path('reclamation_indexx') }}"> <i class="fa fa-reply"></i> Back To List</a>
+                <br>
+                <br>
+                {{ include('Back/reclamation/_delete_form.html.twig') }}
+                <br>
+                <a class="btn btn-instagram" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}"><i class="fa fa-edit"></i> Edit</a>
+            </center>
+</div>
     </form>
 </div>
 </div>

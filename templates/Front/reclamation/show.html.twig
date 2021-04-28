@@ -7,7 +7,7 @@
 {% endblock %}
 {% block contact %}
 <div class="section-header text-center">
-    <h2 class="bg-light py-4 text-info"> Your Selected Reclamation</h2>
+    <h2 class="bg-light py-4 text-info"> Votre Réclamation Sélectionnée</h2>
 </div>
     <table class="table">
         <tbody>
@@ -16,23 +16,23 @@
                 <td>{{ reclamation.idRec }}</td>
             </tr> #}
             <tr>
-                <th>Username</th>
+                <th>User</th>
                 <td>{{ reclamation.username }}</td>
             </tr>
             <tr>
-                <th>Object</th>
+                <th>Objet</th>
                 <td>{{ reclamation.objRec }}</td>
             </tr>
             <tr>
-                <th>Details</th>
+                <th>Description</th>
                 <td>{{ reclamation.sujRec }}</td>
             </tr>
             <tr>
-                <th>Status</th>
+                <th>Etat</th>
                 <td>{{ reclamation.etatRec }}</td>
             </tr>
         <tr>
-            <th>Category</th>
+            <th>Catégories</th>
             <td>{{ reclamation.idCat }}</td>
         </tr>
             <tr>
@@ -42,10 +42,10 @@
         </tbody>
     </table>
 <center>
-    <a class="btn btn-outline-success fas fa-reply-all" href="{{ path('reclamation_index') }}"> Back To List</a>
+    <a class="btn btn-outline-success fas fa-reply-all" href="{{ path('reclamation_index') }}"> Liste Des Réclamations</a>
     <br>
     <br>
-    <a class="btn btn-outline-warning fas fa-edit" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}"> Edit</a>
+    <a class="btn btn-outline-warning fas fa-edit" href="{{ path('reclamation_edit', {'idRec': reclamation.idRec}) }}"> Modifier</a>
     {{ include('Front/reclamation/_delete_form.html.twig') }}
 </center>
 {% endblock %}

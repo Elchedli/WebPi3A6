@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Reclamation;
 use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Date;
@@ -16,7 +17,7 @@ class ReclamationType extends AbstractType
         $builder
             ->add('username', null, ['label' => 'Username'])
             ->add('objRec', null, ['label' => 'Object'])
-            ->add('sujRec',null, ['label' => 'Details'])
+            ->add('sujRec',  TextareaType::class, ['label' => 'Details'])
             ->add('etatRec', null, ['label' => 'Status'])
  //           ->add('dateRec')
             ->add('idCat', null, ['label' => 'Name Category'])
