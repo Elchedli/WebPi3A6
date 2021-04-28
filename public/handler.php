@@ -1,8 +1,10 @@
 <?php
-$db = new PDO('mysql:host=localhost;dbname=chat;charset=utf8', 'root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+$user = 'root';
+$pass = '';
+$ds = 'spirity';
+$db = new PDO("mysql:dbname=$ds;host=localhost",$user,$pass);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $task = "list";
 
 if(array_key_exists("task", $_GET)){
@@ -15,7 +17,8 @@ if($task == "write"){
 }
 function getMessages(){
     global $db;
-    $resultats = $db->query("SELECT * FROM messages ORDER BY created_at DESC LIMIT 20");
+
+    $resultats = $db->query("SELECT contenu_msg,sender FROM message ORDER BY datetemps_msg DESC LIMIT 20");
     $messages = $resultats->fetchAll();
     echo json_encode($messages);
 }
@@ -27,8 +30,7 @@ function postMessage(){
     }
     $author = $_POST['author'];
     $content = $_POST['content'];
-    $query = $db->prepare('INSERT INTO messages SET author = :author, content = :content, created_at = NOW()');
-
+    $query = $db->prepare('INSERT INTO message SET sender = :author, contenu_msg = :content, id_disc = 2');
     $query->execute([
         "author" => $author,
         "content" => $content

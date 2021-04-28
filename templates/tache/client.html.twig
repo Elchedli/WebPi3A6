@@ -1,5 +1,11 @@
-{% extends 'backend/taches.html.twig' %}
+{% extends 'backend2/page.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset("backend/chedli/acceuil.css")}}">
+{% endblock %}
+
 {% block param %}
+<div id="dynamicbull" style="margin-top: 30px">
     {% if clients is defined %}
         <div class="clients">
             {% for client in clients %}
@@ -46,4 +52,5 @@
                     </tbody>
                 </table>
     {% endif %}
+</div>
 {% endblock %}

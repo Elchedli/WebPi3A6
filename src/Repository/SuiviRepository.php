@@ -4,6 +4,7 @@ use App\Entity\login;
 use App\Entity\Suivi;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @method Suivi|null find($id, $lockMode = null, $lockVersion = null)
@@ -13,9 +14,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SuiviRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(ManagerRegistry $registry,SessionInterface $session){
+        $this->session = $session;
         parent::__construct($registry, Suivi::class);
+    }
+
+    public function afficher(){
+        $sql = 'select s from App:Suivi s where s.username = :username';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameter('username', $this->session->get("user"));
+        return $result->getResult();
     }
 
     public function SuiviNom($idS)
@@ -34,17 +41,15 @@ class SuiviRepository extends ServiceEntityRepository
 
     public function SuiviClients()
     {
-        $user = "mgkpsy";
 //        $sql = 'select distinct t.username,s.idS from App:Tache t join App:Suivi s where t.username = s.client';
         $sql = 'select distinct s.client from App:Suivi s where s.username = :user';
-        $result = $this->getEntityManager()->createQuery($sql)->setParameter('user', $user);
+        $result = $this->getEntityManager()->createQuery($sql)->setParameter('user', $this->session->get("user"));
         return $result->getResult();
     }
 
     public function SuiviSelect($client){
-        $user = "mgkpsy";
         $parameters = array(
-            'user' => $user,
+            'user' => $this->session->get("user"),
             'client' => $client
         );
 //        $sql = 'select distinct t.username,s.idS from App:Tache t join App:Suivi s where t.username = s.client';

@@ -7,6 +7,7 @@ use App\Repository\SuiviRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -40,12 +41,13 @@ class SuiviparcsvCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+//        $file =  $input->getArgument('path');
         $this->createSuivi();
         return Command::SUCCESS;
     }
 
     private function getDataFromfile():array{
-        $file = $this->dataDirectory.'suivis.csv';
+        $file = $this->dataDirectory."suivis.csv";
         $fileExtension = pathinfo($file,PATHINFO_EXTENSION);
         $normalizers = [new ObjectNormalizer()];
         $encoders = [
@@ -77,12 +79,8 @@ class SuiviparcsvCommand extends Command
                 $suivi->setUsername($row['username']);
                 $suivi->setClient($row['client']);
                 $suivi->setTitreS($row['titre']);
-//                $conversion = strtotime($row['datedeb']);
-//                $conversion = date('Y-m-d',$conversion);
                 $date = new DateTime($row['datedeb']);
                 $suivi->setDateDs($date);
-//                $conversion = strtotime($row['datefin']);
-//                $newformat = date('Y-m-d',$conversion);
                 $date = new DateTime($row['datefin']);
                 $suivi->setDateFs($date);
                 $date = new DateTime($row['temdeb']);

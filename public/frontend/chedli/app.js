@@ -1,14 +1,15 @@
 function getMessages(){
     const requeteAjax = new XMLHttpRequest();
+    // location.replace("../../test.php");
     requeteAjax.open("GET", "../../handler.php");
     requeteAjax.onload = function(){
         const resultat = JSON.parse(requeteAjax.responseText);
+        console.log(resultat);
         const html = resultat.reverse().map(function(message){
             return `
                 <div class="message">
-                  <span class="date">${message.created_at.substring(11, 16)}</span>
-                  <span class="author">${message.author}</span> : 
-                  <span class="content">${message.content}</span>
+                  <span class="author">${message.sender}</span> : 
+                  <span class="content">${message.contenu_msg}</span>
                 </div>
           `
         }).join('');

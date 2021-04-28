@@ -1,8 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend2/page.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset("backend/chedli/acceuil.css")}}">
+{% endblock %}
 {% block title %}Tache{% endblock %}
 
-{% block body %}
+{% block param %}
+<div id="dynamicbull">
     <h1>Tache</h1>
 
     <table class="table">
@@ -35,4 +39,5 @@
     <a href="{{ path('tache_edit', {'idTache': tache.idTache}) }}">edit</a>
 
     {{ include('tache/_delete_form.html.twig') }}
+</div>
 {% endblock %}

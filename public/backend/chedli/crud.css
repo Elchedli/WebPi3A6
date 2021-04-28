@@ -17,8 +17,6 @@ td > a{
     padding: 10px;
 }
 
-
-
 .btn{
     display: table;
     margin: 0 auto;
@@ -29,4 +27,17 @@ td > a{
 
 input[type="time"]{
     width: 180px !important;
+}
+
+input[type="date"]{
+    width: 180px !important;
+}
+
+#suivi_tempsFs{
+    position: relative;
+    left: 120px;
+}
+#buttdone{
+    position: relative;
+    top: 50px;
 }
