@@ -1,12 +1,17 @@
 {% extends 'backend/taches.html.twig' %}
 {% block param %}
     {% if clients is defined %}
-        {% for client in clients %}
-            <a class="client_link" href="{{ path('suivi_liste', {'NomClient': client.client}) }}">
-                <img class="avatar user-thumb" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt="avatar">
-                <p>{{ client.client }}</p>
-            </a>
-        {% endfor %}
+        <div class="clients">
+            {% for client in clients %}
+                <a class="client_link" href="{{ path('suivi_liste', {'NomClient': client.client}) }}">
+                    <img class="avatar user-thumb" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt="avatar">
+                    <p>{{ client.client }}</p>
+                </a>
+            {% endfor %}
+            <div class="navigation">
+                {{ knp_pagination_render(clients) }}
+            </div>
+        </div>
      {% else %}
                 <table class="table">
                     <thead>

@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Psycho
  *
- * @ORM\Table(name="psycho", uniqueConstraints={@ORM\UniqueConstraint(name="username_2", columns={"username"}), @ORM\UniqueConstraint(name="username", columns={"username"})})
+ * @ORM\Table(name="psycho", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username"}), @ORM\UniqueConstraint(name="username_2", columns={"username"})})
  * @ORM\Entity
  */
 class Psycho
@@ -20,11 +19,17 @@ class Psycho
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idUser;
+    private $id;
 
     /**
      * @var string
-     * @ORM\OneToMany(targetEntity=Suivi::class,mappedBy="username")
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
+     * @Assert\Length(
+     *min=6,
+     *max=50,
+     *minMessage="Le mot de passe doit comporter au moins {{ limit }} caractères",
+     *maxMessage ="Le mot de passe doit comporter au plus {{ limit }} caractères"
+     *)
      * @ORM\Column(name="username", type="string", length=50, nullable=false)
      */
     private $username;
@@ -44,107 +49,82 @@ class Psycho
     private $mail;
 
     /**
-     * @var DateTime
-     *
+     * @var \DateTime
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @ORM\Column(name="date_n", type="date", nullable=false)
      */
-    private $dateN;
+    private $date_n;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Ce champs est obligatoire")
      * @ORM\Column(name="code", type="string", length=20, nullable=false)
      */
     private $code;
-    /**
-     * @return int
-     */
-    public function getIdUser(): int
+
+    public function getId(): ?int
     {
-        return $this->idUser;
+        return $this->id;
     }
 
-    /**
-     * @param int $idUser
-     */
-    public function setIdUser(int $idUser): void
-    {
-        $this->idUser = $idUser;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    /**
-     * @param string $username
-     */
-    public function setUsername(string $username): void
+    public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getMail(): string
+    public function getMail(): ?string
     {
         return $this->mail;
     }
 
-    /**
-     * @param string $mail
-     */
-    public function setMail(string $mail): void
+    public function setMail(string $mail): self
     {
         $this->mail = $mail;
+
+        return $this;
     }
 
     public function getDateN(): ?\DateTimeInterface
     {
-        return $this->dateN;
+        return $this->date_n;
     }
 
-    public function setDateN(\DateTimeInterface $dateN): self
+    public function setDateN(\DateTimeInterface $date_n): self
     {
-        $this->dateN = $dateN;
+        $this->date_n = $date_n;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string $code
-     */
-    public function setCode(string $code): void
+    public function setCode(string $code): self
     {
         $this->code = $code;
-    }
 
+        return $this;
+    }
 
 }

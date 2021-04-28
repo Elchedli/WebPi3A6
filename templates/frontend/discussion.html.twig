@@ -56,7 +56,6 @@
     </div>
     <div class="user-inputs">
         <form action="{{asset("handler.php?task=write")}}" method="POST">
-            {{ app.session.set('user', 'shidono') }}
             <input type="hidden" name="author" id="author" value="{{ app.session.get('user') }}">
             <input type="text" id="content" name="content" class="form-control" placeholder="Ecrire votre message ici">
             <button type="submit">Envoyer</button>

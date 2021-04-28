@@ -1,5 +1,6 @@
 <?php
 namespace App\Repository;
+use App\Entity\login;
 use App\Entity\Suivi;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,12 @@ class SuiviRepository extends ServiceEntityRepository
         parent::__construct($registry, Suivi::class);
     }
 
+    public function SuiviNom($idS)
+    {
+        $sql = 'select s.titreS from App:Suivi s where s.idS = :id';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameter('id', $idS);
+        return $result->getResult();
+    }
     public function SuiviTaches($user)
     {
 //        $sql = 'select distinct t.username,s.idS from App:Tache t join App:Suivi s where t.username = s.client';
@@ -44,5 +51,31 @@ class SuiviRepository extends ServiceEntityRepository
         $sql = 'select s from App:Suivi s where s.username = :user and s.client = :client';
         $result = $this->getEntityManager()->createQuery($sql)->setParameters($parameters);
         return $result->getResult();
+    }
+
+    public function verifieruser(login $user,string $type){
+        $pass = utf8_encode($user->getPassword());
+        $sql = "";
+        $parameters = array(
+            'username' => $user->getUsername(),
+            'password' => $user->getPassword()
+        );
+        switch ($type) {
+            case 'simple':
+                $sql = "select s.username from App:Simple s where s.username = :username AND s.password = :password";
+                break;
+            case 'psycho':
+                $sql = "select s.username from App:Psycho s where s.username = :username AND s.password = :password";
+                break;
+            case 'coach':
+                $sql = "select s.username from App:Coach s where s.username = :username AND s.password = :password";
+                break;
+            case 'nutri':
+                $sql = "select s.username from App:Nutri s where s.username = :username AND s.password = :password";
+                break;
+        }
+        $result = $this->getEntityManager()->createQuery($sql)->setParameters($parameters);
+        if($result->getResult()) return true;
+        return false;
     }
 }

@@ -46,7 +46,7 @@ function showTasks(){
     }
     let newLiTag = "";
     listArray.forEach((element, index) => {
-        newLiTag += `<li>${element}<span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+        newLiTag += `<li>${element}<span class="icon" onclick="deleteTask(${index})"><i class="fas fa-check-circle"></i></span></li>`;
     });
     todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
     inputBox.value = ""; //once task added leave the input field blank
@@ -56,7 +56,7 @@ function showTasks(){
 function deleteTask(index){
     let getLocalStorageData = localStorage.getItem("New Todo");
     listArray = JSON.parse(getLocalStorageData);
-    listArray.splice(index, 1); //delete or remove the li
+    this.parent().style.textDecoration =
     localStorage.setItem("New Todo", JSON.stringify(listArray));
     showTasks(); //call the showTasks function
 }

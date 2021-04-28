@@ -12,14 +12,30 @@
     margin-left: 5px;
     width: 200px;
     height: 200px;
-    background: linear-gradient(to right, #8914fe 0%, #8063f5 100%);
+    background: linear-gradient(to right, #8914fe 0%, rgba(128, 99, 245, 0.66) 100%);
+    filter: brightness(0.9);
     justify-content: center;
     align-items: center;
+}
+
+.clients{
+    display: table;
+    width: 40%;
+    margin: 0 auto;
+}
+.navigation{
+    display: table;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.client_link:hover{
+    filter: brightness(1.1);
 }
 .client_link p{
     margin-top: 30px;
     color: white;
-    font-size: 40px;
+    font-size: 30px;
 }
 #ajouterlabel{
     font-size: 20px;

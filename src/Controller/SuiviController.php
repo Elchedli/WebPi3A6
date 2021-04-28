@@ -8,8 +8,8 @@ use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-
 /**
  * @Route("/suivi")
  */
@@ -18,6 +18,11 @@ class SuiviController extends AbstractController
     /**
      * @Route("/", name="suivi_index", methods={"GET"})
      */
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
     public function index(): Response
     {
         $suivis = $this->getDoctrine()
@@ -43,8 +48,7 @@ class SuiviController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($suivi);
             $entityManager->flush();
-            $session = $request->getSession();
-            $session->set('notif', 'fait');
+            $this->session->set('notif', 'fait');
             return $this->redirectToRoute('suivi_index');
         }
 
@@ -95,8 +99,7 @@ class SuiviController extends AbstractController
         $suivi=$em->getRepository(Suivi::class)->find($idS);
         $em->remove($suivi);
         $em->flush();
-        $session = $request->getSession();
-        $session->set('notif', 'echec');
+        $this->session->set('notif', 'echec');
         return $this->redirectToRoute('suivi_index');
     }
 }

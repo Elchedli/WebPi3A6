@@ -54,14 +54,14 @@
 
 {% block taches %}
     <div class="wrapper">
-        <header>Todo App</header>
+        <header>{{ nom[0].titreS }}</header>
         <div class="inputField">
             <input type="text" placeholder="Add your new todo">
             <button><i class="fas fa-plus"></i></button>
         </div>
         <ul class="todoList">
             {% for tache in taches %}
-                <li>tache.descriptionTache<span class="icon" onclick="deleteTask(0)"><i class="fas fa-trash"></i></span></li>
+                <li>tache.descriptionTache<span class="icon" style="background:green;"><i class="fas fa-check-circle"></i></span></li>
             {% endfor %}
         </ul>
         <div class="footer">

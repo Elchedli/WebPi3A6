@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Suivi;
 use App\Entity\Tache;
 use App\Form\TacheType;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\TacheRepository;
 use App\Repository\SuiviRepository;
@@ -20,11 +21,8 @@ class TacheController extends AbstractController
     /**
      * TacheController constructor.
      */
-    public function __construct(SessionInterface $session)
-    {
+    public function __construct(SessionInterface $session){
         $this->session = $session;
-        $this->session->set('user','shidono');
-        $this->session->set('type','simple');
     }
 
     /**
@@ -44,18 +42,25 @@ class TacheController extends AbstractController
     public function ToDo($idsuivi){
         $em=$this->getDoctrine()->getManager();
         $data = $em->getRepository( Tache::class)->TachesToDo($this->session->get('user'),$idsuivi);
+        $nom = $em->getRepository( Suivi::class)->SuiviNom($idsuivi);
         return $this->render('frontend/todo.html.twig',[
             'taches' => $data,
+            'nom' => $nom
         ]);
     }
 
     /**
      * @Route("/", name="tache_clients", methods={"GET"})
      */
-    public function ClientSelect(): Response
+    public function ClientSelect(Request $request,PaginatorInterface $paginator): Response
     {
         $em=$this->getDoctrine()->getManager();
         $data = $em->getRepository( Suivi::class)->SuiviClients();
+        $data = $paginator->paginate(
+            $data,
+            $request->query->getInt('page',1),
+            2
+        );
         return $this->render('tache/client.html.twig', [
             'clients' => $data,
         ]);
@@ -97,8 +102,7 @@ class TacheController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tache);
             $entityManager->flush();
-            $session = $request->getSession();
-            $session->set('notif', 'fait');
+            $this->session->set('notif', 'fait');
             return $this->redirectToRoute('tache_index',array(
                 'idS' => $idS
             ));
@@ -142,8 +146,7 @@ class TacheController extends AbstractController
         $Tache=$em->getRepository(Tache::class)->find($idTache);
         $em->remove($Tache);
         $em->flush();
-        $session = $request->getSession();
-        $session->set('notif', 'echec');
+        $this->session->set('notif', 'echec');
         return $this->redirectToRoute('tache_index', [
             'idS' => $idS
         ]);
