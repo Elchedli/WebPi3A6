@@ -1,0 +1,11 @@
+{% extends 'frontend/page.html.twig' %} {% block style %}  <link href="{{asset('frontend/general/css/mouradstyle.css')}}" rel="stylesheet"> {% endblock %}
+
+{% block title %}New Simple{% endblock %}
+
+{% block param %}
+    <h1>Create new Simple User</h1>
+        {{ include('simplefront/_form.html.twig') }}
+
+    <a href="{{ path('simplefront_index') }}">back to the list</a>
+
+    {% endblock %}

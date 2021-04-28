@@ -1,0 +1,29 @@
+{% extends 'frontend/page.html.twig' %} {% block style %}  <link href="{{asset('frontend/general/css/mouradstyle.css')}}" rel="stylesheet"> {% endblock %}
+
+{% block title %}Psycho{% endblock %}
+
+{% block param %}
+    <h1>Psycho</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Username</th>
+                <td>{{ Psycho.username }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ Psycho.mail }}</td>
+            </tr>
+            <tr>
+                <th>Date of birth</th>
+                <td>{{ Psycho.dateN ? Psycho.dateN|date('Y-m-d') : '' }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('Psychofront_index') }}">back to list</a>
+
+
+{% endblock %}

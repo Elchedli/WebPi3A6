@@ -1,0 +1,13 @@
+{% extends 'backend2/page.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset("backend/chedli/acceuil.css")}}">
+    <link rel="stylesheet" href="{{asset("backend/chedli/crud.css")}}">
+{% endblock %}
+
+{% block param %}
+    <div id="dynamicbull">
+        {{ include('tache/_form.html.twig') }}
+        <a href="{{ path('tache_index',{'idS' : idS}) }}">Revenir a la liste</a>
+    </div>
+{% endblock %}

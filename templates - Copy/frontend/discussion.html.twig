@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Burger King - Food Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+    <!-- Favicon -->
+    <link href="{{asset("frontend/general/img/favicon.ico")}}" rel="icon">
+
+    <!-- Google Font -->
+    <link href="{{asset("https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700")}}" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="{{asset("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")}}" rel="stylesheet">
+    <link href="{{asset("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css")}}" rel="stylesheet">
+    <link href="{{asset("frontend/general/lib/animate/animate.min.css")}}" rel="stylesheet">
+    <link href="{{asset("frontend/general/lib/owlcarousel/assets/owl.carousel.min.css")}}" rel="stylesheet">
+    <link href="{{asset("frontend/general/lib/flaticon/font/flaticon.css")}}" rel="stylesheet">
+    <link href="{{asset("frontend/general/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css")}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset("backend/general/assets/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" href="{{asset("frontend/chedli/app.css")}}">
+
+    <!-- Template Stylesheet -->
+    <link href="{{asset("frontend/general/css/style.css")}}" rel="stylesheet">
+</head>
+
+<body>
+<!-- Nav Bar Start -->
+<div class="navbar navbar-expand-lg bg-light navbar-light">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            {% include 'frontend/dynamic/nav.html.twig' %}
+        </div>
+    </div>
+</div>
+<!-- Nav Bar End -->
+
+
+<!-- Page Header Start -->
+<div class="page-header mb-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Messagerie</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<section class="chat" style="margin-top: 0px">
+    <div class="messages">
+    </div>
+    <div class="user-inputs">
+        <form action="{{asset("handler.php?task=write")}}" method="POST">
+            <input type="hidden" name="author" id="author" value="{{ app.session.get('user') }}">
+            <input type="text" id="content" name="content" class="form-control" placeholder="Ecrire votre message ici">
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+</section>
+<script src="{{asset("frontend/chedli/app.js")}}"></script>
+
+<a href="{{asset("#")}}" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+<!-- JavaScript Libraries -->
+<script src="{{asset("https://code.jquery.com/jquery-3.4.1.min.js")}}"></script>
+<script src="{{asset("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js")}}"></script>
+<script src="{{asset("frontend/general/lib/easing/easing.min.js")}}"></script>
+<script src="{{asset("frontend/general/lib/owlcarousel/owl.carousel.min.js")}}"></script>
+<script src="{{asset("frontend/general/lib/tempusdominus/js/moment.min.js")}}"></script>
+<script src="{{asset("frontend/general/lib/tempusdominus/js/moment-timezone.min.js")}}"></script>
+<script src="{{asset("frontend/general/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js")}}"></script>
+
+<!-- Contact Javascript File -->
+<script src="{{asset("frontend/general/mail/jqBootstrapValidation.min.js")}}"></script>
+<script src="{{asset("frontend/general/mail/contact.js")}}"></script>
+
+<!-- Template Javascript -->
+<script src="{{asset("frontend/general/js/main.js")}}"></script>
+</body>
+</html>
