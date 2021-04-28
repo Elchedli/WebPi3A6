@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class BackendController extends AbstractController
+class BackController extends AbstractController
 {
     /**
      * @Route("/backend", name="backend")

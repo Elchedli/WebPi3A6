@@ -38,13 +38,13 @@
                 {# <td>{{ category.idCat }}</td> #}
                 <td>{{ category.nomCat }}</td>
                 <td>
-                    <a class="btn btn-warning" href="{{ path('categories_show', {'idCat': category.idCat}) }}"><i class="fa fa-star"></i> Show</a>
-                    <a class="btn btn-instagram" href="{{ path('categories_edit', {'idCat': category.idCat}) }}"><i class="fa fa-edit"></i> Edit</a>
+                    <a class="btn btn-warning" href="{{ path('categories_show', {'idCat': category.idCat}) }}"><i class="fa fa-star"></i> Afficher</a>
+                    <a class="btn btn-instagram" href="{{ path('categories_edit', {'idCat': category.idCat}) }}"><i class="fa fa-edit"></i> Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">No Records Found</td>
+                <td colspan="3">Aucun Enregistrement Trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

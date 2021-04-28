@@ -22,23 +22,23 @@
                 <td>{{ reclamation.idRec }}</td>
             </tr> #}
             <tr>
-                <th>Username</th>
+                <th>User</th>
                 <td>{{ reclamation.username }}</td>
             </tr>
             <tr>
-                <th>Object</th>
+                <th>Objet</th>
                 <td>{{ reclamation.objRec }}</td>
             </tr>
             <tr>
-                <th>Details</th>
+                <th>Description</th>
                 <td>{{ reclamation.sujRec }}</td>
             </tr>
             <tr>
-                <th>Status</th>
+                <th>Etat</th>
                 <td>{{ reclamation.etatRec }}</td>
             </tr>
         <tr>
-            <th>Category</th>
+            <th>Catégories</th>
             <td>{{ reclamation.idCat }}</td>
         </tr>
             <tr>
@@ -49,12 +49,12 @@
     </table>
             <center>
                 <br><br>
-                <a class="btn btn-yahoo" href="{{ path('reclamation_indexx') }}"> <i class="fa fa-reply"></i> Back To List</a>
+                <a class="btn btn-yahoo" href="{{ path('reclamation_indexx') }}"> <i class="fa fa-reply"></i> Liste Des Réclamation</a>
                 <br>
                 <br>
                 {{ include('Back/reclamation/_delete_form.html.twig') }}
                 <br>
-                <a class="btn btn-instagram" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}"><i class="fa fa-edit"></i> Edit</a>
+                <a class="btn btn-instagram" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}"><i class="fa fa-edit"></i> Modifier</a>
             </center>
 </div>
     </form>
