@@ -153,6 +153,8 @@ class Articles
         $this->idCat = $idCat;
         return $this;
     }
+
+
     /**
      * @var int
      *
@@ -233,6 +235,24 @@ class Articles
      * )
      */
     private $idCat;
+
+    private $rating;
+
+    /**
+     * @return mixed
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param mixed $rating
+     */
+    public function setRating($rating): void
+    {
+        $this->rating = $rating;
+    }
 
 
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Form\ArticlesnewType;
 use App\Form\ArticlesType;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,27 +11,46 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
+use Knp\Component\Pager\PaginatorInterface;
 /**
  * @Route("/frontend")
  */
 class ArticlesController extends AbstractController
 {
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
 
-
+    /**
+     * @Route("/testlol", name="test_avissqdqsd")
+     */
+    public function test(): Response{
+        return $this->render('test.html.twig');
+    }
 
         /**
      * @Route("/", name="articles_index", methods={"GET"})
      */
-    public function index(ArticleRepository $articleRepository): Response
+
+    public function index(ArticleRepository $articleRepository,Request $request ,paginatorInterface $paginator): Response
     {
+        $articles = $this->getDoctrine()
+            ->getRepository(Articles::class)
+            ->findAll();
+        $articles = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            2);
         return $this->render('Frontend/articles/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
         ]);
     }
+
 
     /**
      * @param ArticleRepository $articleRepository
@@ -95,9 +115,8 @@ class ArticlesController extends AbstractController
     {
         $article = new Articles();
         $article->setDateArt(New \DateTime());
-        $form = $this->createForm(ArticlesType::class, $article);
+        $form = $this->createForm(ArticlesnewType::class, $article);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('photo')->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -129,6 +148,7 @@ class ArticlesController extends AbstractController
      */
     public function show(Articles $article): Response
     {
+
         return $this->render('Frontend/articles/show.html.twig', [
             'article' => $article,
         ]);
@@ -141,19 +161,18 @@ class ArticlesController extends AbstractController
     {
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $file = $form->get('photo')->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $article->setPhoto($fileName);
-
             $file->move($this->getParameter('images_directory'),$fileName);
             $em=$this->getDoctrine()->getManager();
             $em->persist($article); //l'ajout dans la base
             ////persist joue le role de insert into
             $em->flush();
-
+            $array[] = $this->session->get('avis');
+            $array[$article->getIdArt()] = $article->getRating();
+            $this->session->set('avis',$array);
             return $this->redirectToRoute('articles_index');
         }
 
@@ -176,4 +195,6 @@ class ArticlesController extends AbstractController
 
         return $this->redirectToRoute('articles_index');
     }
+
+
 }

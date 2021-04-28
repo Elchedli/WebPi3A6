@@ -39,7 +39,6 @@
     <div class="form-group col-md-6">
         <label for="inputContenu" class="tt-note pt-4">Photo</label>
         {{ form_errors(form.photo) }}
-
         {{ form_widget(form.photo, { 'attr' : { 'class' : 'form-control', "rows":"5" } }) }}
     </div>
 
@@ -54,7 +53,6 @@
 </div>
 <button class="btn btn-outline-info fas fa-plus">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
-
 
 <a class="btn btn-outline-warning fas fa-backward" href="{{ path('articles_index') }}">Back to list</a>
 

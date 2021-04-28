@@ -53,6 +53,18 @@
                 <th>Catégorie</th>
                 <td>{{ article.idCat }}</td>
             </tr>
+            <tr>
+                <th>Avis</th>
+                <td>
+                    {% set avis = app.session.get('avis') %}
+                    {% if avis and avis[article.idArt] is defined %}
+                        {{ avis[article.idArt]|rating }}
+                    {% else %}
+                        {{ 5|rating }}
+                    {% endif %}
+                </td>
+            </tr>
+
         </tbody>
     </table>
 <center>

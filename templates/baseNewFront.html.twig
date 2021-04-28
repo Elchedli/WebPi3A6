@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     {% block title %}
-        <title>spiriTy</title>
+        <title>SpiriTy</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Free Website Template" name="keywords">
         <meta content="Free Website Template" name="description">
@@ -22,10 +22,11 @@
         <link href="{{ asset("lib/owlcarousel/assets/owl.carousel.min.css")}}" rel="stylesheet">
         <link href="{{ asset("lib/flaticon/font/flaticon.css")}}" rel="stylesheet">
         <link href="{{ asset("lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css")}}" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.css') }}">
 
         <!-- Template Stylesheet -->
         <link href="{{ asset("css/style.css")}}" rel="stylesheet">
-
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
     {% endblock %}
 </head>
 
@@ -880,7 +881,7 @@
 <!-- Footer End -->
 
 <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
+        </div> </div>
 <!-- JavaScript Libraries -->
 {% block js %}
     <script src="{{ asset("https://code.jquery.com/jquery-3.4.1.min.js")}}"></script>
@@ -896,7 +897,9 @@
     <script src="{{ asset("mail/contact.js")}}"></script>
 
     <!-- Template Javascript -->
-    <script src="{{ asset("js/main.js")}}"></script>
+    <script src="{{ asset('js/main.js')}}"></script>
+    <script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')}}"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
 {% endblock %}
 
 </body>

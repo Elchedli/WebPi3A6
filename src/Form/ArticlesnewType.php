@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-class ArticlesType extends AbstractType
+class ArticlesnewType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,15 +22,12 @@ class ArticlesType extends AbstractType
             ->add('auteurArt')
             ->add('descriptionArt')
 //            ->add('dateArt',Datetype::class)
-           // ->add('likes')
+            // ->add('likes')
             ->add('photo',FileType::class,array('label'=>'inserer une image',
                 'data_class' => null))
-
             ->add('idCat')
 
-            ->add('rating', StarRatingType::class, [
-                'label' => 'Rating'
-            ]);
+
         ;
     }
 

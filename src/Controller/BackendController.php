@@ -8,6 +8,7 @@ use App\Form\ArticlesType;
 use App\Form\Categorie1Type;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,12 +30,20 @@ class BackendController extends AbstractController
     /**
      * @Route("/articles", name="articles_indexx", methods={"GET"})
      */
-    public function indexArt(ArticleRepository $articleRepository): Response
+    public function indexArt(ArticleRepository $articleRepository,Request $request ,paginatorInterface $paginator): Response
     {
+        $articles = $this->getDoctrine()
+            ->getRepository(Articles::class)
+            ->findAll();
+        $articles = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1),
+            2);
         return $this->render('Backend/articles/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
         ]);
     }
+
 
     /**
      * @Route("/articles/{idArt}", name="articles_showw", methods={"GET"})
