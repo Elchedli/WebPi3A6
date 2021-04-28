@@ -10,8 +10,13 @@
 <div class="box box-info" style="align-items: center; padding-left: 400px ">
     <div class="box-header">
         {# <i class="fa fa-envelope"></i> #}
-        <h3 class="bg-light py-4 text-info">Our Reclamations</h3>
+        <h3 class="bg-light py-4 text-info">Les Réclamations</h3>
     </div>
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="box-body">
         <form method="post" >
             <input type="text" class="form-control" name="AfficherClasse" onkeyup="myFunction()" placeholder="Search here..." id="myInput" style="width:500px;display: inline-block;margin-left: 170px">
@@ -26,11 +31,11 @@
                     <thead>
             <tr>
                 {# <th>IdRec</th>#}
-                <th>Username</th>
-                <th>Object</th>
-                <th>Details</th>
-                <th>Status</th>
-                <th>Category</th>
+                <th>User</th>
+                <th>Objet</th>
+                <th>Description</th>
+                <th>Etat</th>
+                <th>Catégories</th>
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
@@ -46,13 +51,13 @@
                 <td>{{ reclamation.idCat }}</td>
                 <td>{{ reclamation.dateRec ? reclamation.dateRec|date('d-m-Y H:i:s') : '' }}</td>
                 <td>
-                        <a class="btn btn-warning" href="{{ path('reclamation_showw', {'idRec': reclamation.idRec}) }}"><i class="fa fa-star"></i> Show</a>
-                        <a class="btn btn-success" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}"><i class="fa fa-edit"></i> Edit</a>
+                        <a class="btn btn-warning" href="{{ path('reclamation_showw', {'idRec': reclamation.idRec}) }}"><i class="fa fa-star"></i> Afficher</a>
+                        <a class="btn btn-success" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}"><i class="fa fa-edit"></i> Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">No Records Found</td>
+                <td colspan="7">Aucun Enregistrement Trouvé</td>
             </tr>
         {% endfor %}
         <script>

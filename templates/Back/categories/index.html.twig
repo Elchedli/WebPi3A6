@@ -7,18 +7,19 @@
 {% endblock %}
 
 {% block b %}
-    {% for message in app.flashes('info') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+
     <div class="box box-info" style="align-items: center; padding-left: 400px ">
     <div class="box-header">
         {# <i class="fa fa-envelope"></i> #}
-        <h3 class="bg-light py-4 text-info">Our Categories</h3>
+        <h3 class="bg-light py-4 text-info">Les Catégories</h3>
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <br>
         <center>
-            <a class="btn btn-success" href="{{ path('categories_new') }}"> <i class="fa fa-plus-circle"></i> Add</a>
+            <a class="btn btn-success" href="{{ path('categories_neww') }}"> <i class="fa fa-plus-circle"></i> Ajouter</a>
         </center>
     </div>
     <div class="box-body">
@@ -28,7 +29,7 @@
         <thead>
             <tr>
                 {# <th>Category</th> #}
-                <th>Name Of Category</th>
+                <th>Nom</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -38,8 +39,8 @@
                 {# <td>{{ category.idCat }}</td> #}
                 <td>{{ category.nomCat }}</td>
                 <td>
-                    <a class="btn btn-warning" href="{{ path('categories_show', {'idCat': category.idCat}) }}"><i class="fa fa-star"></i> Afficher</a>
-                    <a class="btn btn-instagram" href="{{ path('categories_edit', {'idCat': category.idCat}) }}"><i class="fa fa-edit"></i> Modifier</a>
+                    <a class="btn btn-warning" href="{{ path('categories_showw', {'idCat': category.idCat}) }}"><i class="fa fa-star"></i> Afficher</a>
+                    <a class="btn btn-instagram" href="{{ path('categories_editt', {'idCat': category.idCat}) }}"><i class="fa fa-edit"></i> Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -47,11 +48,13 @@
                 <td colspan="3">Aucun Enregistrement Trouvé</td>
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
         <ul class="pages">
             {{ knp_pagination_render(categories) }}
         </ul>
+
     </div>
     </form>
     </div>

@@ -17,13 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-class BackController extends AbstractController
-{
-    /**
-     * @Route("/backend", name="backend")
-     */
-
+class BackController extends AbstractController{
     /**
      * @Route("/backend/cat", name="categories_indexx", methods={"GET"})
      */
@@ -33,9 +27,9 @@ class BackController extends AbstractController
             ->getRepository(Categories::class)
             ->findAll();
         $categories = $paginator->paginate(
-            $categories,
-            $request->query->getInt('page', 1),
-            3);
+           $categories,
+           $request->query->getInt('page', 1),
+           3);
         return $this->render('Back/categories/index.html.twig', [
             'categories' => $categories,
         ]);
@@ -57,7 +51,7 @@ class BackController extends AbstractController
 
             $this->addFlash(
                 'info',
-                'Added successfully'
+                'Ajoutée avec succès'
             );
             return $this->redirectToRoute('categories_indexx');
         }
@@ -88,8 +82,12 @@ class BackController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'info',
+                'Modifiée avec succès'
+            );
             return $this->redirectToRoute('categories_indexx');
+
         }
 
         return $this->render('Back/categories/edit.html.twig', [
@@ -107,6 +105,11 @@ class BackController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($categories);
             $entityManager->flush();
+            $this->addFlash(
+                'info',
+                'Supprimée avec succès'
+            );
+
         }
 
         return $this->redirectToRoute('categories_indexx');
@@ -149,6 +152,10 @@ class BackController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash(
+                'info',
+                'Modifiée avec succès'
+            );
 
             return $this->redirectToRoute('reclamation_indexx');
         }
@@ -170,7 +177,7 @@ class BackController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'info',
-                'Deleted successfully'
+                'Supprimée avec succès'
             );
         }
 

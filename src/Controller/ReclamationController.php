@@ -53,7 +53,7 @@ class ReclamationController extends AbstractController
 
             $this->addFlash(
                 'info',
-                'Added successfully'
+                'Ajoutée avec succès'
             );
 
             return $this->redirectToRoute('reclamation_index');
@@ -88,7 +88,7 @@ class ReclamationController extends AbstractController
 
             $this->addFlash(
                 'info',
-                'Updated successfully'
+                'Modifiée avec succès'
             );
 
             return $this->redirectToRoute('reclamation_index');
@@ -111,7 +111,7 @@ class ReclamationController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'info',
-                'Deleted successfully'
+                'Supprimée avec succès'
             );
         }
 
