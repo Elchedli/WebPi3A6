@@ -83,4 +83,10 @@ class SuiviRepository extends ServiceEntityRepository
         if($result->getResult()) return true;
         return false;
     }
+    public function afficherreclamations(){
+        $sql = 'select s from App:reclamation s where s.username = :username';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameter('username', $this->session->get("user"));
+        return $result->getResult();
+    }
+
 }

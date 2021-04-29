@@ -1,0 +1,55 @@
+{% extends 'backend2/page.html.twig' %}
+
+     {% block title %}
+         <meta charset="utf-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <title>Spirity | Articles</title>
+     {% endblock  %}
+{% block param %}
+    <table class="table">
+        <tbody >
+        {#   <tr>
+                <th>IdArt</th>
+                <td>{{ article.idArt }}</td>
+            </tr>
+            <tr>#}
+                <th>Titre Article</th>
+                <td width="85%"  >{{ article.titreArt }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ article.auteurArt }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ article.descriptionArt }}</td>
+            </tr>
+            <tr>
+                <th>Date de publication</th>
+                <td>{{ article.dateArt ? article.dateArt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Likes</th>
+                <td>{{ article.likes }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td ><img style="margin-bottom: -18px" src="{{ asset('uploads/' ~  article.photo) }}" width="200" height="100"></td>
+
+            </tr>
+
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ article.idCat }}</td>
+            </tr>
+        </tbody>
+    </table>
+<center>
+    <a href="{{ path('articles_indexx') }}" class="btn btn-danger">Back to list</a>
+</center>
+    <br>
+
+
+
+
+{% endblock %}

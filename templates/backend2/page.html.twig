@@ -8,6 +8,7 @@
     {% block titre %}
         <title>Admin Spirity</title>
     {% endblock %}
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -326,15 +327,66 @@
                 {% if user != "" %}
                     <li class="treeview">
                         <a href="{{asset("#")}}">
-                            <i class="fa fa-table"></i> <span>Suivi</span>
+                            <i class="fa fa-book"></i> <span>Gestion des suivis</span>
                             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{path("suivi_index")}}"><i class="fa fa-circle-o"></i>Suivi</a></li>
                             <li><a href="{{path("backtaches")}}"><i class="fa fa-circle-o"></i>Taches</a></li>
                         </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="{{asset("#")}}">
+                            <i class="fa fa-pie-chart"></i> <span>Gestion des évenements</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{path("admin")}}"><i class="fa fa-circle-o"></i>Evenements</a></li>
+                            <li><a href="{{path("act_indexAc")}}"><i class="fa fa-circle-o"></i>Activités</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="{{asset("#")}}">
+                            <i class="fa fa-envelope"></i> <span>Gestion des articles</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{path("articles_indexx")}}"><i class="fa fa-circle-o"></i>Articles</a></li>
+                            <li><a href="{{path("categorie_indexx")}}"><i class="fa fa-circle-o"></i>Catégories</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="{{asset("#")}}">
+                            <i class="fa fa-table"></i> <span>Gestion des réclamations</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{path("reclamation_indexx")}}"><i class="fa fa-circle-o"></i>Réclamations</a></li>
+                            <li><a href="{{path("categories_indexx")}}"><i class="fa fa-circle-o"></i>Catégories</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="{{path('BackPublication')}}">
+                            <i class="fa fa-edit"></i> <span>Publication</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{path('simple_index')}}">
+                            <i class="fa fa-laptop"></i> <span>Users</span>
+                        </a>
                     </li>
 
 

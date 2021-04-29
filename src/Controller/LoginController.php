@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Coach;
 use App\Entity\login;
+use App\Entity\Nutri;
+use App\Entity\Psycho;
+use App\Entity\Simple;
 use App\Entity\Suivi;
 use App\Form\loginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +34,8 @@ class LoginController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $exist = $em->getRepository( Suivi::class)->verifieruser($login,'simple');
             if($exist){
+                $user=$em->getRepository(Simple::class)->findOneBy(['username'=>$login->getUsername()]);
+                $this->session->set('id_user',$user->getIdUser());
                 $this->session->set('user',$login->getUsername());
                 $this->session->set('type','simple');
                 return $this->redirectToRoute('acceuil');
@@ -54,6 +60,8 @@ class LoginController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $exist = $em->getRepository( Suivi::class)->verifieruser($login,'psycho');
             if($exist){
+                $user=$em->getRepository(Psycho::class)->findOneBy(['username'=>$login->getUsername()]);
+                $this->session->set('id_user',$user->getId());
                 $this->session->set('user',$login->getUsername());
                 $this->session->set('type','psycho');
                 return $this->redirectToRoute('acceuil');
@@ -77,6 +85,8 @@ class LoginController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $exist = $em->getRepository( Suivi::class)->verifieruser($login,'coach');
             if($exist){
+                $user=$em->getRepository(Coach::class)->findOneBy(['username'=>$login->getUsername()]);
+                $this->session->set('id_user',$user->getId());
                 $this->session->set('user',$login->getUsername());
                 $this->session->set('type','coach');
                 return $this->redirectToRoute('acceuil');
@@ -99,6 +109,8 @@ class LoginController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $exist = $em->getRepository( Suivi::class)->verifieruser($login,'nutri');
             if($exist){
+                $user=$em->getRepository(Nutri::class)->findOneBy(['username'=>$login->getUsername()]);
+                $this->session->set('id_user',$user->getId());
                 $this->session->set('user',$login->getUsername());
                 $this->session->set('type','nutri');
                 return $this->redirectToRoute('acceuil');
@@ -114,6 +126,7 @@ class LoginController extends AbstractController
      * @Route("/deconnexion", name="deconnexion_login")
      */
     public function deconnexion(): Response{
+        $this->session->set('id_user','');
         $this->session->set('user','');
         $this->session->set('type','');
         return $this->redirectToRoute('acceuil');
@@ -132,6 +145,8 @@ class LoginController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $exist = $em->getRepository( Suivi::class)->verifieruser($login,'psycho');
             if($exist){
+                $user=$em->getRepository(Psycho::class)->findOneBy(['username'=>$login->getUsername()]);
+                $this->session->set('id_user',$user->getId());
                 $this->session->set('user',$login->getUsername());
                 $this->session->set('type','psycho');
                 return $this->redirectToRoute('acceuilback2');
@@ -155,6 +170,8 @@ class LoginController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $exist = $em->getRepository( Suivi::class)->verifieruser($login,'coach');
             if($exist){
+                $user=$em->getRepository(Coach::class)->findOneBy(['username'=>$login->getUsername()]);
+                $this->session->set('id_user',$user->getId());
                 $this->session->set('user',$login->getUsername());
                 $this->session->set('type','coach');
                 return $this->redirectToRoute('acceuilback2');
@@ -177,6 +194,8 @@ class LoginController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $exist = $em->getRepository( Suivi::class)->verifieruser($login,'nutri');
             if($exist){
+                $user=$em->getRepository(Nutri::class)->findOneBy(['username'=>$login->getUsername()]);
+                $this->session->set('id_user',$user->getId());
                 $this->session->set('user',$login->getUsername());
                 $this->session->set('type','nutri');
                 return $this->redirectToRoute('acceuilback2');
@@ -192,6 +211,7 @@ class LoginController extends AbstractController
      * @Route("/deconnexionadmin", name="login2_deconnexion")
      */
     public function deconnexion2(): Response{
+        $this->session->set('id_user','');
         $this->session->set('user','');
         $this->session->set('type','');
         return $this->redirectToRoute('acceuilback2');

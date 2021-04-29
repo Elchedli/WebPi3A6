@@ -1,0 +1,11 @@
+{% extends 'Front.html.twig' %}
+
+{% block title %}New Act{% endblock %}
+
+{% block Evenement %}
+    <h1>Create new Act</h1>
+
+    {{ include('act/_form.html.twig') }}
+
+    <a href="{{ path('act_index') }}"><i class="fa fa-backward">Revenir à la liste</i></a>
+{% endblock %}

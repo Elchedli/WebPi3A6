@@ -4,7 +4,6 @@ function getMessages(){
     requeteAjax.open("GET", "../../handler.php");
     requeteAjax.onload = function(){
         const resultat = JSON.parse(requeteAjax.responseText);
-        console.log(resultat);
         const html = resultat.reverse().map(function(message){
             return `
                 <div class="message">

@@ -100,7 +100,8 @@ class SuiviController extends AbstractController
     /**
      * @Route("/effacer/{idS}", name="suivi_delete", methods={"GET","POST"})
      */
-    public function effacer(Request $request,$idS){
+    public function effacer(Request $request,$idS) : Response
+    {
         $em = $this->getDoctrine()->getManager();
         $suivi=$em->getRepository(Suivi::class)->find($idS);
         $em->remove($suivi);
@@ -113,7 +114,8 @@ class SuiviController extends AbstractController
      * @Route("/convers", name="convert")
      * @throws \Exception
      */
-    public function convert(KernelInterface $kernel){
+    public function convert(KernelInterface $kernel) : Response
+    {
         $application = new Application($kernel);
         $application->setAutoExit(false);
         $input = new ArrayInput([

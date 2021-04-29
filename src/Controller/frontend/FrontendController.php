@@ -4,11 +4,19 @@ namespace App\Controller\frontend;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 /**
  * @Route("/frontend")
  */
 class FrontendController extends AbstractController
 {
+    /**
+     * FrontendController constructor.
+     */
+    public function __construct(SessionInterface $session){
+        $this->session = $session;
+    }
+
     /**
      * @Route("/", name="acceuil", methods={"GET"})
      */

@@ -1,0 +1,20 @@
+{% extends 'backend2/page.html.twig' %}
+
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+{% endblock %}
+
+{% block param %}
+    <div class="box box-info" style="align-items: center; padding-left: 400px ">
+        <div class="box-header">
+            <h1>Edit PhotoPublication</h1>
+
+            {{ include('photo_publication/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('photo_publication/_delete_form.html.twig') }} <br>
+            <a href="{{ path('photos_publication',{'id_pub': photo_publication.idPub}) }}">Return</a>
+
+        </div>
+    </div>
+{% endblock %}

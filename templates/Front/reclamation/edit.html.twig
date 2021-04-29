@@ -1,0 +1,24 @@
+{%  extends 'basefront.html.twig' %}
+{% block title %}
+    <title>Réclamation</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+{% endblock %}
+{% block contact %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+<div class="contact">
+    <div class="container">
+        <div class="section-header text-center">
+            <h1 class="bg-light py-4 text-info"> Modifier Une Réclamation </h1>
+        </div>
+    </div>
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {{ include('Front/reclamation/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('Front/reclamation/_delete_form.html.twig', {'button_label': 'Update'}) }}
+</div>
+    {% endblock %}

@@ -15,6 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CoachController extends AbstractController
 {
+
+
+
     /**
      * @Route("/", name="coach_index", methods={"GET"})
      */

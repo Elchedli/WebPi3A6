@@ -1,7 +1,7 @@
 <?php
 $user = 'root';
 $pass = '';
-$ds = 'spirity';
+$ds = 'groupe';
 $db = new PDO("mysql:dbname=$ds;host=localhost",$user,$pass);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -17,7 +17,6 @@ if($task == "write"){
 }
 function getMessages(){
     global $db;
-
     $resultats = $db->query("SELECT contenu_msg,sender FROM message ORDER BY datetemps_msg DESC LIMIT 20");
     $messages = $resultats->fetchAll();
     echo json_encode($messages);

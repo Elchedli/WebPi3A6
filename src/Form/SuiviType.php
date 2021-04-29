@@ -12,15 +12,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SuiviType extends AbstractType
 {
-    public function __construct(SessionInterface $session)
-    {
-        $this->session = $session;
-    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -30,7 +25,7 @@ class SuiviType extends AbstractType
                     'placeholder'=>'Nom du psy',
                     'class' => 'form-control',
                     'readonly' => true,
-                    'value' => $this->session->get('user')
+                    'value' => 'mgkpsy'
                 ]
             ])
             ->add('client',TextType::class,[

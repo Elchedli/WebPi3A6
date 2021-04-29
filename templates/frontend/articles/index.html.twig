@@ -1,0 +1,81 @@
+{% extends 'baseNewFront.html.twig' %}
+{% set user = app.session.get('id_user') %}
+{% set type = app.session.get('type') %}
+{% set username = app.session.get('user') %}
+{% block car %}
+<div class="carousel">
+    <div class="container-fluid">
+        <div class="owl-carousel">
+            <div class="carousel-item-art">
+                <div class="carousel-img">
+                    <img src="{{ asset("img/blog-for-business.jpg")}}" alt="Image">
+                </div>
+                <div class="carousel-text">
+                    <h1>Liste des <span> Articles </span> </h1>
+                </div>
+            </div>
+
+        </div>
+        {% endblock %}
+
+{% block blog %}
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
+<br>
+        <br>
+<center>
+        <a href="{{ path('articles_new') }}" class="btn btn-outline-danger fas fa-plus">Add Article +</a>
+</center>
+    <div class="blog">
+            <div class="container">
+
+
+                <div class="row">
+                    {% for article in articles %}
+                        <div class="col-md-6">
+                            <div class="blog-item">
+                                <div class="blog-img">
+                                    <img src="../uploads/{{ article.photo }}" alt="Blog" height="250px" width="50px">
+                                </div>
+                                <div class="blog-content">
+
+                                    <h3 class="blog-title" style="color: darkgreen;">Titre Article: {{ article.titreArt}}</h3>
+                                    <h4 style="color: orange;">Auteur: {{ article.auteurArt }}</h4>
+
+                                    <div class="blog-text">
+
+                                        <h5>Description: {{ article.descriptionArt }}</h5>
+                                        <p> <i class="far fa-calendar-alt" style="color: orange"></i> Date de publication: {{article.dateArt ? article.dateArt|date('Y-m-d H:i:s') : ''}}</p>
+                                        <p><i class="far fa-comments" style="color: orange"></i> Likes: {{  article.likes }}</p>
+
+                                        <p> <i class="far fa-list-alt" style="color: orange"></i> Catégories: {{  article.idCat }}</p>
+                                    </div>
+                                    <div>
+                                    <span>
+                                       <a href="{{ path('articles_show', {'idArt': article.idArt}) }}" class="btn btn-outline-warning fas fa-star">Show</a>
+                                {% if type != 'simple' %}
+                    <a href="{{ path('articles_edit', {'idArt': article.idArt}) }}" class="btn btn-outline-success fas fa-edit">Edit</a>
+                                        {%endif%}
+
+
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                    <ul class="pages">
+                        {{ knp_pagination_render(articles) }}
+                    </ul>
+
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends 'backend2/page.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Articles</title>
+{% endblock  %}
+
+
+{% block param %}
+    <div class="box-header">
+
+        <center>  <h2 class="box-title" style="font-size: 40px;color:#1d5987;">Liste des Articles</h2></center>
+        <p><button class="btn btn-info" onclick="sortTable()"> Trier Par Titre</button></p>
+        <a class="btn btn-success"  href="{{path('statistique_Art') }}"> <i class="fa fa-star"></i> Stat </a>
+        <form method="post">
+            <input type="text"  class="form-control" name="AfficherClasse" onkeyup="myFunction()" placeholder="Chercher par catégorie..."  id="myInput" >
+        </form>
+    </div>
+
+<br>
+    <br>
+    <table class="table" id="myT" >
+        <thead>
+            <tr>
+                {# <th>IdArt</th>  #}
+                <th>Titre Article</th>
+                <th>Auteur</th>
+                <th>Description</th>
+                <th>Date de publication</th>
+                <th>Likes</th>
+                <th>Photo</th>
+                <th>Catégories</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+               {#  <td>{{ article.idArt }}</td> #}
+                <td>{{ article.titreArt }}</td>
+                <td>{{ article.auteurArt }}</td>
+                <td>{{ article.descriptionArt }}</td>
+                <td>{{ article.dateArt ? article.dateArt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.likes }}</td>
+                <td><img style="margin-bottom: -50px" src="{{ asset('uploads/' ~  article.photo) }}" width="250" height="100"></td>
+                <td>{{ article.idCat }}</td>
+                <td>
+                    <a href="{{ path('articles_showw', {'idArt': article.idArt}) }}" class="btn btn-success">Show</a>
+                    <br>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        <ul class="pages">
+            {{ knp_pagination_render(articles) }}
+        </ul>
+        <script>
+            function sortTable() {
+                var table, rows, switching, i, x, y, shouldSwitch,dir;
+                table = document.getElementById("myT");
+                switching = true;
+                // Set the sorting direction to ascending:
+
+
+                while (switching) {
+
+                    switching = false;
+                    rows = table.rows;
+
+                    for (i = 1; i < (rows.length - 1); i++) {
+
+                        shouldSwitch = false;
+
+                        x = rows[i].getElementsByTagName("TD")[0];
+                        y = rows[i + 1].getElementsByTagName("TD")[0];
+
+
+
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+                            shouldSwitch = true;
+                            break;
+                        } }
+
+                    if (shouldSwitch) {
+
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+
+
+                }
+            }
+            function myFunction() {
+                var input, filter, table, tr, td, i,j, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myT");
+                tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+                for (i = 0; i < tr.length; i++) {
+                    td= tr[i].getElementsByTagName("td")[6];
+                    td1= tr[i].getElementsByTagName("td")[2];
+
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        }
+                        else if  (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";  }
+                        else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+        </script>
+        </tbody>
+    </table>
+
+{% endblock %}

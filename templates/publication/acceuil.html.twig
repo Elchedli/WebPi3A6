@@ -1,0 +1,43 @@
+{% extends 'backend2/page.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+{% endblock %}
+
+{% block param %}
+
+    <div class="box box-info">
+        <div class="box-header">
+            <h4 class="page-title pull-left" >Publications</h4><br><br>
+            <table width="1000">
+                <tr>
+                    <th>User</th>
+                    <th>Text</th>
+                    <th>Likes</th>
+                </tr>
+                {% for publication in pubs %}
+                    <tr>
+                        <td>{{ publication.getUsername()}}</td>
+                        <td>{{ publication.getTexte() }}</td>
+                        <td>{{ publication.getNb_reaction() }}</td>
+                        <td></td>
+                        <td>{{ publication.getDate() | date('d/m/Y')}} At: {{ publication.getDate() | date('H:i')}}</td>
+                        <td><a href="{{ path('Pub_likeBack',{'id_pub':publication.getId(),'id_user':1}) }}">Like/Dislike</a></td>
+                        <td><a href="{{ path('commentaire_indexx',{'id_pub':publication.getId()}) }}">Commentaires</a></td>
+                        <td><a href="{{ path('photos_publication',{'id_pub':publication.getId()}) }}">View Pics</a></td>
+                        <td><a href="{{ path('BackPub_delete',{'id':publication.getId()})}}"type="button">Delete</a></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+            </table><br>
+            {{ form_start(formPub, {attr: {novalidate: 'novalidate'}}) }}
+            {{ form_widget(formPub.texte,{ 'attr':{'class':'form-control','placeholder':'Text'}}) }}
+            {{ form_errors(formPub.texte) }}
+            {{ form_rest(formPub) }}
+            {{ form_end(formPub) }}
+    </div>
+{% endblock %}

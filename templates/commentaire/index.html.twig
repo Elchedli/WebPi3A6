@@ -1,0 +1,49 @@
+{% extends 'backend2/page.html.twig' %}
+
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Categories</title>
+{% endblock %}
+
+{% block param %}
+
+    <div class="box box-info">
+        <div class="box-header">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Publication</th>
+                    <th>User</th>
+                    <th>Contenu</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commentaire in commentaires %}
+                    <tr>
+                        <td>{{ commentaire.idPub }}</td>
+                        <td>{{ commentaire.getUsername() }}</td>
+                        <td>{{ commentaire.contenu }}</td>
+                        <td>{{ commentaire.date ? commentaire.date|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('commentaire_show', {'id': commentaire.id,'id_pub': id_pub}) }}">Show</a>
+
+                            <a href="{{ path('commentaire_delete', {'id': commentaire.id, 'id_pub': id_pub}) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('commentaire_new_', {'id_pub': id_pub,'id_user':1}) }}">Comment</a><br>
+            <a href="{{ path('BackPublication') }}">Back</a>
+
+        </div>
+    </div>
+{% endblock %}

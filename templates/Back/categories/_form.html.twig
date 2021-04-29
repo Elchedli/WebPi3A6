@@ -1,0 +1,10 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+{{ form_widget(form) }}
+<center>
+<br><br>
+    <button class="btn btn-info"> <i class="fa fa-upload"></i> {{ button_label|default('Ajouter') }}</button>
+<br>
+<br>
+<a class="btn btn-success" href="{{ path('categories_indexx') }}"><i class="fa fa-reply"></i> Liste Des Catégories</a>
+</center>
+    {{ form_end(form) }}

@@ -1,0 +1,67 @@
+{% extends 'backend2/page.html.twig' %}
+{% block title %}Act index{% endblock %}
+
+{% block param %}
+    <h1>Activités</h1>
+    <form method="post" >
+        <input type="text"  class="form-control" name="AfficherClasse" onkeyup="myFunction()" placeholder="Rechercher.."  id="myInput" >
+
+    </form >
+    <table class="table"  style="width: 75%;"  border=" 1px solid" align="center" border-collapse="collapse"
+           width="100%" id="mytable">
+        <thead>
+        <tr>
+            {#  <th>IdAct</th> #}
+            <th>Nom</th>
+            <th>Type</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for act in acts %}
+            <tr>
+
+                <td>{{ act.nomAct }}</td>
+                <td>{{ act.typeAct }}</td>
+                <td>
+                    <a href="{{ path('act_showAAc', {'idAct': act.idAct}) }}" <i class="fa fa-star">Afficher</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i,j, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("mytable");
+                tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+                for (i = 0; i < tr.length; i++) {
+                    td= tr[i].getElementsByTagName("td")[0];
+                    td1= tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1)
+                        {
+                            tr[i].style.display = "";
+                        }
+                        else if  (txtValue1.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";  }
+                        else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <a class="btn btn-outline-success"  href="{{path('Stat') }}"> <i class="fa fa-adjust"></i> Statistic </a>
+        </tbody>
+    </table>
+
+{% endblock %}

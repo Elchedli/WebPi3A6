@@ -28,9 +28,6 @@ class TacheRepository extends ServiceEntityRepository
 
     // n'oublie pas de verifier cela
     public function chercherTaches($idS){
-        $user = "mgkpsy";
-//        $sql = 'select distinct t.username,s.idS from App:Tache t join App:Suivi s where t.username = s.client';
-//        $sql = 'select t from App:Tache t where t.idS=:id';
         $idS = "shidono";
         $sql = 'select t from App:Tache t where t.username = :id';
         $result = $this->getEntityManager()->createQuery($sql)->setParameter('id', $idS);

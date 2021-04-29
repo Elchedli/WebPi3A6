@@ -1,0 +1,63 @@
+{% extends 'backend2/page.html.twig' %}
+{% block title %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Spirity | Reclamations</title>
+{% endblock %}
+{% block param %}
+    <h1>Categories</h1>
+<div class="box box-info" style="align-items: center; padding-left: 400px ">
+    <div class="box-header">
+        {# <i class="fa fa-envelope"></i> #}
+<h3 class="box-title">Reclamation</h3>
+</div>
+<div class="box-body">
+    <form action="#" method="post">
+        <div class="form-group">
+            <table class="table">
+                <thead>
+                <tbody>
+        {#   <tr>
+               <th>IdRec</th>
+                <td>{{ reclamation.idRec }}</td>
+            </tr> #}
+            <tr>
+                <th>User</th>
+                <td>{{ reclamation.username }}</td>
+            </tr>
+            <tr>
+                <th>Objet</th>
+                <td>{{ reclamation.objRec }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reclamation.sujRec }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ reclamation.etatRec }}</td>
+            </tr>
+        <tr>
+            <th>Catégories</th>
+            <td>{{ reclamation.idCat }}</td>
+        </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ reclamation.dateRec ? reclamation.dateRec|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+            <center>
+                <br><br>
+                <a class="btn btn-yahoo" href="{{ path('reclamation_indexx') }}"> <i class="fa fa-reply"></i> Liste Des Réclamation</a>
+                <br>
+                <br>
+                {{ include('Back/reclamation/_delete_form.html.twig') }}
+                <br>
+                <a class="btn btn-instagram" href="{{ path('reclamation_editt', {'idRec': reclamation.idRec}) }}"><i class="fa fa-edit"></i> Modifier</a>
+            </center>
+</div>
+    </form>
+</div>
+</div>
+{% endblock %}

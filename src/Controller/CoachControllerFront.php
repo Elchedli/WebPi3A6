@@ -24,7 +24,6 @@ class CoachControllerFront extends AbstractController
             'coachs' => $CoachRepository->findAll(),
         ]);
     }
-
     /**
      * @Route("/new", name="coachfront_new", methods={"GET","POST"})
      */
@@ -91,4 +90,14 @@ class CoachControllerFront extends AbstractController
 
         return $this->redirectToRoute('coachfront_index');
     }
+
+    /**
+     * @Route("/mm", name="mm", methods={"GET","POST"})
+     */
+    public function mm(): Response
+    {
+        return $this->render('../templates/frontend/acceuil.html.twig', [
+        ]);
+    }
+
 }
