@@ -1,0 +1,7 @@
+{% extends 'backend/taches.html.twig' %}
+{% block param %}
+    <div id="dynamicbull">
+        {{ include('tache/_form.html.twig', {'button_label': 'Mise a jour'}) }}
+        <a href="{{ path('tache_index',{'idS' : idS}) }}">Revenir a la liste</a>
+    </div>
+{% endblock %}

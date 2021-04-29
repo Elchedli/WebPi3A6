@@ -1,0 +1,32 @@
+#dynamicbull{
+    display: table;
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+table{
+    margin-top: 30px;
+}
+
+td > a{
+    margin-right: 20px;
+}
+
+.form-group{
+    padding: 10px;
+}
+
+
+
+.btn{
+    display: table;
+    margin: 0 auto;
+}
+.form-inline{
+    width: 450px;
+}
+
+input[type="time"]{
+    width: 180px !important;
+}
