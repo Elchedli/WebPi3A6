@@ -1,6 +1,0 @@
-<center>
-    <form method="post" action="{{ path('categories_deletee', {'idCat': categories.idCat}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categories.idCat) }}">
-        <button class="btn btn-yahoo"> <i class="fa fa-trash"></i> Supprimer</button>
-    </form>
-</center>
