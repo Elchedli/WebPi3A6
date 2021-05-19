@@ -9,10 +9,13 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\TacheRepository;
 use App\Repository\SuiviRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+
 /**
  * @Route("/tache")
  */
@@ -91,6 +94,70 @@ class TacheController extends AbstractController
             'idS' => $idS
         ]);
     }
+
+    /**
+     * @Route("/indexjson", name="index_tachejson", methods={"GET"})
+     */
+    public function indexjson(Request $request): Response{
+        $json = $request->getContent();
+        $json = json_decode($json);
+        $suivis = $this->getDoctrine()->getRepository(Tache::class)->chercherTaches($json->IdS());
+        if($suivis){
+            return new JsonResponse($suivis);
+        }
+        return new JsonResponse(false);
+
+    }
+    /**
+     * @Route("/newjson", name="tachenewjson",methods={"GET","POST"})
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
+    public function newjson(Request $request,SerializerInterface $serializer) : Response{
+        $json = $request->getContent();
+        $suivi = $serializer->deserialize($json,Tache::class,'json');
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($suivi);
+        $entityManager->flush();
+        return new JsonResponse(true);
+    }
+
+    /**
+     * @Route("/editjson", name="edit_tachejson", methods={"GET","POST"})
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
+    public function editjson(Request $request,SerializerInterface $serializer) : Response{
+        $json = $request->getContent();
+        $suivijson = $serializer->deserialize($json,Tache::class,'json');
+        $suivi = $this->getDoctrine()->getRepository(Tache::class)->changer($suivijson);
+        $suivbase=$this->getDoctrine()->getRepository(Tache::class)->find($suivijson->getIdTache());
+        if($suivi) return new JsonResponse($suivbase->getUsername());
+        return new JsonResponse("rien");
+    }
+
+    /**
+     * @Route("/supprimerjson", name="supp_tachejson", methods={"GET","POST"})
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
+    public function deletejson(Request $request,SerializerInterface $serializer) : Response{
+        $json = $request->getContent();
+        $suivi = $serializer->deserialize($json,Tache::class,'json');
+        $em = $this->getDoctrine()->getManager();
+        $suivbase=$em->getRepository(Tache::class)->find($suivi->getIdS());
+        if($suivbase){
+            $em->remove($suivbase);
+            $em->flush();
+            return new JsonResponse(true);
+        }
+        return new JsonResponse(false);
+    }
+
+
     /**
      * @Route("/new/{idS}", name="tache_new", methods={"GET","POST"})
      */
@@ -124,7 +191,6 @@ class TacheController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('tache_index', [
                 'idS' => $idS
             ]);
@@ -150,5 +216,12 @@ class TacheController extends AbstractController
         return $this->redirectToRoute('tache_index', [
             'idS' => $idS
         ]);
+    }
+
+    /**
+     * @Route("/convers", name="tache_delete", methods={"GET"})
+     */
+    public function converss(Request $request){
+        return new JsonResponse("bitch");
     }
 }

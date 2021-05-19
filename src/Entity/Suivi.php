@@ -77,6 +77,32 @@ class Suivi
      */
     private $client;
 
+    public function __construct()
+    {
+        $arguments = func_get_args();
+        $numberOfArguments = func_num_args();
+
+        if (method_exists($this, $function = '__construct'.$numberOfArguments)) {
+            call_user_func_array(array($this, $function), $arguments);
+        }
+    }
+
+
+    public function __construct1(){
+    }
+
+    public function __construct2(Suivi $p)
+    {
+        $this->setIdS($p->getIdS());
+        $this->setUsername($p->getUsername());
+        $this->setClient($p->getClient());
+        $this->setTitreS($p->getTitreS());
+        $this->setDateDs($p->getDateDs());
+        $this->setDateFs($p->getDateFs());
+        $this->setTempsDs($p->getTempsDs());
+        $this->setTempsFs($p->getTempsFs());
+    }
+
     /**
      * @return int
      */

@@ -1,5 +1,6 @@
 <?php
 namespace App\Repository;
+use App\Entity\Suivi;
 use App\Entity\Tache;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,19 @@ class TacheRepository extends ServiceEntityRepository
     public function TachesToDo($client,$idS){
         $sql = 'select t from App:Tache t where t.username = :user';
         $result = $this->getEntityManager()->createQuery($sql)->setParameter('user', $client);
+        return $result->getResult();
+    }
+
+    public function changer(Tache $suivi){
+        $parameters = array(
+            'id' => $suivi->getIdTache(),
+            'username' => $suivi->getUsername(),
+            'etat' => $suivi->getEtatTache(),
+            'difficulte' => $suivi->getDifficulteTache(),
+            'description' => $suivi->getDescriptionTache()
+        );
+        $sql = 'update App:Tache t set t.username = :username,t.etat = :etat,s.difficulteTache = :difficulte,t.descriptionTache = :description where s.idTache = :id';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameters($parameters);
         return $result->getResult();
     }
 

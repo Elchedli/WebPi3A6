@@ -48,12 +48,8 @@ class PublicationController extends AbstractController
      */
     public function index(Request $request): Response
     {
-
-
         $pform = new Publication();
-
         $comment = new Commentaire();
-
         $form = $this->createFormBuilder($pform)
                      ->add('texte',TextareaType::class)
                      ->add('post', SubmitType::class, ['label' => 'Publier'])

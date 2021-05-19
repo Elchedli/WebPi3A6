@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 /**
@@ -23,7 +25,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SuiviController extends AbstractController
 {
-
     public function __construct(SessionInterface $session)
     {
         $this->session = $session;
@@ -39,6 +40,7 @@ class SuiviController extends AbstractController
             'suivis' => $suivis,
         ]);
     }
+
 
     /**
      * @Route("/new", name="suivi_new", methods={"GET","POST"})
@@ -57,11 +59,77 @@ class SuiviController extends AbstractController
             $this->session->set('notif', 'fait');
             return $this->redirectToRoute('suivi_index');
         }
-
         return $this->render('suivi/new.html.twig', [
             'suivi' => $suivi,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/indexjson", name="index_json", methods={"GET"})
+     */
+    public function indexjson(Request $request): Response{
+        $json = $request->getContent();
+        $json = json_decode($json);
+        $suivis = $this->getDoctrine()->getRepository(Suivi::class)->afficher2($json->username);
+        return new JsonResponse($suivis);
+    }
+    /**
+     * @Route("/newjson", name="newjson",methods={"GET","POST"})
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
+    public function newjson(Request $request,SerializerInterface $serializer) : Response{
+        //$json = $request->getContent();
+        //$suivi = $serializer->deserialize($json,Suivi::class,'json');
+        $suivi = new Suivi();
+        $suivi->setUsername($request->get("username"));
+        $suivi->setClient($request->get("client"));
+        $suivi->setTitreS($request->get("titre"));
+        $suivi->setDateDs($request->get("dateds"));
+        $suivi->setDateFs($request->get("datefs"));
+        $suivi->setTempsDs($request->get("tempsds"));
+        $suivi->setTempsDs($request->get("tempsfs"));
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($suivi);
+        $entityManager->flush();
+        return new JsonResponse(true);
+    }
+
+    /**
+     * @Route("/editjson", name="edit_suivijson", methods={"GET","POST"})
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
+    public function editjson(Request $request,SerializerInterface $serializer) : Response{
+        $json = $request->getContent();
+        $suivijson = $serializer->deserialize($json,Suivi::class,'json');
+        $suivi = $this->getDoctrine()->getRepository(Suivi::class)->changer($suivijson);
+        $suivbase=$this->getDoctrine()->getRepository(Suivi::class)->find($suivijson->getIdS());
+        echo $suivi;
+        if($suivi) return new JsonResponse($suivbase->getUsername());
+        return new JsonResponse("rien");
+    }
+
+    /**
+     * @Route("/supprimerjson", name="supp_suivijson", methods={"GET","POST"})
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return Response
+     */
+    public function deletejson(Request $request,SerializerInterface $serializer) : Response{
+        $json = $request->getContent();
+        $suivi = $serializer->deserialize($json,Suivi::class,'json');
+        $em = $this->getDoctrine()->getManager();
+        $suivbase=$em->getRepository(Suivi::class)->find($suivi->getIdS());
+        if($suivbase){
+            $em->remove($suivbase);
+            $em->flush();
+            return new JsonResponse(true);
+        }
+        return new JsonResponse(false);
     }
 
     /**
@@ -97,6 +165,7 @@ class SuiviController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/effacer/{idS}", name="suivi_delete", methods={"GET","POST"})
      */
@@ -109,6 +178,8 @@ class SuiviController extends AbstractController
         $this->session->set('notif', 'echec');
         return $this->redirectToRoute('suivi_index');
     }
+
+
 
     /**
      * @Route("/convers", name="convert")
@@ -126,4 +197,6 @@ class SuiviController extends AbstractController
         $content = $output->fetch();
         return new JsonResponse("cool");
     }
+
+
 }

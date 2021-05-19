@@ -25,6 +25,12 @@ class SuiviRepository extends ServiceEntityRepository
         return $result->getResult();
     }
 
+    public function afficher2($username){
+        $sql = 'select s from App:Suivi s where s.username = :username';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameter('username', $username);
+        return $result->getResult();
+    }
+
     public function SuiviNom($idS)
     {
         $sql = 'select s.titreS from App:Suivi s where s.idS = :id';
@@ -86,6 +92,21 @@ class SuiviRepository extends ServiceEntityRepository
     public function afficherreclamations(){
         $sql = 'select s from App:reclamation s where s.username = :username';
         $result = $this->getEntityManager()->createQuery($sql)->setParameter('username', $this->session->get("user"));
+        return $result->getResult();
+    }
+
+    public function changer(Suivi $suivi){
+        $parameters = array(
+            'id' => $suivi->getIdS(),
+            'client' => $suivi->getClient(),
+            'titre' => $suivi->getTitreS(),
+            'dateDs' => $suivi->getDateDs(),
+            'dateFs' => $suivi->getDateFs(),
+            'tempsDs' => $suivi->getTempsDs(),
+            'tempsFs' => $suivi->getTempsFs()
+        );
+        $sql = 'update App:Suivi s set s.client = :client,s.titreS = :titre,s.dateDs = :dateDs,s.dateFs = :dateFs,s.tempsDs = :tempsDs,s.tempsFs = :tempsFs where s.idS = :id';
+        $result = $this->getEntityManager()->createQuery($sql)->setParameters($parameters);
         return $result->getResult();
     }
 
