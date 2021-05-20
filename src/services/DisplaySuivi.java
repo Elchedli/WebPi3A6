@@ -6,6 +6,7 @@
 package services;
 
 import com.codename1.l10n.SimpleDateFormat;
+import com.codename1.notifications.LocalNotification;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Container;
@@ -36,6 +37,38 @@ public class DisplaySuivi extends Form{
             ArrayList<Suivi> list = ServiceSuivi.getInstance().getSuivi();
             System.out.println("liste est : "+list);
             Button Ajouter = new Button("Ajouter");
+//            TextField tchercher = new TextField("","Chercher un titre");
+//            Button buttchercher = new Button("Chercher");
+//            buttchercher.addActionListener(e->{
+//                removeAll();
+//                ArrayList<Suivi> searchs = ServiceSuivi.getInstance().chercher(tchercher.getText());
+//                for(int i= 0;i<=searchs.size()-1;i++){
+//                Suivi s = searchs.get(i);
+//                Container cnt = new Container(BoxLayout.y());
+//                Label lclient = new Label("client : "+s.getClient());
+//                Label ltitre = new Label("titre : "+s.getTitre_s());
+//                Label ldate_ds = new Label("date debut : "+getDay(s.getDate_ds()));
+//                Label ldate_fs = new Label("date fin : "+getDay(s.getDate_fs()));
+//                Label ltemps_ds  = new Label("temps debut : "+getTime(s.getTemps_ds()));
+//                Label ltemps_fs  = new Label("temps fin : "+getTime(s.getTemps_fs()));
+//                cnt.addAll(lclient,ltitre,ldate_ds,ldate_fs,ltemps_ds,ltemps_fs);
+//                Container cnt2 = new Container(new GridLayout(2,1));
+//                Button supprimer = new Button("Supprimer");
+//                supprimer.addActionListener(h->{
+//                    boolean verif = SSerivce.getInstance().supprimerSuivi(s.getId_s());
+//                    if(verif){
+//                         Dialog.show("Success","Suivi supprimée !",new Command("Ok"));
+//                    }else{
+//                        Dialog.show("Failed","Echec de Supprission",new Command("Ok"));
+//                    }
+//                    removeAll();
+//                    DisplaySuivi ds = new DisplaySuivi();
+//                    ds.show();
+//                  });
+//                  cnt2.add(supprimer);
+//                  addAll(cnt,cnt2);
+//                  }
+//                });
             Ajouter.addActionListener(e->{
                 Form fajouter = new Form("Ajouter Suivi",BoxLayout.y());
                 TextField client = new TextField("", "client");
@@ -53,9 +86,14 @@ public class DisplaySuivi extends Form{
                         Suivi suiv = new Suivi(client.getText(),titre.getText(),datedeb.getText(),datefin.getText(),tempsdeb.getText(),tempsfin.getText());
                         boolean verif = SSerivce.getInstance().AjouterSuivi(suiv);
                         if(verif){
+                                LocalNotification ln = new LocalNotification();
+                                ln.setId("LnMessage");
+                                ln.setAlertTitle("Welcome");
+                                ln.setAlertBody("Thanks for arriving!");
+                                Display.getInstance().scheduleLocalNotification(ln, System.currentTimeMillis()+3000, LocalNotification.REPEAT_NONE);
                             Dialog.show("Success","Suivi ajouter !",new Command("Ok"));
                              DisplaySuivi ds = new DisplaySuivi();
-                            ds.show();
+                             ds.show();
                         }else{
                             Dialog.show("Failed","Echec de l'ajout",new Command("Ok"));
                         }
@@ -63,7 +101,9 @@ public class DisplaySuivi extends Form{
                 fajouter.addAll(client,titre,datedeb,datefin,tempsdeb,tempsfin,add);
                 fajouter.show();
             });
-            add(Ajouter);
+            
+            addAll(Ajouter);
+            
             for(int i= 0;i<=list.size()-1;i++){
                 Suivi s = list.get(i);
                 Container cnt = new Container(BoxLayout.y());

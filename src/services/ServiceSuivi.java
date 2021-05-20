@@ -113,6 +113,25 @@ public class ServiceSuivi {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+
+    ArrayList<Suivi> chercher(String text) {
+        String url =BASE_URL+"suivi/chercherjson?user="+userclient.getUser()+"&data="+text;
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>(){
+                @Override public void actionPerformed(NetworkEvent evt) 
+                {
+                    try {
+                        suivis = parseSuivi(new String(req.getResponseData()));
+                        req.removeResponseListener(this);
+                    } catch (IOException ex) {
+                    
+                    }
+                }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+       return suivis;
+    }
     
     
 }

@@ -33,7 +33,7 @@ public class PublicationMain {
         // use two network threads instead of one
         updateNetworkThreadCount(2);
 
-        theme = UIManager.initFirstTheme("/theme_3");
+        theme = UIManager.initFirstTheme("/theme_1");
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);

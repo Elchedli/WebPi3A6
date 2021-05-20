@@ -15,6 +15,7 @@ import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.events.ActionListener;
 import entities.Reclamation;
 import entities.Categories;
+import entities.userclient;
 import utils.Statics;
 import java.io.IOException;
 
@@ -55,7 +56,7 @@ public class ServiceRec {
     }
 
     public boolean addTask(Reclamation t) {
-    t.setUsername("Salma");
+    t.setUsername(userclient.getUser());
 String url = Statics.BASE_URL + "/reclamation/addRecJSON/new?user=" + t.getUsername() + "&objet=" + t.getObj_rec() + "&description=" + t.getSuj_rec() + "&cat=" + t.getId_cat(); 
 req.setUrl(url);// Insertion de l'URL de notre demande de connexion
         req.addResponseListener(new ActionListener<NetworkEvent>() {

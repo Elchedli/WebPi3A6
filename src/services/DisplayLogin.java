@@ -30,7 +30,7 @@ import gui.News;
  * @author chado
  */
 public class DisplayLogin extends Form{
-        private Resources theme = UIManager.initFirstTheme("/theme_3");
+        Resources theme;
         DisplayLogin current=this;
         ServiceLogin Slogin;
          public Form loginchoice(){
@@ -50,25 +50,34 @@ public class DisplayLogin extends Form{
          Button btnchat = new Button("Discussion");
          Button btnpub = new Button("Publication");
          Button btnRec = new Button("Reclamation");
+         btnchat.addActionListener((e) -> {
+            theme =  UIManager.initFirstTheme("/theme_1");
+            new DisplayDiscussion().show();
+        });
          btnRec.addActionListener((e) -> {
-            new ListRec(theme).show();
+             theme =  UIManager.initFirstTheme("/theme_3");
+            new DisplayDiscussion().show();
         });
          btnevent.addActionListener((e) -> {
+             theme =  UIManager.initFirstTheme("/theme_3");
             new EvenementListForm(theme).show();
         });
          btnact.addActionListener((e) -> {
+             theme =  UIManager.initFirstTheme("/theme_3");
              new ListeActivite(theme).show();   
         });
          
           btnarticle.addActionListener((e) -> {
+              theme =  UIManager.initFirstTheme("/theme_3");
              new ListProduitsForm(theme).show();   
         });
          
          btnsuivi.addActionListener((e) -> {
-            DisplaySuivi SuiviForm = new DisplaySuivi();
-            SuiviForm.show();
+            theme =  UIManager.initFirstTheme("/theme_1");
+            new DisplaySuivi().show();
         });
          btnpub.addActionListener((e) -> {
+             theme =  UIManager.initFirstTheme("/theme_1");
             DisplayAllPublicationForm pubForm = new DisplayAllPublicationForm();
             pubForm.show();
         });
