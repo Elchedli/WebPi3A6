@@ -14,24 +14,56 @@ import com.codename1.ui.Form;
 import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.spinner.Picker;
+import com.codename1.ui.util.Resources;
 import com.innovdev.spirity.publication.DisplayAllPublicationForm;
+import com.mycompany.myapp.gui.EvenementListForm;
+import com.mycompany.myapp.gui.ListeActivite;
 import entities.userclient;
+import gui.ListProduitsForm;
+import gui.ListRec;
+import gui.News;
 
 /**
  *
  * @author chado
  */
 public class DisplayLogin extends Form{
+        private Resources theme = UIManager.initFirstTheme("/theme_3");
         DisplayLogin current=this;
         ServiceLogin Slogin;
          public Form loginchoice(){
+               //new EvenementListForm(theme).show();
+       // new Home().show();
+     //   new AddActForm(theme).show();
+//       new StatisticForm(current).show();
+       // new ListEventForm(current).show();
+       // new AddTopicForm(current).show();
+        //new WalkthruForm(theme).show();
          Form f1 = new Form("Choix", BoxLayout.y());
          Button btnarticle = new Button("Article");
          Button btntaches = new Button("Taches");
          Button btnsuivi = new Button("Suivi");
+         Button btnevent = new Button("Evenement");
+         Button btnact = new Button("Activitée");
          Button btnchat = new Button("Discussion");
          Button btnpub = new Button("Publication");
+         Button btnRec = new Button("Reclamation");
+         btnRec.addActionListener((e) -> {
+            new ListRec(theme).show();
+        });
+         btnevent.addActionListener((e) -> {
+            new EvenementListForm(theme).show();
+        });
+         btnact.addActionListener((e) -> {
+             new ListeActivite(theme).show();   
+        });
+         
+          btnarticle.addActionListener((e) -> {
+             new ListProduitsForm(theme).show();   
+        });
+         
          btnsuivi.addActionListener((e) -> {
             DisplaySuivi SuiviForm = new DisplaySuivi();
             SuiviForm.show();
@@ -42,16 +74,16 @@ public class DisplayLogin extends Form{
         });
         switch(userclient.getType()){
             case "psycho":
-                f1.addAll(btnarticle,btntaches,btnsuivi,btnchat,btnpub);
+                f1.addAll(btnarticle,btntaches,btnsuivi,btnchat,btnpub,btnevent,btnact,btnRec);
               break;
             case "simple":
-                f1.addAll(btnarticle,btntaches,btnchat,btnpub);
+                f1.addAll(btnarticle,btntaches,btnchat,btnpub,btnevent,btnact,btnRec);
               break;
             case "nutri":
-                 f1.addAll(btnpub);
+                 f1.addAll(btnpub,btnevent,btnact,btnarticle,btnRec);
               break;
              case "coach":
-                  f1.addAll(btnpub);
+                  f1.addAll(btnpub,btnevent,btnact,btnarticle,btnRec);
               break;
             default:
               // code block

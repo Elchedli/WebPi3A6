@@ -4,14 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/ServiceCommentaire.java</file>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/AddCommentForm.java</file>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/ServicePublication.java</file>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/PublicationMain.java</file>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/UpdatePublicationForm.java</file>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/DisplayPublicationForm.java</file>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/DisplayAllPublicationForm.java</file>
-            <file>file:/C:/Users/Mobile/Publication/src/com/innovdev/spirity/publication/AddPublicationForm.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/anas/src/services/DisplayLogin.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/anas/src/services/ServiceLogin.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/anas/src/services/ServiceSuivi.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/anas/src/services/DisplaySuivi.java</file>
         </group>
     </open-files>
 </project-private>

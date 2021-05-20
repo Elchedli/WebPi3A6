@@ -14,6 +14,8 @@ import com.codename1.ui.Toolbar;
 import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
+import com.mycompany.myapp.gui.SignInForm;
+import gui.ListRec;
 import services.DisplayLogin;
 import utils.json;
 
@@ -31,7 +33,7 @@ public class PublicationMain {
         // use two network threads instead of one
         updateNetworkThreadCount(2);
 
-        theme = UIManager.initFirstTheme("/theme_1");
+        theme = UIManager.initFirstTheme("/theme_3");
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
@@ -60,6 +62,7 @@ public class PublicationMain {
 //        PubForm.show();
         DisplayLogin LoginForm = new DisplayLogin();
         LoginForm.show();
+// new SignInForm(theme).show();
     }
 
     public void stop() {
